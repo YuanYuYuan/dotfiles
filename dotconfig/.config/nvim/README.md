@@ -19,7 +19,7 @@ Note that this depends on your operating system and require the administrator pr
 3. Build locally
 
     ```bash
-    make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/neovim"
+    make -j CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/neovim"
     make install
     ```
 4. Add support for python
@@ -46,14 +46,14 @@ Note that this depends on your operating system and require the administrator pr
 
 1. After cloned this project, copy the files in this folder to _~/.config/nvim_.
 
-2. Install vim-plug
+2. Install the package manager: packer
 
     ```bash
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+         ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     ```
 3. Launch neovim and install the plugins
 
     ```vim
-    :PlugInstall
+    :PackerSync
     ```
