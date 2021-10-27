@@ -1,0 +1,118 @@
+snippet "temp(late)?" "Template" br
+= ${1:Title}
+:nofooter:
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
+:rouge-style: thankful_eyes
+:sectnums:
+:sectlinks:
+:sectanchors:
+:stem:
+endsnippet
+
+snippet "emph(asize)?" "High Light" br
+[big red yellow-background]#($0)#
+endsnippet
+
+snippet hlt "High Light" iA
+[big red yellow-background]#(${1:${VISUAL}})#$0
+endsnippet
+
+snippet cbl "Codeblock" bA
+[source, ${1:python}, options="nowrap"]
+----
+${2:${VISUAL}}
+----$0
+endsnippet
+
+snippet lcbl "LeetCodeblock" bA
+:lc-name: $1
+:lc-numb: $2
+:lc-link: $3
+:lc-type: ${4:Medium}
+include::./leetcode_template.adoc[]
+endsnippet
+
+snippet cml "command line" bA
+....
+${2:${VISUAL}}
+....$0
+endsnippet
+
+snippet ilc "inline code" wA
+\`${1:${VISUAL}}\`
+endsnippet
+
+snippet cbf "Codeblock from file" bA
+.${1:name}
+[source, ${2:python}, linenums]
+----
+include::{codedir}/${3:file}[]
+----
+endsnippet
+
+snippet vdo "video" bA
+video::${1:file}[align="center"]
+#_$1_#$0
+endsnippet
+
+snippet imgg "image" bA
+image::${1:file_name}[align="center",width=800]
+[.text-center]
+#_$1_#$0
+endsnippet
+
+snippet tbl "table" bA
+.${1:name}
+[options="header", frame="topbot", grid="none"]
+|===
+| ${2:Col_1} | ${3:Col_2}
+
+| ${4:Col_1_Row_1}
+| ${5:Col_2_Row_1}
+
+|===
+endsnippet
+
+snippet lb "line break" wA
+pass:q[<br>]
+endsnippet
+
+snippet "coll(apsible)?" "collapsible" br
+.[Example]
+[%collapsible]
+====
+${1:${VISUAL}}
+====$0
+endsnippet
+
+snippet stm "stem" bA
+[stem]
+++++
+$0
+++++
+endsnippet
+
+snippet ascm "asciimath" bA
+[asciimath]
+++++
+$0
+++++
+endsnippet
+
+snippet latm "latexmath" bA
+[latexmath]
+++++
+$0
+++++
+endsnippet
+
+snippet mm "stem" A
+stem:[${0:${VISUAL}}]
+endsnippet
+
+snippet PLK "PDF link" wA
+link:++${0:file_path}++[PDF,role=external,window=_blank]
+endsnippet

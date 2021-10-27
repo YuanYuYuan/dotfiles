@@ -1,0 +1,146 @@
+# { Slides } {{{
+snippet sld "new slide" bA
+<section>
+	<h1>$1</h1>
+	<p>
+        $2
+    </p>
+</section>
+endsnippet
+
+snippet vsld "vertical slides" bA
+<section data-background-color=#28306a>
+
+    <section>
+        <h2>$1</h2>
+        <p>
+            $2
+        </p>
+    </section>
+
+</section>
+endsnippet
+
+snippet slim "new image slide" bA
+<section>
+	<h1>${1:Title}</h1>
+    <img src="${2:image}" width=${3:1200}>
+</section>
+endsnippet
+
+snippet bgim "background image" bA
+<section
+    data-background="$1"
+    data-background-size="${2:contain}"
+    data-background-color="${3:white}"
+></section>
+endsnippet
+
+snippet fgim "foreground image" bA
+<section data-background-color="${3:#FFFFFF}">
+    <img src="${1:image}" width=${2:80%}>
+</section>
+endsnippet
+
+snippet mkd "markdown" bA
+<section data-markdown>
+	<textarea data-template>
+        $1
+	</textarea>
+</section>
+endsnippet
+
+snippet bgif "background iframe" bA
+<section data-background-iframe="$1"></section>
+endsnippet
+
+snippet topsl "topic slide" bA
+<section>
+    <section data-background-color="#28306a">
+        <h1>${1:Topic}</h1>
+    </section>
+</section>
+endsnippet
+# }}}
+
+# { Componenets } {{{
+# snippet fgm "fragment" bA
+# <span class="fragment">
+#     ${1:${VISUAL}}
+# </span>
+# endsnippet
+
+snippet img "image" bA
+<img src="$1">
+endsnippet
+
+snippet lst "list" bA
+<ul >
+    <li class="fragment">
+        $1
+    </li>
+</ul>
+endsnippet
+
+
+snippet cols "columns" bA
+<div class="columns">
+
+    <div class="col">
+        $1
+    </div>
+
+    <div class="col">
+        $0
+    </div>
+
+</div>
+endsnippet
+# }}}
+
+# { Style } {{{
+snippet clr "color" wA
+<span style=color:${2:yellow}>${1:${VISUAL}}</span>
+endsnippet
+
+snippet clst "color style" wA
+style="color:${1:black}"
+endsnippet
+
+snippet tbl "table" bA
+<table>
+    <tr>
+        <th>${1:field}</th>
+    </tr>
+    <tr>
+        <td>${2:element}</td>
+    </tr>
+</table>
+endsnippet
+
+snippet cbl "code block" bA
+<pre class="${1:bash}"><code class="hljs">
+${2:code}
+</code></pre>
+endsnippet
+
+snippet lk "hyper link" wA
+<a href="${1:Link}">${2:${VISUAL}}</a>
+endsnippet
+
+snippet hlk "paragraph hyper link" bA
+<p><a href="$1">
+    $2
+</a></p>
+endsnippet
+
+
+snippet aln "text align" wA
+style="text-align:${1:left}"
+endsnippet
+
+
+snippet fgm "fragment" wA
+class="fragment"
+endsnippet
+# }}}

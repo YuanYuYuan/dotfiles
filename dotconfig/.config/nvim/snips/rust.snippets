@@ -1,0 +1,57 @@
+snippet st "struct" w
+struct ${1:CLASS} {
+	${2:ITEM}
+}$0
+endsnippet
+
+snippet fn "fn" b
+fn ${1:FUNCTION}(${2:ARGUMENTS})${3/..*/ -> /}$3 {
+	$4
+}$0
+endsnippet
+
+snippet im "impl" w
+impl ${1:STRUCT_OR_TRAIT} {
+	$2
+}$0
+endsnippet
+
+snippet if" "if" b
+if ${1:BOOLEAN} {
+	$2
+} $0
+endsnippet
+
+snippet elif "elif" w
+elif ${1:BOOLEAN} {
+	$2
+} $0
+endsnippet
+
+snippet else "elif" w
+else {
+	$1
+}$0
+endsnippet
+
+snippet pn "println" b
+println!("$1"${2/..*/, /}$2)$0;
+endsnippet
+
+snippet pr "println" b
+println!("{:?}", ${1:${VISUAL}})$0;
+endsnippet
+
+
+snippet #t "test" b
+#[test]
+$0
+endsnippet
+
+snippet #ct "tests" b
+#[cfg(test)]
+mod tests {
+    #[test]
+	$0
+}
+endsnippet

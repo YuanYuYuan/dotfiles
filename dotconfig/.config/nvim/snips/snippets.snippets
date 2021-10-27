@@ -1,0 +1,15 @@
+snippet snp "Ultisnips snippet definition" bA
+`!p snip.rv = "snippet"` ${1:Tab_trigger} "${2:Description}" ${3:bA}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet
+
+snippet cbl "Codeblock" bA
+# { ${1:${VISUAL}} } {{{
+$0
+# }}}
+endsnippet
+
+snippet vis "Codeblock" w
+\${${1:1}:\${VISUAL}}$0
+endsnippet

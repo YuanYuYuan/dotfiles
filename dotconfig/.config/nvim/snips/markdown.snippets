@@ -1,0 +1,17 @@
+snippet cbl "Codeblock" bA
+\`\`\`${1:bash}
+${2:${VISUAL}}
+\`\`\`$0
+endsnippet
+
+snippet img "image" bA
+![${1:NAME}](${2:PATH})
+endsnippet
+
+snippet lk "link" wA
+[${VISUAL}](`!v getreg("*")`)$0
+endsnippet
+
+snippet ilc "inline code" wA
+\`${1:${VISUAL}}\`
+endsnippet

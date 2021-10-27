@@ -1,0 +1,821 @@
+# { Math zones } {{{
+# global !p
+# texMathZones = [
+#     'texMathRegion' + x for x in [
+#         'A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES',
+#         'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS',
+#         'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z',
+#         'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG',
+#         'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS'
+#     ]
+# ]
+# texIgnoreMathZones = ['texMathText']
+# texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+# texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+# ignore = texIgnoreMathZoneIds[0]
+# def math():
+#     synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+#     try:
+#         first = next(
+#             i for i in reversed(synstackids)
+#             if i in texIgnoreMathZoneIds or i in texMathZoneIds
+#         )
+#         return first != ignore
+#     except StopIteration:
+#         return False
+# endglobal
+# global !p
+# # texMathZones = ['texMathZone' + x for x in ['', 'X', 'XX', 'Env', 'EnvStarred', 'Ensured']]
+# texMathZones = [
+#     'texMathZone' + x for x in [
+#         'A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES',
+#         'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS',
+#         'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z',
+#         'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG',
+#         'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS',
+#         'Env', 'EnvStarred', 'XX', 'Ensured'
+#     ]
+# ]
+# texIgnoreMathZones = ['texMathTextArg']
+
+# texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+
+# texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+# ignore = texIgnoreMathZoneIds[0]
+
+
+# def math():
+#     synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+#     try:
+#         first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+#         return first != ignore
+#     except StopIteration:
+#         return False
+# endglobal
+# }}}
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+
+# { Templates } {{{
+snippet tempdoc "document template" bA
+\documentclass[a4paper]{article}
+\usepackage[left = 2cm, right = 2cm, top = 1.5cm, bottom = 1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{tabu}
+\usepackage{enumerate}
+\usepackage{extarrows}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{mathtools}
+% \usepackage{stix2}    % for better arrows
+% \usepackage{CJKutf8}  % Chinese
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\newcommand{\notimplies}{\;\not\!\!\!\implies}
+% \setlength{\parindent}{0pt}  % disable indent of the 1st paragraph
+\usepackage{indentfirst}
+\setlength{\parskip}{0.8em}
+
+\begin{document}
+	\title{$1}
+	\author{${2:Yu-Yuan, Yuan\\\\r07246002@ntu.edu.tw}}
+	\maketitle
+	$0
+\end{document}
+endsnippet
+
+snippet tempthm "theorem template" bA
+% custom environments
+\theoremstyle{definition}
+\newtheorem{Example}{Example}[subsection]
+\newtheorem{Remark}{Remark}[subsection]
+\newtheorem{Definition}{Definition}[subsection]
+\newtheorem{Exercise}{Exercise}[subsection]
+\newtheorem{Theorem}{Theorem}[subsection]
+\newtheorem{Proposition}{Proposition}[subsection]
+endsnippet
+# }}}
+
+# { Environments } {{{
+
+# use package
+snippet "u(se)?p(acka)?ge?" "usepackage" brA
+\usepackage{$2}$0
+endsnippet
+
+# Chinese
+snippet "chn" "chinese environment" bA
+\begin{CJK*}{UTF8}{bsmi}
+$1
+\end{CJK*}
+endsnippet
+
+# }}}
+
+# { Notations } {{{
+
+# { Sets } {{{
+context "math()"
+snippet ss "set" wA
+\\{${1:${VISUAL}}\\}$0
+endsnippet
+
+context "math()"
+snippet < "subseteq" w
+\subseteq $0
+endsnippet
+
+context "math()"
+snippet > "supseteq" w
+\supseteq $0
+endsnippet
+
+context "math()"
+snippet << "subset" w
+\subset
+endsnippet
+
+context "math()"
+snippet >> "supset" w
+\supset
+endsnippet
+
+context "math()"
+snippet " \\" "setminus" rw
+ \setminus $0
+endsnippet
+# }}}
+
+# { Expressions } {{{
+context "math()"
+snippet ... "dots" wA
+\dots $0
+endsnippet
+
+context "math()"
+snippet "f(or)?al?l" "forall" wrA
+\forall\ $0
+endsnippet
+
+context "math()"
+snippet EE "exists" wA
+\exists\ $0
+endsnippet
+
+context "math()"
+snippet "\bin\s" "belong in" rA
+\in $0
+endsnippet
+
+context "math()"
+snippet "\bst\s" "such that" rA
+\text{ s.t. } $0
+endsnippet
+
+context "math()"
+snippet "\bwh\s" "where" rA
+\text{, where } $0
+endsnippet
+
+snippet dfn "defined by" iA
+\triangleq\ $0
+endsnippet
+# }}}
+
+# { Operations } {{{
+context "math()"
+snippet // "fraction" iA
+\\frac{${1:${VISUAL}}}{$2}$0
+endsnippet
+
+context "math()"
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+context "math()"
+snippet "\bxx\s" "times" rA
+\times $0
+endsnippet
+
+context "math()"
+snippet "\s\.\s" "cdot" rA
+ \cdot $0
+endsnippet
+
+context "math()"
+snippet "\bo\.\s" "odot" rA
+\odot $0
+endsnippet
+
+context "math()"
+snippet >= "greater or equal" wA
+\geqslant $0
+endsnippet
+
+context "math()"
+snippet <= "less or equal" wA
+\leqslant $0
+endsnippet
+# }}}
+
+# { Arrows } {{{
+
+snippet ~> "leads to" iA
+\leadsto $0
+endsnippet
+
+snippet " => " "Rightarrow" wrA
+ \implies $0
+endsnippet
+
+snippet " =< " "Leftarrow" wrA
+ \Longleftarrow $0
+endsnippet
+
+snippet " -> " "long right arrow" wrA
+ \longrightarrow $0
+endsnippet
+
+snippet " -< " "long left arrow" wrA
+ \longleftarrow $0
+endsnippet
+
+snippet "==> " "Rightarrow with text" wrA
+\overset{$1}{\implies} $0
+endsnippet
+
+snippet "==< " "Leftarrow with text" wrA
+\overset{$1}{\Longleftarrow} $0
+endsnippet
+
+snippet "--> " "long right arrow with text" wrA
+\xlongrightarrow[]{$1}$0
+endsnippet
+
+snippet "--<" "long left arrow with text" wrA
+\xlongleftarrow[]{$1}$0
+endsnippet
+
+snippet _> "double arrows" iA
+\xrightrightarrow[$1]{$2}$0
+endsnippet
+
+snippet \> "south east arrow" iA
+\searrow $0
+endsnippet
+
+snippet /> "north east arrow" iA
+\nearrow $0
+endsnippet
+
+snippet fcn "big function" iA
+\begin{aligned}
+	$1 &\xrightarrow{\makebox[1cm]{$2}} $3 \\\\
+	$4 &\xmapsto{\makebox[1cm]{}} $5
+\end{aligned}
+endsnippet
+
+# }}}
+
+# { Supscripts } {{{
+snippet "sq(rt)?" "square root" rwA
+\sqrt{$1}$0
+endsnippet
+
+# snippet 2 "square" i
+# ^2
+# endsnippet
+
+# snippet 3 "cubic" i
+# ^3
+# endsnippet
+
+# snippet -1 "inverse" i
+# ^{-1}
+# endsnippet
+
+# snippet -1 "inverse" i
+# ^{-1}
+# endsnippet
+
+context "math()"
+snippet ^ "power" iA
+^{$0}
+endsnippet
+
+# }}}
+
+# { Subscripts } {{{
+context "math()"
+snippet '\b([A-Za-z])(\d)' "auto subscript" rA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '\b([A-Za-z])_(\d\d)' "auto subscript2" rA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+context "math()"
+snippet _ "subscript" iA
+_{$0}
+endsnippet
+# }}}
+
+# { Symbols } {{{
+context "math()"
+snippet "\b([A-Za-z])bar" "bar" rA
+\overline{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+context "math()"
+snippet "\b([A-Za-z])(~)" "tilde" rA
+\tilde{`!p snip.rv = match.group(1)`}
+endsnippet
+
+context "math()"
+snippet '\b([A-Za-z])(hat|dot)' "hat/dot" rA
+\\`!p snip.rv = match.group(2)`{`!p snip.rv = match.group(1)`}$0
+endsnippet
+# }}}
+
+context "math()"
+snippet | "veritcal bar" i
+\bigg|_{$1}^{$2}$0
+endsnippet
+
+global !p
+def create_row_placeholders(snip):
+    # retrieving single line from current string and treat it like tabstops
+    # count
+    placeholders_amount = int(snip.buffer[snip.line].strip())
+
+    # erase current line
+    # snip.buffer[snip.line] = ''
+
+    # create anonymous snippet with expected content and number of tabstops
+    anon_snippet_body = ' & '.join([
+		'$' + str(i+1)for i in range(placeholders_amount)
+    ])
+
+    # expand anonymous snippet
+    snip.expand_anon(anon_snippet_body)
+endglobal
+
+context "math()"
+post_jump "create_row_placeholders(snip)"
+snippet "&(\d+)" "latex table row variable" brA
+`!p snip.rv = match.group(1)`
+endsnippet
+# }}}
+
+# { Generics } {{{
+
+# { Spaces } {{{
+snippet "\bhsp(ace)?" "hspace" rA
+\hspace{${1:1}cm}$0
+endsnippet
+
+# snippet kk "makebox" wA
+# \makebox[${1:1}cm]{${2:${VISUAL}}}$0
+# endsnippet
+# }}}
+
+# Displaystyle
+snippet "dsp(laystyle)?" "Displaystyle" rA
+\displaystyle $0
+endsnippet
+
+
+# Graphicx
+snippet img "image" bA
+\begin{center}
+	\includegraphics[width=${1:16}cm, height=${2:12}cm]{$3}
+\end{center}
+$0
+endsnippet
+
+# Figure
+snippet fig "figure" bA
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=${1:16}cm, height=${2:12}cm]{$3}
+	\caption{$4}
+\end{figure}
+$0
+endsnippet
+
+# Table
+snippet tbl "table" bA
+\begin{center}
+	\begin{tabular}{ |c| }
+		 \hline
+	\end{tabular}
+\end{center}
+endsnippet
+
+# }}}
+
+# { Environments } {{{
+snippet hh "equation" bA
+\[
+	${0:${VISUAL}}
+\]
+endsnippet
+
+snippet ctn "begin{center} / end{center}" bA
+\begin{center}
+	${0:${VISUAL}}
+\end{center}
+endsnippet
+
+snippet bgn "begin{} / end{}" bA
+\begin{$1}
+	${0:${VISUAL}}
+\end{$1}
+endsnippet
+
+snippet equ "equation" bA
+\begin{equation*}
+	${1:${VISUAL}}
+\end{equation*}$0
+endsnippet
+
+snippet aln "align" bA
+\begin{align*}
+	${1:${VISUAL}}
+\end{align*}$0
+endsnippet
+
+snippet enu "eumerate" bA
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet itm "item" bA
+\item $0
+endsnippet
+
+
+snippet mm "inline math" wA
+$${0:${VISUAL}}$
+endsnippet
+
+snippet ans. "answer" bA
+\textbf{Ans.}
+$0
+endsnippet
+
+snippet sol. "solution" bA
+{\color{blue} \textbf{Sol.}
+	$0
+}
+endsnippet
+
+snippet cse "cases" bA
+\begin{cases}
+	${1:${VISUAL}}&,\\ ${2:${VISUAL}}\\\\
+	${3:${VISUAL}}&,\\ ${4:${VISUAL}}
+\end{cases}
+endsnippet
+
+# }}}
+
+# { Pairs } {{{
+context "math()"
+snippet "(\b)nm\s" "norm" rA
+\|$1${VISUAL}\| $0
+endsnippet
+
+snippet "(\b)nm(\d)" "p-norm" rA
+\|$1${VISUAL}\|_{`!p snip.rv = match.group(2)`} $0
+endsnippet
+
+snippet "(\(|\[|\{)" "left right pairs" r
+\left`!p snip.rv = match.group(1)` $1 \right
+endsnippet
+
+context "math()"
+snippet ,. "l/rangle" iA
+\langle ${1:${VISUAL}} \rangle$0
+endsnippet
+# }}}
+
+# { Texts } {{{
+snippet tx "text" iA
+\text{${1:${VISUAL}}}$0
+endsnippet
+
+snippet bf "text bold font" wA
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet clr "coloured text" wA
+{\color{${2:blue}} ${1:${VISUAL}}}$0
+endsnippet
+# }}}
+
+# { Sets of numbers } {{{
+context "math()"
+snippet "\b([A-Z])(bb)" "mathbb" rA
+\mathbb{`!p snip.rv = match.group(1)`}
+endsnippet
+
+context "math()"
+snippet NN "natural numbers" wA
+\mathbb{N}
+endsnippet
+
+context "math()"
+snippet RR "real numbers" wA
+\mathbb{R}
+endsnippet
+
+context "math()"
+snippet "\b([A-Z])(nn)" "mathbb" rA
+\mathbb{`!p snip.rv = match.group(1)`}^{n}$0
+endsnippet
+
+context "math()"
+snippet nni "nonnegative integers" wA
+\in \mathbb{N}\cup \\{0\\}$0
+endsnippet
+# }}}
+
+# { Functions } {{{
+# TODO merge the power version into one
+context "math()"
+snippet "\b(sin|cos|tan|cot|sec|csc)\s" "trigonometric functions" rA
+\\`!p snip.rv = match.group(1)` ($1) $0
+endsnippet
+
+context "math()"
+snippet "\b(sin|cos|tan|cot|sec|csc)(\d)\s" "trigonometric functions" rA
+\\`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`} ($1) $0
+endsnippet
+
+context "math()"
+snippet "\ba(sin|cos|tan|cot|sec|csc) " "inverse trigonometric functions" rA
+\\`!p snip.rv = match.group(1)`^{-1} ($1) $0
+endsnippet
+
+context "math()"
+snippet "\b(sin|cos|tan|cot|sec|csc)h\s" "hyperbolic trigonometric functions" rA
+\\`!p snip.rv = match.group(1)`h ($1) $0
+endsnippet
+# }}}
+
+# { Calculus } {{{
+context "math()"
+snippet dif "d/dx" wA
+\frac{d ${1:f}}{d ${2:x}} $0
+endsnippet
+
+# context "math()"
+# snippet "oo " "after/circ" wrA
+# \circ $0
+# endsnippet
+
+
+context "math()"
+snippet "\b(?<!\\)(int|sum|prod)\s" "integral/summation/production" rA
+\\`!p snip.rv = match.group(1)`_{$1}^{$2} $0
+endsnippet
+
+context "math()"
+snippet "\blim\s" "limit" rA
+\lim_{$1 \to ${2:\infty}} $0
+endsnippet
+
+
+context "math()"
+snippet LH "L'Hopital" wA
+\xlongequal{\text{L'H, }\frac{0}{0}} $0
+endsnippet
+
+context "math()"
+snippet oo "infinity" wA
+\infty
+endsnippet
+
+context "math()"
+snippet conv. "converge" wA
+\text{ converges }$0
+endsnippet
+
+context "math()"
+snippet div. "diverge" wA
+\text{ diverges }$0
+endsnippet
+
+# }}}
+
+# { Vector Calculus } {{{
+context "math()"
+snippet "vv" "vector" wrA
+\vec{$1}$0
+endsnippet
+
+context "math()"
+snippet "\bgrad\s" "gradient" rA
+\nabla $0
+endsnippet
+
+context "math()"
+snippet "\bcurl\s" "curl" rA
+\nabla \times $0
+endsnippet
+
+context "math()"
+snippet "\bdiv\s" "divergence" rA
+\nabla \cdot $0
+endsnippet
+
+snippet "par(tial)?" "d/dx" wri
+\frac{\partial ${1:f}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet "\bpar\s" "partial" rA
+\partial $0
+endsnippet
+
+priority 1
+context "math()"
+snippet "\bpar\^" "partial" rA
+\partial^{$0}
+endsnippet
+
+context "math()"
+snippet "\bpar(\d|i|j|k|t)" "partial" rA
+\partial_`!p snip.rv = match.group(1)`
+endsnippet
+
+priority 1
+context "math()"
+snippet "\bpar_" "partial" rA
+\partial_{$0}
+endsnippet
+# }}}
+
+
+global !p
+abbreviations = {
+	'alp': '\\alpha',
+	'bet': '\\beta',
+	'del': '\\delta',
+	'gam': '\\gamma',
+	'eta': '\\eta',
+	'the': '\\theta',
+	'iot': '\\iota',
+	'mu': '\\mu',
+	'nu': '\\nu',
+	'pi': '\\pi',
+	'lam': '\\lambda',
+	'tau': '\\tau',
+	'rho': '\\rho',
+	'phi': '\\phi',
+	'omg': '\\omega',
+	'sig': '\\sigma',
+	'kap': '\\kappa',
+	'psi': '\\psi',
+	'eps': '\\epsilon',
+	'zet': '\\zeta',
+}
+
+def check_greek():
+	word = vim.eval("getline('.')")
+	row, col = vim.windows[0].cursor
+	line = vim.current.line
+	word = line[:col-1].split(' ')[-1].lower()
+	return word in abbreviations
+endglobal
+
+# { Greek Alphabets } {{{
+context "math() and check_greek()"
+snippet "\b(?<!\\)(\w+)(\s|\d|\^|_)" "Generic Abbreviations" rA
+`!p
+keyword = match.group(1).lower()
+if keyword in abbreviations:
+	word = abbreviations[keyword]
+else:
+	word = match.group(1)
+
+if match.group(1)[0].isupper():
+	word = word.title()
+
+# prefix
+if match.group(2) == " ":
+	snip.rv = word + " "
+elif match.group(2) == "_":
+	snip.rv = word + "_{"
+elif match.group(2) == "^":
+	snip.rv = word + "^{"
+else:
+	snip.rv = word + '_' + match.group(2)
+`$0`!p
+# postfix
+if match.group(2) in ["_", "^"]:
+	snip.rv = "}"
+`
+endsnippet
+
+context "math()"
+snippet "\bD([A-Za-z])\s" "finite difference" rA
+\Delta `!p snip.rv = match.group(1)` $0
+endsnippet
+
+
+# snippet "\\ve" "varepsilon" r
+# \varepsilon
+# endsnippet
+
+# }}}
+
+# { Algebraic Topology } {{{
+context "math()"
+snippet "hom " "Homomorphism" rwA
+\mathbf{Hom}($1, $2)$0
+endsnippet
+
+context "math()"
+snippet hom_ "Homomorphism" wA
+\mathbf{Hom}_{$1}($2, $3)$0
+endsnippet
+
+context "math()"
+snippet "ob " "object" rwA
+\mathbf{Ob}(\mathscr{${1:VISUAL}})$0
+endsnippet
+
+context "math()"
+snippet cc "category" iA
+\mathscr{C}$0
+endsnippet
+# }}}
+
+# { Matrices } {{{
+snippet "pm(atrix)?" "pmatrix" rbA
+\begin{pmatrix}
+	$0
+\end{pmatrix}
+endsnippet
+
+snippet "bm(atrix)?" "bmatrix" rbA
+\begin{bmatrix}
+	$0
+\end{bmatrix}
+endsnippet
+
+snippet "tr " "trace" rwA
+\text{tr}($1)$0
+endsnippet
+
+snippet "det " "determinant" rwA
+\det($1)$0
+endsnippet
+# }}}
+
+# { Theorems } {{{
+snippet THM "Theorem" bA
+\begin{Theorem}
+	$0
+\end{Theorem}
+endsnippet
+
+snippet DEF "Definition" bA
+\begin{Definition}
+	$0
+\end{Definition}
+endsnippet
+
+snippet EXP "Example" bA
+\begin{Example}
+	$0
+\end{Example}
+endsnippet
+
+snippet PROP "Proposition" bA
+\begin{Proposition}
+	$0
+\end{Proposition}
+endsnippet
+
+snippet PF "Proof" bA
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
+# }}}
