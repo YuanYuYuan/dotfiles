@@ -388,19 +388,14 @@ EOF
     vnoremap <C-s> <C-a>
 
     " redo/undo
-    " nnoremap U <C-r>zz
-    " nnoremap u uzz
-    " inoremap uu <Esc>uzz
-
     nnoremap U <C-r>
     inoremap uu <Esc>u
 
     " visual selection
     nnoremap vv <C-v>
+
     " select last pasted
     nnoremap gp `[v`]
-    vnoremap <C-k> 5k
-    vnoremap <C-j> 5j
 
     " Text editing
     inoremap aa <C-o>a
@@ -408,14 +403,18 @@ EOF
     " yy yank a line with line break, and Y yank a plain line
     nnoremap Y y$
 
-    " browse the following link
-    nnoremap gx <silent> <cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>
+    " { Browse } {{{
+        " browse the following link
+        nnoremap gx <cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>
 
-    " { vimrc } {{{
+        " open file stored in clipboard
+        nnoremap <Space>o :e <C-r>+<CR>
+    " }}}
+
+    " { vimrc / lua } {{{
         nnoremap <Space>ve :e $MYVIMRC<CR>
         nnoremap <Space>vv :source $MYVIMRC<CR>
-        nnoremap <Space>vi :source $MYVIMRC<CR> :PlugInstall<CR>
-        nnoremap <Space>vc :source $MYVIMRC<CR> :PlugClean<CR>
+        nnoremap <Space>vl :luafile %<CR> :PackerCompile<CR>
     " }}}
 
     " { Movement with in line } {{{
@@ -461,8 +460,8 @@ EOF
     " { Page scrolling } {{{
         nnoremap <C-k> <C-u>
         nnoremap <C-j> <C-d>
-        " inoremap <C-k> <Esc><C-u>
-        " inoremap <C-j> <Esc><C-d>
+        vnoremap <C-k> 5k
+        vnoremap <C-j> 5j
     " }}}
 
     " { Escape key mapping } {{{
