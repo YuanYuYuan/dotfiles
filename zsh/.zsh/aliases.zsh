@@ -3,7 +3,7 @@
     alias adoc='$HOME/Workings/scripts/asciidoc-autoreload.sh'
     alias ez='exec zsh'
     alias g='googler -n 5'
-    alias h='history'
+    alias h='history -i'
     alias lv='nvim -u $HOME/.config/nvim/init-lua-plugin.vim'
     alias m='make'
     alias mutt='neomutt'
