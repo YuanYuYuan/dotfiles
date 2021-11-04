@@ -6,7 +6,6 @@ $hostname\
 $shlvl\
 $singularity\
 $kubernetes\
-$directory\
 $vcsh\
 $git_branch\
 $git_commit\
@@ -14,6 +13,7 @@ $git_state\
 $git_metrics\
 $git_status\
 $hg_branch\
+$directory\
 $docker_context\
 $package\
 $cmake\
@@ -31,3 +31,9 @@ $character"""
 
 [character]                            # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[username]
+format = "[$user]($style)"
+
+[hostname]
+format = " @ [$hostname]($style) "
