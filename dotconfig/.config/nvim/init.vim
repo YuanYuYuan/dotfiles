@@ -221,6 +221,9 @@ EOF
     vnoremap N "ny/<C-r>n<CR>NN
     vnoremap C "ny/<C-r>n<CR>Ncgn
 
+    nnoremap n nzzzv
+    nnoremap N Nzzzv
+
     " grep search and show on quickfix
     vnoremap <C-f> y:vimgrep <C-r>" %<CR> \| :copen <CR>
     nnoremap <C-f> :vimgrep <C-r>/ %<CR> \| :copen <CR>
@@ -390,6 +393,12 @@ EOF
     " redo/undo
     nnoremap U <C-r>
     inoremap uu <Esc>u
+
+    " break points
+    inoremap , ,<C-g>u
+    inoremap . .<C-g>u
+    inoremap ! !<C-g>u
+    inoremap ? ?<C-g>u
 
     " visual selection
     nnoremap vv <C-v>
