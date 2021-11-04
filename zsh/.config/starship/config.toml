@@ -37,3 +37,6 @@ format = "[$user]($style)"
 
 [hostname]
 format = " @ [$hostname]($style) "
+
+[git_branch]
+format = " [$symbol$branch]($style) "
