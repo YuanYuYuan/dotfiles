@@ -143,6 +143,6 @@
 
     # Starting X11 on console login
     if [[ ! ${DISPLAY} && ${XDG_VTNR} == 1 ]]; then
-        exec startx
+        # exec startx
     fi
 # }}}

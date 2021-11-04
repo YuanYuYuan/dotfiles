@@ -31,7 +31,6 @@
         AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" $(x -o)'
     alias gdx='gdrive download -r $(x -o | cut -d = -f 2)'
     alias gx='git clone $(x -o)'
-    alias rgx='cd $(x -o) && rg'
 # }}}
 
 # { Configuration } {{{
@@ -87,7 +86,7 @@
 # }}}
 
 # { sk } {{{
-    alias xk='sk | x -i'
+    alias xk='realpath $(sk) | xclip -selection clipboard -in -rmlastnl'
     alias osk='xdg-open "$(sk)"'
     alias rsk='sk --ansi -i -c "rg --color=always --line-number "{}""'
 # }}}
