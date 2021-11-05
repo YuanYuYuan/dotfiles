@@ -1,4 +1,14 @@
 # { ZIM } {{{
+    export ZIM_HOME="$HOME/.zim"
+    if [ ! -d $ZIM_HOME ]; then
+        mkdir -p $ZIM_HOME
+    fi
+    if [ ! -f ${ZIM_HOME}/zimfw.zsh ]; then
+        wget https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh -O ${ZIM_HOME}/zimfw.zsh
+        zsh ${ZIM_HOME}/zimfw.zsh install
+        exec zsh
+    fi
+
     # Set editor default keymap to emacs (`-e`) or vi (`-v`)
     bindkey -e
     # Prompt for spelling correction of commands.
