@@ -1,0 +1,15 @@
+[pull]
+    rebase = false
+[user]
+    email = az6980522@gmail.com
+    name = yuanyuyuan
+[init]
+    defaultBranch = main
+[core]
+    quotepath = false
+[merge]
+    tool = vimdiff
+[mergetool]
+    keepBackup = false
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
