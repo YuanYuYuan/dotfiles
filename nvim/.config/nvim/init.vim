@@ -277,13 +277,14 @@ EOF
     set foldenable
 
     " default foldmethod
-    setlocal foldmethod=expr
+    setlocal foldmethod=syntax
+    " setlocal foldmethod=expr
 
-    " FIXME: adress the treesitter folding issuse
-    autocmd BufWritePost * lua vim.opt.foldmethod = vim.opt.foldmethod
+    " " FIXME: adress the treesitter folding issuse
+    " autocmd BufWritePost * lua vim.opt.foldmethod = vim.opt.foldmethod
 
-    " FIXME
-    set foldexpr=nvim_treesitter#foldexpr()
+    " " FIXME
+    " set foldexpr=nvim_treesitter#foldexpr()
 
     set fillchars=fold:\ " use trailing space as the padding of folding
     set foldtext=MyFoldText()
