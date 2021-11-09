@@ -33,17 +33,6 @@
     alias gx='git clone $(x -o)'
 # }}}
 
-# { Configuration } {{{
-    alias cfg-zsh='$EDITOR ~/.zshrc'
-    alias cfg-i3='$EDITOR ~/.config/i3/config'
-    alias cfg-tmux='$EDITOR ~/.config/tmux/tmux.conf'
-    alias cfg-vim='$EDITOR ~/.vimrc ~/.vim/plugins.vim'
-    alias cfg-mutt='$EDITOR ~/.config/mutt/muttrc'
-    alias cfg-ssh='$EDITOR ~/.ssh/config'
-    alias cfg-alias='$EDITOR ~/.aliases'
-    alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
-# }}}
-
 # { Youtube } {{{
     alias yt-music='youtube-dl --config-location $HOME/.config/youtube-dl/music.conf'
     alias yt-musicpl='youtube-dl --config-location $HOME/.config/youtube-dl/music-playlist.conf'
@@ -77,12 +66,12 @@
 # }}}
 
 # { list } {{{
-    alias l='ls -lah'
-    alias la='ls -lAh'
-    alias ll='ls -lh'
-    alias lt='ls -rlath'
     alias ls='ls --color=tty'
-    alias lsa='ls -lah'
+    alias l='ls -AX --color=tty'
+    alias ll='ls -lAXh --color=tty'
+    alias lt='ls -rlAXth --color=tty'
+    # alias la='ls -lAh'
+    # alias lsa='ls -lah'
 # }}}
 
 # { sk } {{{
