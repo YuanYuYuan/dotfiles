@@ -21,7 +21,7 @@
 
     # { Golang } {{{
         export GOPATH=$HOME/go
-        export PATH="$PATH:$GOPATH/bin"
+        export PATH="$GOPATH/bin:$PATH"
     # }}}
 
     # { NPM } {{{
@@ -30,8 +30,8 @@
     # }}}
 
     # { PATH } {{{
-        export PATH="$PATH:$HOME/.local/bin"
-        export PATH="$PATH:$HOME/Workings/scripts"
+        export PATH="$HOME/.local/bin:$PATH"
+        export PATH="$HOME/Workings/scripts:$PATH"
         export PATH="/usr/lib/ccache/bin/:$PATH"
     # }}}
 
@@ -39,10 +39,10 @@
         export LIBTORCH=/usr
 
         # CUDA
-        export CPATH="$CPATH:/opt/cuda/include"
-        export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/cuda/lib64"
-        export LIBRARY_PATH="$LIBRARY_PATH:/opt/cuda/lib64"
-        export CUDA_HOME="/opt/cuda"
+        export CPATH="/opt/cuda/include:$CPATH"
+        export LD_LIBRARY_PATH="/opt/cuda/lib64:$LD_LIBRARY_PATH"
+        # export LIBRARY_PATH="/opt/cuda/lib64:$LIBRARY_PATH"
+        # export CUDA_HOME="/opt/cuda"
     # }}}
 
     # # { Torch / CUDA for Ubuntu } {{{
