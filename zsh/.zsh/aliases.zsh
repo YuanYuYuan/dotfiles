@@ -66,10 +66,10 @@
 # }}}
 
 # { list } {{{
-    alias ls='ls --color=tty'
-    alias l='ls -AX --color=tty'
-    alias ll='ls -lAXh --color=tty'
-    alias lt='ls -rlAXth --color=tty'
+    alias ls='ls --color=tty --group-directories-first'
+    alias l='ls -AX'
+    alias ll='ls -lAXh'
+    alias lt='ls -rlAXth'
     # alias la='ls -lAh'
     # alias lsa='ls -lah'
 # }}}
