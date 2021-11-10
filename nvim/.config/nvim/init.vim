@@ -211,14 +211,11 @@ EOF
     set incsearch           " incremental search
     set inccommand=nosplit  " live substitution
 
-    " Redraw and clean highlight
-    nnoremap <c-l> :nohl<cr><c-l>
-
     " next/previous search
     vnoremap 0 n
     vnoremap 9 N
-    vnoremap n "ny/<C-r>n<CR>
-    vnoremap N "ny/<C-r>n<CR>NN
+    vnoremap n "ny/<C-r>n<CR>zzzv
+    vnoremap N "ny/<C-r>n<CR>NNzzzv
     vnoremap C "ny/<C-r>n<CR>Ncgn
 
     nnoremap n nzzzv
@@ -326,7 +323,7 @@ EOF
         if foldlevel(line('.')) == 0
             call feedkeys("vip")
         else
-            call feedkeys("za")
+            call feedkeys("zazz")
         endif
     endfunction
 

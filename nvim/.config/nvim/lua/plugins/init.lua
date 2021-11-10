@@ -204,6 +204,7 @@ return require('packer').startup(function(use)
     end
   }
   use { 'SirVer/ultisnips',
+    ft = {'tex', 'asciidoctor', 'markdown'},
     config = vim.cmd [[
       let g:UltiSnipsExpandTrigger="<c-e>"
       let g:UltiSnipsJumpForwardTrigger="<CR>"
