@@ -13,11 +13,11 @@ $git_state\
 $git_metrics\
 $git_status\
 $hg_branch\
-$directory\
 $docker_context\
-$package\
+$python\
 $cmake\
 $conda\
+$directory\
 $memory_usage\
 $env_var\
 $cmd_duration\
@@ -40,3 +40,8 @@ format = " @ [$hostname]($style) "
 
 [git_branch]
 format = " [$symbol$branch]($style) "
+
+[python]
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+version_format = "v${major}.${minor}"
