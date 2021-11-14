@@ -1,3 +1,5 @@
+local map = vim.api.nvim_set_keymap
+
 -- font size & font list
 local font_size = 9
 local font_list = {
@@ -28,9 +30,9 @@ function M.change_size(change)
 end
 
 set_font(font_size)
-vim.api.nvim_set_keymap('n', '<C-=>', "<cmd>lua require('neovide').change_size(1)<CR>", {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
-vim.api.nvim_set_keymap('c', '<C-v>', '<C-r>+', {noremap = true})
+map('n', '<C-=>', "<cmd>lua require('neovide').change_size(1)<CR>", {noremap = true})
+map('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
+map('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
+map('c', '<C-v>', '<C-r>+', {noremap = true})
 
 return M
