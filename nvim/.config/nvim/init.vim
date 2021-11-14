@@ -361,7 +361,7 @@ EOF
         if (buf_len && empty_name)
             exec 'q'
         else
-            exec 'bd'
+            exec 'bd!'
         endif
     endfunction
     nnoremap <silent> <Space>q :call QuitOrBufferDelete()<CR>
