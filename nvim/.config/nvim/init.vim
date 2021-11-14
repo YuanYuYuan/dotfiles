@@ -24,12 +24,6 @@
     set updatetime=300
     set signcolumn=yes
 
-    " set guifont=SauceCodePro\ Nerd\ Font:h18
-    set guifont=FiraCode\ Nerd\ Font,Font\ Awesome\ 5\ Free,DejaVuSans,Noto\ Color\ Emoji:h12
-    " set guifont=Noto\ Color\ Emoji:h18
-    let g:neovide_transparency=0.8
-    " set guifont=Fira\ Code:h18
-
     let mapleader = "\<Space>"
 
     " { Clipboard } {{{
@@ -203,6 +197,9 @@
 " { Lua } {{{
 lua <<EOF
 require('plugins')
+if vim.fn.exists('g:neovide') then
+    require('neovide')
+end
 EOF
 " }}}
 
