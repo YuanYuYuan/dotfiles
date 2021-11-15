@@ -227,12 +227,7 @@ return require('packer').startup(function(use)
 
 
   -- lsp
-  use { 'neovim/nvim-lspconfig',
-    config = vim.cmd [[
-      nnoremap <F2> :LspStart<CR>
-      inoremap <F2> <Esc>:LspStart<CR>
-    ]]
-  }
+  use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
   use 'glepnir/lspsaga.nvim'
   use { 'nvim-lua/lsp-status.nvim',

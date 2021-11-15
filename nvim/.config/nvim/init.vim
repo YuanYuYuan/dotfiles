@@ -268,6 +268,7 @@ lua <<EOF
 if vim.fn.exists('g:neovide') > 0 then
     require('neovide')
 end
+require('keymappings')
 EOF
 " }}}
 
