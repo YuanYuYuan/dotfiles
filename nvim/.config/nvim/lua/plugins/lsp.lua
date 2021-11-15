@@ -5,6 +5,7 @@ local saga = require('lspsaga')
 local lsp = vim.lsp
 local cmd = vim.cmd
 local buf_keymap = vim.api.nvim_buf_set_keymap
+local map = vim.api.nvim_set_keymap
 local kind_symbols = {
   Text        = '韛',
   Function    = '',
@@ -68,6 +69,10 @@ lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_pub
 
 saga.init_lsp_saga {use_saga_diagnostic_sign = true}
 
+map('n', '<F2>', '<cmd>LspStart<CR>', {noremap = true})
+map('i', '<F2>', '<cmd>LspStart<CR>', {noremap = true})
+
+
 local keymap_opts = {noremap = true, silent = true}
 local function on_attach(client)
   lsp_status.on_attach(client)
@@ -75,7 +80,7 @@ local function on_attach(client)
   buf_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
   buf_keymap(0, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', keymap_opts)
   buf_keymap(0, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', keymap_opts)
-  buf_keymap(0, 'n', '<F2>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', keymap_opts)
+  buf_keymap(0, 'n', '<Space>sd', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', keymap_opts)
   buf_keymap(0, 'n', 'K', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>', keymap_opts)
   -- buf_keymap(0, 'n', 'gS', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>', keymap_opts)
   buf_keymap(0, 'n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>', keymap_opts)

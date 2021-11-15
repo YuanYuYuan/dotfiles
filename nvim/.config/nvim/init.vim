@@ -194,13 +194,8 @@
 
 " }}}
 
-" { Lua } {{{
-lua <<EOF
-require('plugins')
-if vim.fn.exists('g:neovide') then
-    require('neovide')
-end
-EOF
+" { Lua Plugins } {{{
+lua require('plugins')
 " }}}
 
 " { Search configuration } {{{
@@ -227,13 +222,14 @@ EOF
 " }}}
 
 " { Color } {{{
-    set background=dark
     set synmaxcol=150          " limit max columns of highlight to prevent slowing down
+
+    set background=dark
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
-    " colorscheme elflord
-    " colorscheme one
+    set t_Co=256
+
     colorscheme zephyr
 
     " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
@@ -266,6 +262,16 @@ EOF
     " toggle highlight search
     nnoremap <Space>ch :set hlsearch! hlsearch?<CR>
 " }}}
+
+" { Lua settings } {{{
+lua <<EOF
+if vim.fn.exists('g:neovide') > 0 then
+    require('neovide')
+end
+require('keymappings')
+EOF
+" }}}
+
 
 " { Folding } {{{
     set foldenable

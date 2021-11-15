@@ -1,5 +1,8 @@
 local map = vim.api.nvim_set_keymap
 
+-- adjust color
+vim.api.nvim_command('highlight CursorLine guibg=#1B2229')
+
 -- font size & font list
 local font_size = 9
 local font_list = {
