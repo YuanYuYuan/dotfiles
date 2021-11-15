@@ -2,6 +2,7 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'b0o/mapx.nvim'
   use { 'lewis6991/gitsigns.nvim',
     config = function()
       require 'gitsigns'.setup()
