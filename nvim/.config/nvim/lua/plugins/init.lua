@@ -2,6 +2,7 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'gutenye/json5.vim'
   use { 'lewis6991/gitsigns.nvim',
     config = function()
       require 'gitsigns'.setup()
@@ -29,14 +30,13 @@ return require('packer').startup(function(use)
   }
   use 'liuchengxu/vista.vim'
   use 'skywind3000/asyncrun.vim'
-  -- Switch between single-line and multiline forms of code
-  use 'AndrewRadev/splitjoin.vim'
   use 'mg979/vim-visual-multi'
   use { 'godlygeek/tabular',
     config = vim.cmd [[
         vnoremap \ :Tabularize /
     ]]
   }
+  use 'simrat39/rust-tools.nvim'
   -- use { 'junegunn/vim-easy-align',
   --   config = vim.cmd [[
   --     xmap ga <Plug>(EasyAlign)
@@ -135,21 +135,12 @@ return require('packer').startup(function(use)
       xmap gs <Plug>VgSurround
     ]]
   }
-  use { 'jiangmiao/auto-pairs',
-    config = vim.cmd [[
-      " Disable some shortcuts
-      let g:AutoPairsShortcutBackInsert = ''
-      let g:AutoPairsShortcutToggle = ''
-    ]]
-  }
-  use { 'hrsh7th/nvim-compe',
+  use { 'windwp/nvim-autopairs',
     config = function()
-      require'plugins.compe'
-      vim.cmd [[
-        set completeopt+=menuone,noselect
-      ]]
+      require('nvim-autopairs').setup()
     end
   }
+
   use 'kyazdani42/nvim-web-devicons'
   use { 'akinsho/nvim-bufferline.lua',
     config = [[require'plugins.bufferline']]
@@ -158,7 +149,7 @@ return require('packer').startup(function(use)
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = [[require'plugins.treesitter']]
+    config = [[require('plugins.treesitter')]]
   }
   use 'nvim-treesitter/playground'
 
@@ -193,16 +184,6 @@ return require('packer').startup(function(use)
       nnoremap <silent> <Space>a :ArgWrap<CR>
     ]]
   }
-  use { 'simrat39/rust-tools.nvim',
-    -- ft = 'rust',
-    config = function()
-      require('plugins.rust')
-      vim.cmd [[
-        nnoremap <F3> :RustRunnables<CR>
-        inoremap <F3> <Esc>:RustRunnables<CR>
-      ]]
-    end
-  }
   use { 'SirVer/ultisnips',
     ft = {'tex', 'asciidoctor', 'markdown'},
     config = vim.cmd [[
@@ -223,16 +204,48 @@ return require('packer').startup(function(use)
   --     nnoremap <F4> :VsnipOpenEdit<CR>
   --     inoremap <F4> <Esc>:VsnipOpenEdit<CR>
   --   ]]
-  -- }
 
+  -- }
 
   -- lsp
   use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
-  use 'glepnir/lspsaga.nvim'
+  use 'ray-x/lsp_signature.nvim'
   use { 'nvim-lua/lsp-status.nvim',
-    config = [[require'plugins.lsp']]
+    config = function()
+      require('plugins.lsp')
+    end
   }
+
+  -- cmp / lspkind
+  use {
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('trouble').setup {
+        use_lsp_diagnostic_signs = true,
+        auto_close = true,
+      }
+      vim.api.nvim_set_keymap("n", "<F2>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+    end
+  }
+  use { 'tzachar/cmp-tabnine',
+    run='./install.sh'
+  }
+  use { 'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+    },
+    config = function()
+      require('plugins.cmp')
+    end
+  }
+
 
   use 'nvim-telescope/telescope.nvim'
   use { 'glepnir/galaxyline.nvim',
