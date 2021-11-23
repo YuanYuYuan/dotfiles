@@ -244,6 +244,7 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('plugins.cmp')
+      vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
     end
   }
 
