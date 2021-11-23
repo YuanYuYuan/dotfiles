@@ -1,5 +1,8 @@
-vim.cmd [[packadd packer.nvim]]
-
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -35,7 +38,11 @@ return require('packer').startup(function(use)
     ]],
     ft = 'asciidoctor',
   }
-  use 'liuchengxu/vista.vim'
+  use { 'liuchengxu/vista.vim',
+    config = function()
+      vim.api.nvim_set_keymap('n', '<Space><Space>v', '<cmd>Vista!!<CR>', {noremap = true})
+    end
+  }
   use 'skywind3000/asyncrun.vim'
   use 'mg979/vim-visual-multi'
   use { 'godlygeek/tabular',
@@ -264,4 +271,9 @@ return require('packer').startup(function(use)
     end
   }
   use 'arkav/lualine-lsp-progress'
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)

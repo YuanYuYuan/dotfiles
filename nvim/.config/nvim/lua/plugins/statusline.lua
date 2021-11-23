@@ -24,6 +24,13 @@ require'lualine'.setup {
     lualine_a = {'mode'},
     lualine_b = {
       'filetype',
+    },
+    lualine_c = {
+      {
+        'filename',
+        file_status = true,
+        path = 0,
+      },
       {
         'diagnostics',
         sources={'nvim_lsp'},
@@ -33,13 +40,6 @@ require'lualine'.setup {
           info = ' ',
           hint = ' '
         },
-      },
-    },
-    lualine_c = {
-      {
-        'filename',
-        file_status = true,
-        path = 0,
       },
       -- function() return require"lsp-status".status() end,
       {
@@ -79,18 +79,7 @@ require'lualine'.setup {
           spinner = 500,
           lsp_client_name_enddelay = 500
         },
-        spinner_symbols = {
-          '⠋',
-          '⠙',
-          '⠹',
-          '⠸',
-          '⠼',
-          '⠴',
-          '⠦',
-          '⠧',
-          '⠇',
-          '⠏'
-        },
+        spinner_symbols = {'⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'},
       }
     },
     lualine_x = {'progress'},
