@@ -1,8 +1,12 @@
 vim.cmd [[packadd packer.nvim]]
 
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'gutenye/json5.vim'
+  use 'rhysd/conflict-marker.vim'
+  use { 'gutenye/json5.vim',
+    ft = 'markdown',
+  }
   use 'b0o/mapx.nvim'
   use { 'lewis6991/gitsigns.nvim',
     config = function()
@@ -15,7 +19,8 @@ return require('packer').startup(function(use)
   use { 'mattn/emmet-vim',
     config = vim.cmd [[
       let g:user_emmet_leader_key=','
-    ]]
+    ]],
+    ft = 'html',
   }
   use 'AndrewRadev/switch.vim'
   use { 'habamax/vim-asciidoctor',
@@ -27,7 +32,8 @@ return require('packer').startup(function(use)
 
       autocmd FileType asciidoc setlocal foldmethod=expr
       autocmd FileType asciidoc setlocal foldexpr=AsciidoctorFold()
-    ]]
+    ]],
+    ft = 'asciidoctor',
   }
   use 'liuchengxu/vista.vim'
   use 'skywind3000/asyncrun.vim'
@@ -38,12 +44,12 @@ return require('packer').startup(function(use)
     ]]
   }
   use 'simrat39/rust-tools.nvim'
-  -- use { 'junegunn/vim-easy-align',
-  --   config = vim.cmd [[
-  --     xmap ga <Plug>(EasyAlign)
-  --     nmap ga <Plug>(EasyAlign)
-  --   ]]
-  -- }
+  use { 'junegunn/vim-easy-align',
+    config = vim.cmd [[
+      xmap ga <Plug>(EasyAlign)
+      nmap ga <Plug>(EasyAlign)
+    ]]
+  }
   use { 'kyazdani42/nvim-tree.lua',
     config = function()
       require'nvim-tree'.setup {
@@ -87,10 +93,10 @@ return require('packer').startup(function(use)
     ]]
   }
 
-  -- colorscheme
+  -- -- colorscheme
   use 'YuanYuYuan/zephyr-nvim'
 
-  -- A high-performance color highlighter for Neovim
+  -- -- A high-performance color highlighter for Neovim
   use { 'norcalli/nvim-colorizer.lua',
     config = [[require 'colorizer'.setup()]]
   }
@@ -152,7 +158,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate',
     config = [[require('plugins.treesitter')]]
   }
-  use 'nvim-treesitter/playground'
+  -- use 'nvim-treesitter/playground'
 
   use { 'lervag/vimtex',
     ft = 'tex',
@@ -218,7 +224,7 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- cmp / lspkind
+  -- -- cmp / lspkind
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -250,8 +256,12 @@ return require('packer').startup(function(use)
 
 
   use 'nvim-telescope/telescope.nvim'
-  use { 'glepnir/galaxyline.nvim',
-    branch = 'main',
-    config = [[require'plugins.statusline']]
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('plugins.statusline')
+    end
   }
+  use 'arkav/lualine-lsp-progress'
 end)
