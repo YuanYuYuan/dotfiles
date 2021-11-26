@@ -1,0 +1,386 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+; background = #aa2F343F
+; ; background-alt = #444
+; foreground = #dfdfdf
+; alert = #bd2c40
+; ; foreground-alt = #555
+; primary = #ffb52a
+; secondary = #e60053
+
+background = #aa14425a
+background-alt = #2d667e
+foreground = #add8e6
+foreground-alt = #006e96
+primary = #efa95a
+secondary = #000000
+alert = #bd2c40
+
+
+; { Bars } {{{
+
+; { Left } {{{
+[bar/left]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 20%
+height = 27
+; offset-x = 25%
+; offset-y = 1%
+radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+bottom = true
+
+module-margin-left = 1
+module-margin-right = 2
+
+; font-0 = fixed:pixelsize=10;1
+font-0 = SauceCodePro Nerd Font:pixelsize=12;1
+; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+; font-2 = siji:pixelsize=10;1
+; font-3 = fontawesome:pixelsize=12
+; font-4 = Font Awesome 5 Free:pixelsize=12;2
+; font-5 = Font Awesome 5 Free Solid:pixelsize=12;2
+; font-6 = Font Awesome 5 Brands:pixelsize=12;2
+font-1 = FontAwesome5Free:style=Solid:size=10;4
+font-2 = FontAwesome5Free:style=Regular:size=10;4
+font-3 = FontAwesome5Brands:style=Regular:size=10;4
+font-4 = RobotoMono Nerd Font:pixelsize=10;4
+
+modules-left = ewmh
+
+enable-ipc = true
+override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+; }}}
+
+; { Center } {{{
+[bar/center]
+width = 40%
+height = 27
+offset-x = 30%
+; offset-y = 1%
+radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+bottom = true
+
+module-margin-left = 1
+module-margin-right = 1
+
+
+font-0 = RobotoMono Nerd Font:pixelsize=12;1
+; font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = fontawesome:pixelsize=13
+font-4 = FontAwesome5Free:style=Solid:size=10;4
+font-5 = FontAwesome5Free:style=Regular:size=10;4
+font-6 = FontAwesome5Brands:style=Regular:size=10;4
+
+modules-left = filesystem backlight alsa memory cpu wlan eth battery date powermenu
+
+enable-ipc = true
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+; }}}
+
+; { Right } {{{
+[bar/right]
+width = 8%
+height = 27
+offset-x = 92%
+; offset-y = 1%
+radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+bottom = true
+
+modules-left = "blank"
+
+tray-offset-x = 0
+tray-offset-y = 0
+tray-position = right
+tray-detach = true
+tray-padding = 4
+tray-maxsize = 22
+tray-scale = 1.0
+tray-background = ${colors.background}
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = fontawesome:pixelsize=13
+
+enable-ipc = true
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+; }}}
+
+; }}}
+
+; { Modules } {{{
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/ewmh]
+type = internal/xworkspaces
+
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+
+format = <label-state>
+label-active-foreground = #ffffff
+label-active-background = #3f3f3f
+label-active-underline = #fba922
+label-active-padding = 3
+
+label-occupied-underline = #555555
+label-occupied-padding = 3
+
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+label-urgent-padding = 3
+
+label-empty-foreground = #55
+label-empty-padding = 3
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp> <label>
+label = %percentage:2%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+format-underline = #f90000
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp0s20f3
+interval = 3.0
+
+format-connected = 直 <label-connected>
+format-connected-underline = #9f78e1
+label-connected = %essid%
+
+format-disconnected = 睊
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/eth]
+type = internal/network
+interface = enp7s0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = 
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+time = %c
+time-alt = %H:%M
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground}
+format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/alsa]
+type = internal/alsa
+
+; format-prefix-font = 4
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage:2%%
+label-volume-foreground = ${root.foreground}
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+
+format-muted-foreground = ${colors.foreground-alt}
+label-muted =  muted
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 750
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/blank]
+type = custom/text
+content = " "
+content-foreground = #00ffffff
+
+; }}}
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini foldmethod=marker
