@@ -82,7 +82,10 @@ require'lualine'.setup {
         spinner_symbols = {'⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'},
       }
     },
-    lualine_x = {'progress'},
+    lualine_x = {
+      'location',
+      'progress',
+    },
     lualine_y = {
       {
         'diff',
