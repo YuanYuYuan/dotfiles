@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
   use { 'gutenye/json5.vim',
     ft = 'markdown',
   }
-  use 'b0o/mapx.nvim'
+  -- use 'b0o/mapx.nvim'
   use { 'lewis6991/gitsigns.nvim',
     config = function()
       require 'gitsigns'.setup()
@@ -43,23 +43,20 @@ return require('packer').startup(function(use)
       vim.api.nvim_set_keymap('n', '<Space><Space>v', '<cmd>Vista!!<CR>', {noremap = true})
     end
   }
-  use 'skywind3000/asyncrun.vim'
-  use 'mg979/vim-visual-multi'
+  -- use 'skywind3000/asyncrun.vim'
+  -- use 'mg979/vim-visual-multi'
   use { 'godlygeek/tabular',
     config = vim.cmd [[
         vnoremap \ :Tabularize /
     ]]
   }
   use 'simrat39/rust-tools.nvim'
-  use { 'junegunn/vim-easy-align',
-    config = vim.cmd [[
-      xmap ga <Plug>(EasyAlign)
-      nmap ga <Plug>(EasyAlign)
-    ]]
-  }
   use { 'kyazdani42/nvim-tree.lua',
     config = function()
       require'nvim-tree'.setup {
+        git = {
+          enable = false,
+        },
         diagnostics = {
           enable = true,
           icons = {
@@ -100,13 +97,13 @@ return require('packer').startup(function(use)
     ]]
   }
 
-  -- -- colorscheme
+  -- -- -- colorscheme
   use 'YuanYuYuan/zephyr-nvim'
 
-  -- -- A high-performance color highlighter for Neovim
-  use { 'norcalli/nvim-colorizer.lua',
-    config = [[require 'colorizer'.setup()]]
-  }
+  -- -- -- A high-performance color highlighter for Neovim
+  -- use { 'norcalli/nvim-colorizer.lua',
+  --   config = [[require 'colorizer'.setup()]]
+  -- }
 
   use { 'scrooloose/nerdcommenter',
     config = vim.cmd [[
@@ -165,7 +162,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate',
     config = [[require('plugins.treesitter')]]
   }
-  -- use 'nvim-treesitter/playground'
+  -- -- use 'nvim-treesitter/playground'
 
   use { 'lervag/vimtex',
     ft = 'tex',
@@ -231,7 +228,7 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- -- cmp / lspkind
+  -- cmp / lspkind
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',

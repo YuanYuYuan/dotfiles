@@ -85,6 +85,7 @@ local servers = {
   sqls = {},
   gopls = {},
   pyright = {},
+  -- clangd = {},
   ccls = {
     init_options = {
       clang = {
@@ -168,7 +169,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- }
 
 for server, config in pairs(servers) do
-  config.autostart = false
+  config.autostart = true
   config.on_attach = on_attach
   config.capabilities = capabilities
   lsp_config[server].setup(config)
