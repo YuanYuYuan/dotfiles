@@ -74,8 +74,9 @@ return require('packer').startup(function(use)
           side = 'left',
           hide_root_folder = false,
           auto_resize = true
-        }
+        },
       }
+      vim.g["nvim_tree_quit_on_open"] = 1
       vim.cmd [[
         nnoremap <F1> :NvimTreeToggle<CR>
       ]]
