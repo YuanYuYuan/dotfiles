@@ -5,12 +5,6 @@ local map = vim.api.nvim_set_keymap
 
 require ('lsp_signature').setup()
 
--- vim.fn.sign_define('LspDiagnosticsSignError', {text = '', numhl = 'RedSign'})
--- vim.fn.sign_define('LspDiagnosticsSignWarning', {text = '', numhl = 'YellowSign'})
--- vim.fn.sign_define('LspDiagnosticsSignInformation', {text = '', numhl = 'WhiteSign'})
--- vim.fn.sign_define('LspDiagnosticsSignHint', {text = '', numhl = 'BlueSign'})
-
-
 local kind_symbols = require('plugins.kind_symbols')
 
 lsp_status.config {
@@ -185,20 +179,20 @@ require('rust-tools').setup{
 
 -- set lsp diagnostic sign
 vim.fn.sign_define(
-  'LspDiagnosticsSignError',
-  {text = "", texthl = "LspDiagnosticsDefaultError"}
+  'DiagnosticSignError',
+  {text = "", texthl = "DiagnosticDefaultError"}
 )
 vim.fn.sign_define(
-  'LspDiagnosticsSignWarning',
-  {text = "", texthl = "LspDiagnosticsDefaultWarning"}
+  'DiagnosticSignWarning',
+  {text = "", texthl = "DiagnosticDefaultWarning"}
 )
 vim.fn.sign_define(
-  'LspDiagnosticsSignInformation',
-  { text = "", texthl = "LspDiagnosticsDefaultInformation" }
+  'DiagnosticSignInformation',
+  { text = "", texthl = "DiagnosticDefaultInformation" }
 )
 vim.fn.sign_define(
-  'LspDiagnosticsSignHint',
-  { text = "", texthl = "LspDiagnosticsDefaultHint" }
+  'DiagnosticSignHint',
+  { text = "", texthl = "DiagnosticDefaultHint" }
 )
 
 -- return on_attach
