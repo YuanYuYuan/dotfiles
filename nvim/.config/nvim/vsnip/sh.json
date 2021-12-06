@@ -1,0 +1,9 @@
+{
+  "Class": {
+    "prefix": ["shb"],
+    "body": [
+      "#!/usr/bin/env bash"
+    ],
+    "description": "shell bang"
+  }
+}
