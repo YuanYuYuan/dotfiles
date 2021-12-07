@@ -123,7 +123,11 @@ local servers = {
       }
     }
   },
-  julials = {}
+  julials = {},
+  lemminx = {
+    cmd = { "/usr/bin/lemminx" }
+  },
+  html = {},
 }
 
 -- local on_attach = function(client, bufnr)

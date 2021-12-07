@@ -1,0 +1,45 @@
+{
+  "Template": {
+    "prefix": ["="],
+    "body": [
+      "= ${1:Title}",
+      ":nofooter:",
+      ":toc: left",
+      ":toclevels: 3",
+      ":icons: font",
+      ":source-highlighter: rouge",
+      ":rouge-style: thankful_eyes",
+      ":sectnums:",
+      ":sectlinks:",
+      ":sectanchors:",
+      ":stem:"
+    ],
+    "description": "Template"
+  },
+  "Code block": {
+    "prefix": ["cbl"],
+    "body": [
+      "[source, ${1:bash}, options=\"nowrap\"]",
+      "----",
+      "$2",
+      "----"
+    ],
+    "description": "Code block"
+  },
+  "Image": {
+    "prefix": ["img"],
+    "body": [
+      "image::${1:file_name}[align=\"center\",width=800]"
+    ],
+    "description": "Insert an image"
+  },
+  "Image with path": {
+    "prefix": ["imgp"],
+    "body": [
+      "image::${1:file_name}[align=\"center\",width=800]",
+      "[.text-center]",
+      "#_$1_#"
+    ],
+    "description": "Insert an image with path"
+  }
+}

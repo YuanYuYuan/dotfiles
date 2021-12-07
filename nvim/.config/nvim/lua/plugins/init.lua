@@ -197,7 +197,11 @@ return require('packer').startup(function(use)
     ]]
   }
   use { 'SirVer/ultisnips',
-    ft = {'tex', 'asciidoctor', 'markdown'},
+    ft = {
+      'tex',
+      -- 'asciidoctor',
+      'markdown'
+    },
     config = vim.cmd [[
       let g:UltiSnipsExpandTrigger="<c-e>"
       let g:UltiSnipsJumpForwardTrigger="<CR>"
@@ -207,7 +211,15 @@ return require('packer').startup(function(use)
       nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
     ]]
   }
-  -- use 'hrsh7th/vim-vsnip'
+  use { 'hrsh7th/vim-vsnip',
+    config = function()
+      vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
+      vim.cmd [[
+        smap <expr> <CR>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<CR>'
+        smap <expr> <S-CR> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-CR>'
+      ]]
+    end
+  }
   -- use { 'hrsh7th/vim-vsnip-integ',
   --   config = vim.cmd [[
   --     let g:vsnip_snippet_dir = '$XDG_CONFIG_HOME/nvim/snips'
@@ -247,7 +259,7 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip',
+      -- 'hrsh7th/vim-vsnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -255,7 +267,6 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('plugins.cmp')
-      vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
     end
   }
 
