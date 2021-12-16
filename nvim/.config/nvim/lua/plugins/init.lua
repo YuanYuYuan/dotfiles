@@ -133,7 +133,12 @@ return require('packer').startup(function(use)
       vmap <BS> <plug>NERDCommenterToggle
     ]]
   }
-  use { 'YuanYuYuan/mru',
+  -- use { 'YuanYuYuan/mru',
+  --   config = vim.cmd [[
+  --     nnoremap <Space>f :MRU<CR>
+  --   ]]
+  -- }
+  use { 'yegappan/mru',
     config = vim.cmd [[
       nnoremap <Space>f :MRU<CR>
     ]]
@@ -247,7 +252,7 @@ return require('packer').startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('trouble').setup {
-        use_lsp_diagnostic_signs = true,
+        use_diagnostic_signs = true,
         auto_close = true,
       }
       vim.api.nvim_set_keymap("n", "<F2>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})

@@ -33,7 +33,7 @@ require'lualine'.setup {
       },
       {
         'diagnostics',
-        sources={'nvim_lsp'},
+        sources={'nvim_diagnostic'},
         symbols = {
           error = ' ',
           warn = ' ',

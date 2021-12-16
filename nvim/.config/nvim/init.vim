@@ -120,6 +120,7 @@
         inoremap <silent> <F7> <Esc>:call ToggleTerminal(12)<CR>
         tnoremap <silent> <F7> <C-\><C-n>:call ToggleTerminal(12)<CR>
     " }}}
+
     " { Completion } {{{
         " The tab trigger is done by SuperTab.
         " And the intelligent completion relies on coc.vim.
@@ -272,7 +273,6 @@ require('keymappings')
 EOF
 " }}}
 
-
 " { Folding } {{{
     set foldenable
 
@@ -332,7 +332,6 @@ EOF
 
     " Press Enter to toggle folding except in quickfix
     " nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : "call FoldOrSelect()"
-    " nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : ":call FoldOrSelect()<CR>"
     nnoremap <expr> <Tab> &buftype ==# 'quickfix' ? "\<CR>" : ":call FoldOrSelect()<CR>"
 
     " Press Enter to create folding
@@ -384,8 +383,10 @@ EOF
     " jump between changes and view in middle
     nnoremap g; g;zz
     nnoremap g, g,zz
-    nnoremap <C-o> <C-o>zz
-    nnoremap <C-m> <C-i>zz
+
+    " FIXME: <C-m> = Enter, <C-i> = Tab in vim, don't override them
+    " nnoremap <C-o> <C-o>zz
+    " nnoremap <C-m> <C-i>zz
 
     " number increment: press <C-s>/<C-x> to increase/decrease 1
     nnoremap <C-s> <C-a>
