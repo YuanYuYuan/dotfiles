@@ -43,7 +43,7 @@ return require('packer').startup(function(use)
       vim.api.nvim_set_keymap('n', '<Space><Space>v', '<cmd>Vista!!<CR>', {noremap = true})
     end
   }
-  -- use 'skywind3000/asyncrun.vim'
+  use 'skywind3000/asyncrun.vim'
   -- use 'mg979/vim-visual-multi'
   use { 'godlygeek/tabular',
     config = vim.cmd [[
@@ -220,8 +220,11 @@ return require('packer').startup(function(use)
     config = function()
       vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
       vim.cmd [[
-        smap <expr> <CR>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<CR>'
-        smap <expr> <S-CR> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-CR>'
+        " Jump forward or backward
+        imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+        smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+        imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+        smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
       ]]
     end
   }

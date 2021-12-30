@@ -26,6 +26,20 @@
     ],
     "description": "Code block"
   },
+  "Table": {
+    "prefix": ["tbl"],
+    "body": [
+      "[options=\"header\", frame=\"topbot\", grid=\"none\"]",
+      "|===",
+      "| ${2:Col_1} | ${3:Col_2}",
+      "",
+      "| ${4:Col_1_Row_1}",
+      "| ${5:Col_2_Row_1}",
+      "",
+      "|==="
+    ],
+    "description": "Table"
+  },
   "Image": {
     "prefix": ["img"],
     "body": [

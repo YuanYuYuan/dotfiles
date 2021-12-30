@@ -54,3 +54,13 @@ png
 supervisely
 timestamp
 vncserver
+LiDAR
+PCD
+Voxel
+BBox
+2D
+3D
+LiDARs
+todo
+config
+Zenoh

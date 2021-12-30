@@ -182,7 +182,7 @@
     " asciidoc
     function! RunAsciidoc()
         exec "w"
-        exec "AsyncRun $HOME/Workings/scripts/asciidoc-autoreload.sh %"
+        exec "AsyncRun $XDG_CONFIG_HOME/nvim/scripts/asciidoc-autoreload.sh %"
     endfunction
     autocmd FileType asciidoc inoremap <buffer> <silent> <F3> <Esc>:call RunAsciidoc()<CR>
     autocmd FileType asciidoc nnoremap <buffer> <silent> <F3> :call RunAsciidoc()<CR>
@@ -542,9 +542,9 @@ EOF
     " TODO
     inoremap <c-k> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-    " use <F8> to toggle spell check
-    nnoremap <silent> <F8> :setlocal spell!<CR>
-    inoremap <silent> <F8> <ESC>:setlocal spell!<CR>i
+    " " use <F8> to toggle spell check
+    " nnoremap <silent> <F8> :setlocal spell!<CR>
+    " inoremap <silent> <F8> <ESC>:setlocal spell!<CR>i
 " }}}
 
 " vim: foldmethod=marker
