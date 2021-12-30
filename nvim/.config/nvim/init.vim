@@ -232,6 +232,7 @@ lua require('plugins')
     set t_Co=256
 
     colorscheme zephyr
+    " colorscheme onedark
 
     " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
     " autocmd vimenter * hi LineNr guibg=NONE ctermbg=NONE
@@ -385,8 +386,8 @@ EOF
     nnoremap g, g,zz
 
     " FIXME: <C-m> = Enter, <C-i> = Tab in vim, don't override them
-    " nnoremap <C-o> <C-o>zz
-    " nnoremap <C-m> <C-i>zz
+    nnoremap <C-o> <C-o>zz
+    nnoremap O <C-i>zz
 
     " number increment: press <C-s>/<C-x> to increase/decrease 1
     nnoremap <C-s> <C-a>

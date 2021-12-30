@@ -100,6 +100,7 @@ return require('packer').startup(function(use)
 
   -- -- -- colorscheme
   use 'YuanYuYuan/zephyr-nvim'
+  use 'joshdick/onedark.vim'
 
   -- -- -- A high-performance color highlighter for Neovim
   -- use { 'norcalli/nvim-colorizer.lua',
