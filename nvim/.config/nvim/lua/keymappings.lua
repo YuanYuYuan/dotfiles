@@ -7,7 +7,8 @@ function M.yank_and_display_path()
   print(file_path)
 end
 
-map('n', '<Space><Space>t', '<Cmd>!alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
+map('n', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
+map('i', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
 map('n', '<Space><Space>l', '<Cmd>LspStart<CR>', {noremap = true})
 map('n', '<C-g>', "<Cmd>lua require('keymappings').yank_and_display_path()<CR>", {noremap = true, silent=true})
 
