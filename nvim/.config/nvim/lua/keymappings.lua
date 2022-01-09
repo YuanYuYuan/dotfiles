@@ -11,5 +11,6 @@ map('n', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {norem
 map('i', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
 map('n', '<Space><Space>l', '<Cmd>LspStart<CR>', {noremap = true})
 map('n', '<C-g>', "<Cmd>lua require('keymappings').yank_and_display_path()<CR>", {noremap = true, silent=true})
+map('n', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})
 
 return M

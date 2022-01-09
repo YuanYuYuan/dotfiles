@@ -290,6 +290,24 @@ return require('packer').startup(function(use)
   }
   use 'arkav/lualine-lsp-progress'
 
+  -- improve highlight searching
+  use { 'kevinhwang91/nvim-hlslens',
+    config = function()
+      require('hlslens').setup({
+        calm_down = true,
+      })
+    end
+  }
+  use {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup()
+      vim.cmd [[
+        hi default link HlSearchLens IncSearch
+      ]]
+    end
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   if packer_bootstrap then
     require('packer').sync()
