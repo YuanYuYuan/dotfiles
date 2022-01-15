@@ -207,12 +207,18 @@ lua require('plugins')
     " next/previous search
     vnoremap 0 n
     vnoremap 9 N
-    vnoremap n "ny/<C-r>n<CR>zzzv
-    vnoremap N "ny/<C-r>n<CR>NNzzzv
+    vnoremap n "ny/<C-r>n<CR>zv
+    vnoremap N "ny/<C-r>n<CR>NNzv
     vnoremap C "ny/<C-r>n<CR>Ncgn
 
-    nnoremap n nzzzv
-    nnoremap N Nzzzv
+    nnoremap n nzv
+    nnoremap N Nzv
+
+    " " auto jump to center
+    " vnoremap n "ny/<C-r>n<CR>zzzv
+    " vnoremap N "ny/<C-r>n<CR>NNzzzv
+    " nnoremap n nzzzv
+    " nnoremap N Nzzzv
 
     " grep search and show on quickfix
     vnoremap <C-f> y:vimgrep <C-r>" %<CR> \| :copen <CR>
