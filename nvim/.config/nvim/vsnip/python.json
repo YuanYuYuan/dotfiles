@@ -1,0 +1,23 @@
+{
+  "numpy": {
+    "prefix": ["imnp"],
+    "body": [
+      "import numpy as np"
+    ],
+    "description": "Import numpy"
+  },
+  "matplotlib": {
+    "prefix": ["impl"],
+    "body": [
+      "import matplotlib.pyplot as plt"
+    ],
+    "description": "Import matplotlib"
+  },
+  "ipdb": {
+    "prefix": ["ipdb"],
+    "body": [
+      "import ipdb; ipdb.set_trace()"
+    ],
+    "description": "ipdb"
+  }
+}

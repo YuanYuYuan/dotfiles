@@ -7,10 +7,38 @@ function M.yank_and_display_path()
   print(file_path)
 end
 
+function M.switch_brackets()
+  vim.cmd('noau normal! "vy"')
+  vim.cmd[[
+    '<,'>s/\[/{/g
+    '<,'>s/\]/}/g
+  ]]
+  -- local _, srow, scol, _ = unpack(vim.fn.getpos("'<"))
+  -- local _, erow, ecol, _ = unpack(vim.fn.getpos("'>"))
+  -- if ecol > 999 then
+  --   ecol = 999
+  -- end
+  -- local x = vim.fn.getreg('v'):gsub('%[', '{'):gsub('%]', '}')
+  -- local lines = {}
+  -- for l in x:gmatch('[^\r\n]+') do
+  --   table.insert(lines, l)
+  -- end
+  -- print(vim.inspect(x))
+  -- print(vim.inspect(lines))
+  -- print('vim:', vim.inspect(vim.split(x, '\n', true)))
+  -- print('bufline count: ', vim.api.nvim_buf_line_count(0))
+  -- print(srow, scol, erow, ecol)
+  -- vim.api.nvim_buf_set_text(0, srow, scol, erow, ecol, vim.split(x, '\n', true))
+  -- -- vim.api.nvim_buf_set_text(0, srow, scol, erow, ecol, {'wtf', 'wtf2'})
+  -- -- print(vim.fn.getreg('v'))
+end
+
 map('n', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
 map('i', '<F8>', '<Cmd>silent !alacritty --working-directory %:p:h&<CR>', {noremap = true, silent=true})
 map('n', '<Space><Space>l', '<Cmd>LspStart<CR>', {noremap = true})
 map('n', '<C-g>', "<Cmd>lua require('keymappings').yank_and_display_path()<CR>", {noremap = true, silent=true})
 map('n', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})
+map('v', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})
+map('v', 'gs', "<Cmd>silent lua require('keymappings').switch_brackets()<CR>", {noremap = true, silent=true})
 
 return M

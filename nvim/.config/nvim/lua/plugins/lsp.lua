@@ -181,22 +181,20 @@ require('rust-tools').setup{
   }
 }
 
--- set lsp diagnostic sign
+-- set lsp diagnostic sign: neovim 0.6.1
 vim.fn.sign_define(
   'DiagnosticSignError',
-  {text = "", texthl = "DiagnosticDefaultError"}
+  {text = '', texthl = "DiagnosticDefaultError"}
 )
 vim.fn.sign_define(
-  'DiagnosticSignWarning',
-  {text = "", texthl = "DiagnosticDefaultWarning"}
+  'DiagnosticSignWarn',
+  {text = '', texthl = 'DiagnosticSignWarn'}
 )
 vim.fn.sign_define(
-  'DiagnosticSignInformation',
-  { text = "", texthl = "DiagnosticDefaultInformation" }
+  'DiagnosticSignInfo',
+  { text = '', texthl = 'DiagnosticSignInfo' }
 )
 vim.fn.sign_define(
   'DiagnosticSignHint',
-  { text = "", texthl = "DiagnosticDefaultHint" }
+  { text = '', texthl = 'DiagnosticSignHint' }
 )
-
--- return on_attach
