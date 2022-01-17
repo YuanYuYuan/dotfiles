@@ -1,0 +1,35 @@
+{
+  "int main()": {
+    "prefix": ["intm"],
+    "body": [
+      "int main() {",
+      "\t$1",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "int main()"
+  },
+  "cout": {
+    "prefix": ["co"],
+    "body": [
+      "cout << $1 << endl;"
+    ],
+    "description": "cout"
+  },
+  "for loop": {
+    "prefix": ["fo"],
+    "body": [
+      "for (${1:int i = 0}; ${2:i < n}; ${3:i++}) {",
+      "\t$4",
+      "}"
+    ],
+    "description": "for loop"
+  },
+  "vec": {
+    "prefix": ["vec"],
+    "body": [
+      "vector<$1>"
+    ],
+    "description": "vec"
+  }
+}
