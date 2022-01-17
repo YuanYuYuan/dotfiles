@@ -8,6 +8,15 @@ local check_back_space = function()
   return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 
 -- nvim-cmp setup
 cmp.setup {
@@ -22,8 +31,8 @@ cmp.setup {
       vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
 
       vim_item.menu = ({
-        buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
+        buffer = "[Buffer]",
         nvim_lua = "[Lua]",
       })[entry.source.name]
 
@@ -35,22 +44,33 @@ cmp.setup {
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-e>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping(
+      function(fallback)
+        if vim.fn["vsnip#available"](1) == 1 then
+          feedkey("<Plug>(vsnip-expand)", "")
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end,
+      { "i", "s" }
+    ),
     ["<C-c>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
+    ["<Tab>"] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      {"i", "s"}
+    ),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -67,9 +87,9 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "path" },
     { name = "buffer" },
-    { name = "vsnip" },
     { name = "calc" },
     { name = "cmp_tabnine" },
+    { name = "vsnip" },
     -- { name = 'emoji' }
   },
 }
