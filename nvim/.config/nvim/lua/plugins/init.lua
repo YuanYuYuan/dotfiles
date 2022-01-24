@@ -60,7 +60,7 @@ return require('packer').startup(function(use)
         diagnostics = {
           enable = true,
           icons = {
-            hint = "",
+            hint = "",
             info = "",
             warning = "",
             error = "",
