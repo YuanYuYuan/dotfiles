@@ -1,0 +1,15 @@
+{
+  "Vsnip code block": {
+    "prefix": ["cbl"],
+    "body": [
+      "\"${1:NAME}\": {",
+      "  \"prefix\": [\"${2:KEYWORD}\"],",
+      "  \"body\": [",
+        "    \"$3\"",
+      "  ],",
+      "\"description\": \"${1:NAME}\"",
+      "}"
+    ],
+    "description": "Vsnip code block"
+  }
+}

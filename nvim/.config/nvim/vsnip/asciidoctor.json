@@ -26,6 +26,13 @@
     ],
     "description": "Code block"
   },
+  "Inline Code block": {
+    "prefix": ["ilc"],
+    "body": [
+      "`$1`"
+    ],
+    "description": "Inline Code block"
+  },
   "Table": {
     "prefix": ["tbl"],
     "body": [
