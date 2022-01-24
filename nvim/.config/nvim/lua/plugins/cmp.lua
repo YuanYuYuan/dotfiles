@@ -56,11 +56,41 @@ cmp.setup {
       end,
       { "i", "s" }
     ),
+    ["<C-j>"] = cmp.mapping(
+      function(fallback)
+        if vim.fn["vsnip#jumpable"](1) == 1 then
+          feedkey("<Plug>(vsnip-jump-next)", "")
+        else
+          fallback()
+        end
+      end,
+      { "i", "s" }
+    ),
+    ["<C-k>"] = cmp.mapping(
+      function(fallback)
+        if vim.fn["vsnip#jumpable"](1) == 1 then
+          feedkey("<Plug>(vsnip-jump-prev)", "")
+        else
+          fallback()
+        end
+      end,
+      { "i", "s" }
+    ),
     ["<C-c>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    -- ["<CR>"] = cmp.mapping(
+    --   function(fallback)
+    --     if cmp.visible() and has_words_before() then
+    --       cmp.mapping.confirm {
+    --         behavior = cmp.ConfirmBehavior.Replace,
+    --         select = true,
+    --       }
+    --     else
+    --       fallback()
+    --     end
+    --   end,
+    --   { "i", "s" }
+    -- ),
     ["<Tab>"] = cmp.mapping(
       function(fallback)
         if cmp.visible() then
@@ -77,10 +107,9 @@ cmp.setup {
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end,
+    {"i", "s"}
+    ),
   },
   sources = {
     { name = "nvim_lsp" },

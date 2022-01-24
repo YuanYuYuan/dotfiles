@@ -2,9 +2,14 @@
 
     " FIXME: this seems conflict with treesitter
     " and block the autostart of LSP
-    " syntax enable                         " syntax highlight
-    syntax on                         " syntax highlight
-    syntax sync fromstart
+
+    " { Syntax } {{{
+        " syntax enable                         " syntax highlight
+        syntax on                         " syntax highlight
+        syntax sync fromstart
+        autocmd BufReadPre * if getfsize(expand("%")) > 1000000 | syntax clear | endif
+    " }}}
+
     set showcmd                       " Show partial commands in the last line of the screen
     set history=10000                 " history limit
     set cursorline                    " highlight current line
@@ -281,53 +286,56 @@ EOF
 " }}}
 
 " { Folding } {{{
-    set foldenable
 
-    " default foldmethod
-    setlocal foldmethod=syntax
-    " setlocal foldmethod=expr
+    augroup MyFoldGroup
+        autocmd!
+        " disable folding if file size > 1 MB
+        if getfsize(expand("%")) > 1000000
+            setlocal foldmethod=manual
+        else
+            set foldenable
+            setlocal foldmethod=syntax
+
+            set fillchars=fold:\ " use trailing space as the padding of folding
+            set foldtext=MyFoldText()
+            function! MyFoldText()
+                let head = getline(v:foldstart)
+                let head = substitute(head, '{{{', '', 'g')
+                let head = substitute(head, '\s\+$', '', 'g')
+                let tail = substitute(trim(getline(v:foldend)), '.*}}}', '', 'g')
+                return head . ' ... ' . tail
+            endfunction
+
+            " Open the folding automatically in conditions of
+            "   all             any
+            "   block           (, {, [[, [{, etc.
+            "   hor             horizontal movements
+            "   insert          any command in Insert mode
+            "   jump            far jumps
+            "   mark            mark jumps
+            "   percent         pair match
+            "   quickfix        :cn, :crew, :make, etc.
+            "   search          search for a pattern: /, n, *, gd, etc.
+            "                   (not for a search pattern in a : command) Also for [s and ]s.
+            "   tag             jumping to a tag: :ta, CTRL-T, etc.
+            "   undo            undo or redo: u and CTRL-R
+            set foldopen=hor,mark,percent,quickfix,search,tag,undo
+
+
+            " fold methods for different filetypes
+            autocmd FileType tmux,zsh,snippets setlocal foldmethod=marker foldmarker={{{,#\ }}}
+            autocmd FileType haskell setlocal foldmethod=marker foldmarker={{{,--\ }}}
+            autocmd FileType vim setlocal foldmethod=marker
+            autocmd FileType json,json5 setlocal foldmethod=syntax
+            autocmd FileType tex setlocal foldmethod=expr
+
+            " Python folding
+            autocmd FileType python,lua setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+        endif
+    augroup END
 
     " " FIXME: adress the treesitter folding issuse
     " autocmd BufWritePost * lua vim.opt.foldmethod = vim.opt.foldmethod
-
-    " " FIXME
-    " set foldexpr=nvim_treesitter#foldexpr()
-
-    set fillchars=fold:\ " use trailing space as the padding of folding
-    set foldtext=MyFoldText()
-    function! MyFoldText()
-        let head = getline(v:foldstart)
-        let head = substitute(head, '{{{', '', 'g')
-        let head = substitute(head, '\s\+$', '', 'g')
-        let tail = substitute(trim(getline(v:foldend)), '.*}}}', '', 'g')
-        return head . ' ... ' . tail
-    endfunction
-
-    " Open the folding automatically in conditions of
-    "   all             any
-    "   block           (, {, [[, [{, etc.
-    "   hor             horizontal movements
-    "   insert          any command in Insert mode
-    "   jump            far jumps
-    "   mark            mark jumps
-    "   percent         pair match
-    "   quickfix        :cn, :crew, :make, etc.
-    "   search          search for a pattern: /, n, *, gd, etc.
-    "                   (not for a search pattern in a : command) Also for [s and ]s.
-    "   tag             jumping to a tag: :ta, CTRL-T, etc.
-    "   undo            undo or redo: u and CTRL-R
-    set foldopen=hor,mark,percent,quickfix,search,tag,undo
-
-
-    " fold methods for different filetypes
-    autocmd FileType tmux,zsh,snippets setlocal foldmethod=marker foldmarker={{{,#\ }}}
-    autocmd FileType haskell setlocal foldmethod=marker foldmarker={{{,--\ }}}
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType json,json5 setlocal foldmethod=syntax
-    autocmd FileType tex setlocal foldmethod=expr
-
-    " TODO: Python folding
-    " autocmd FileType python setlocal foldmethod=manual
 
     function! FoldOrSelect()
         if foldlevel(line('.')) == 0
@@ -343,6 +351,10 @@ EOF
 
     " Press Enter to create folding
     vnoremap <Tab> zf
+
+    " quick yank folded text
+    nnoremap yc zcyyzo
+    nnoremap yC zCyyzO
 
 " }}}
 
@@ -547,7 +559,7 @@ EOF
     autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.adoc if &l:buftype !=# 'help' | setlocal spell | endif
 
     " TODO
-    inoremap <c-k> <c-g>u<Esc>[s1z=`]a<c-g>u
+    " inoremap <c-k> <c-g>u<Esc>[s1z=`]a<c-g>u
 
     " " use <F8> to toggle spell check
     " nnoremap <silent> <F8> :setlocal spell!<CR>

@@ -1,4 +1,38 @@
 {
+  "inclde": {
+    "prefix": ["in"],
+    "body": [
+      "#include <$1>"
+    ],
+    "description": "include"
+  },
+  "using namespace": {
+    "prefix": ["un"],
+    "body": [
+      "using namespace ${1:std};"
+    ],
+    "description": "using namespace"
+  },
+  "if": {
+    "prefix": ["if"],
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "if"
+  },
+  "if else": {
+    "prefix": ["ife"],
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "} else {",
+      "\t$3",
+      "}"
+    ],
+    "description": "if else"
+  },
   "int main()": {
     "prefix": ["intm"],
     "body": [

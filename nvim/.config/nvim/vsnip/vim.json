@@ -1,0 +1,11 @@
+{
+  "code block": {
+    "prefix": ["cbl"],
+    "body": [
+      "\" { $1 } {{{",
+      "\t$2",
+      "\" }}}"
+    ],
+  "description": "code block"
+  }
+}
