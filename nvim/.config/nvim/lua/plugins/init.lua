@@ -134,16 +134,11 @@ return require('packer').startup(function(use)
       vmap <BS> <plug>NERDCommenterToggle
     ]]
   }
-  -- use { 'YuanYuYuan/mru',
+  -- use { 'yegappan/mru',
   --   config = vim.cmd [[
   --     nnoremap <Space>f :MRU<CR>
   --   ]]
   -- }
-  use { 'yegappan/mru',
-    config = vim.cmd [[
-      nnoremap <Space>f :MRU<CR>
-    ]]
-  }
   use { 'tpope/vim-surround',
     config = vim.cmd [[
       let g:surround_no_mappings = 1
@@ -202,31 +197,31 @@ return require('packer').startup(function(use)
       nnoremap <silent> <Space>a :ArgWrap<CR>
     ]]
   }
-  use { 'SirVer/ultisnips',
-    ft = {
-      'tex',
-      -- 'asciidoctor',
-      'markdown'
-    },
-    config = vim.cmd [[
-      let g:UltiSnipsExpandTrigger="<c-e>"
-      let g:UltiSnipsJumpForwardTrigger="<CR>"
-      let g:UltiSnipsJumpBackwardTrigger="<S-CR>"
-      let g:UltiSnipsSnippetDirectories=['snips']
-      snoremap qq <Esc>
-      nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
-    ]]
-  }
+  -- use { 'SirVer/ultisnips',
+  --   ft = {
+  --     'tex',
+  --     -- 'asciidoctor',
+  --     'markdown'
+  --   },
+  --   config = vim.cmd [[
+  --     let g:UltiSnipsExpandTrigger="<c-e>"
+  --     let g:UltiSnipsJumpForwardTrigger="<CR>"
+  --     let g:UltiSnipsJumpBackwardTrigger="<S-CR>"
+  --     let g:UltiSnipsSnippetDirectories=['snips']
+  --     snoremap qq <Esc>
+  --     nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
+  --   ]]
+  -- }
   use { 'hrsh7th/vim-vsnip',
     config = function()
       vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
-      vim.cmd [[
-        " Jump forward or backward
-        imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-        smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-        imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-        smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-      ]]
+      -- vim.cmd [[
+      --   " Jump forward or backward
+      --   imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+      --   smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+      --   imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+      --   smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+      -- ]]
     end
   }
   -- use { 'hrsh7th/vim-vsnip-integ',
@@ -251,8 +246,7 @@ return require('packer').startup(function(use)
   }
 
   -- cmp / lspkind
-  use {
-    'folke/trouble.nvim',
+  use { 'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('trouble').setup {
@@ -280,9 +274,41 @@ return require('packer').startup(function(use)
   }
 
 
-  use 'nvim-telescope/telescope.nvim'
+  use { 'nvim-telescope/telescope.nvim',
+    config = function()
+      vim.cmd [[
+        nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+        nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+        nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+        nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+      ]]
+      require'telescope'.setup{
+        defaults = {
+          path_display = { 'smart'},
+          mappings = {
+            i = {
+              ['<C-j>'] = 'move_selection_next',
+              ['<C-k>'] = 'move_selection_previous',
+            }
+          }
+        }
+      }
+    end
+  }
   use {
-    'nvim-lualine/lualine.nvim',
+    'nvim-telescope/telescope-frecency.nvim',
+    config = function()
+      require'telescope'.load_extension('frecency')
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>f",
+        "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
+        {noremap = true, silent = true}
+      )
+    end,
+    requires = {'tami5/sqlite.lua'}
+  }
+  use { 'nvim-lualine/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('plugins.statusline')
@@ -298,8 +324,7 @@ return require('packer').startup(function(use)
       })
     end
   }
-  use {
-    'petertriho/nvim-scrollbar',
+  use { 'petertriho/nvim-scrollbar',
     config = function()
       require('scrollbar').setup()
       vim.cmd [[
