@@ -117,8 +117,8 @@ cmp.setup {
     { name = "path" },
     { name = "buffer" },
     { name = "calc" },
-    { name = "cmp_tabnine" },
     { name = "vsnip" },
+    { name = "cmp_tabnine" },
     -- { name = 'emoji' }
   },
 }

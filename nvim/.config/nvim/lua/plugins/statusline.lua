@@ -37,7 +37,7 @@ require'lualine'.setup {
         symbols = {
           error = ' ',
           warn = ' ',
-          info = ' ',
+          info = ' ',
           hint = ' '
         },
       },
