@@ -17,7 +17,7 @@
     "prefix": ["if"],
     "body": [
       "if ($1) {",
-      "\t$2",
+      "    $2",
       "}"
     ],
     "description": "if"
@@ -26,18 +26,18 @@
     "prefix": ["ife"],
     "body": [
       "if ($1) {",
-      "\t$2",
+      "    $2",
       "} else {",
-      "\t$3",
+      "    $3",
       "}"
     ],
     "description": "if else"
   },
   "int main()": {
-    "prefix": ["intm"],
+    "prefix": ["mai"],
     "body": [
       "int main() {",
-      "\t$1",
+      "    $1",
       "\treturn 0;",
       "}"
     ],
@@ -46,7 +46,7 @@
   "cout": {
     "prefix": ["co"],
     "body": [
-      "cout << $1 << endl;"
+      "cout << ${1:$TM_SELECTED_TEXT} << endl;"
     ],
     "description": "cout"
   },
@@ -54,7 +54,7 @@
     "prefix": ["fo"],
     "body": [
       "for (${1:int i = 0}; ${2:i < n}; ${3:i++}) {",
-      "\t$4",
+      "    $4",
       "}"
     ],
     "description": "for loop"
@@ -65,5 +65,17 @@
       "vector<$1>"
     ],
     "description": "vec"
+  },
+  "TreeNode": {
+    "prefix": ["stn"],
+    "body": [
+      "struct TreeNode {",
+      "    int val;",
+      "    TreeNode* left;",
+      "    TreeNode* right;",
+      "    TreeNode(int v) : val(v) {}",
+      "};"
+    ],
+    "description": "TreeNode"
   }
 }
