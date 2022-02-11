@@ -274,6 +274,7 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim',
     config = function()
       vim.cmd [[
+        nnoremap <leader>f <cmd>lua require('telescope.builtin').oldfiles()<cr>
         nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
         nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
         nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
@@ -300,7 +301,7 @@ return require('packer').startup(function(use)
       require'telescope'.load_extension('frecency')
       vim.api.nvim_set_keymap(
         "n",
-        "<leader>f",
+        "<leader>fq",
         "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
         {noremap = true, silent = true}
       )
