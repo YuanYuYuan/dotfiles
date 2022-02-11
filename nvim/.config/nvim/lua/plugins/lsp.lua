@@ -76,6 +76,8 @@ end
 
 
 local servers = {
+  eslint = {},
+  tsserver = {},
   sqls = {},
   gopls = {},
   pyright = {},

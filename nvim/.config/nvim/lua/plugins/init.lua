@@ -215,13 +215,10 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/vim-vsnip',
     config = function()
       vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
-      -- vim.cmd [[
-      --   " Jump forward or backward
-      --   imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-      --   smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-      --   imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-      --   smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-      -- ]]
+      vim.cmd [[
+        nmap <C-e> <Plug>(vsnip-cut-text)
+        xmap <C-e> <Plug>(vsnip-cut-text)
+      ]]
     end
   }
   -- use { 'hrsh7th/vim-vsnip-integ',
@@ -277,18 +274,21 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim',
     config = function()
       vim.cmd [[
+        nnoremap <leader>f <cmd>lua require('telescope.builtin').oldfiles()<cr>
         nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-        nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
         nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
         nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+        nnoremap ?          <cmd>lua require('telescope.builtin').live_grep()<cr>
       ]]
       require'telescope'.setup{
         defaults = {
           path_display = { 'smart'},
           mappings = {
             i = {
-              ['<C-j>'] = 'move_selection_next',
-              ['<C-k>'] = 'move_selection_previous',
+              ['<C-j>']   = 'move_selection_next',
+              ['<Tab>']   = 'move_selection_next',
+              ['<C-k>']   = 'move_selection_previous',
+              ['<S-Tab>'] = 'move_selection_previous',
             }
           }
         }
@@ -301,7 +301,7 @@ return require('packer').startup(function(use)
       require'telescope'.load_extension('frecency')
       vim.api.nvim_set_keymap(
         "n",
-        "<leader>f",
+        "<leader>fq",
         "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
         {noremap = true, silent = true}
       )

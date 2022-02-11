@@ -195,8 +195,8 @@
     " julia
     autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
-    " less space
-    autocmd FileType haskell,lua,yaml,json,json5,html,tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    " less space of indention
+    autocmd FileType haskell,lua,yaml,json,json5,html,tex,javascript,typescript setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " }}}
 
@@ -329,8 +329,8 @@ EOF
             autocmd FileType json,json5 setlocal foldmethod=syntax
             autocmd FileType tex setlocal foldmethod=expr
 
-            " Python folding
-            autocmd FileType python,lua setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+            " Treesitter based folding
+            autocmd FileType python,lua,javascript setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
         endif
     augroup END
 
