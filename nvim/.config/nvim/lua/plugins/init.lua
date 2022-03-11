@@ -274,11 +274,11 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim',
     config = function()
       vim.cmd [[
-        nnoremap <leader>f <cmd>lua require('telescope.builtin').oldfiles()<cr>
-        nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-        nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-        nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-        nnoremap ?          <cmd>lua require('telescope.builtin').live_grep()<cr>
+        nnoremap <leader>f         <cmd> lua require('telescope.builtin').oldfiles()<cr>
+        nnoremap <leader>ff        <cmd> lua require('telescope.builtin').find_files()<cr>
+        nnoremap <leader>fb        <cmd> lua require('telescope.builtin').buffers()<cr>
+        nnoremap <leader>fh        <cmd> lua require('telescope.builtin').help_tags()<cr>
+        nnoremap <leader><leader>a <cmd> lua require('telescope.builtin').lsp_code_actions()<cr>
       ]]
       require'telescope'.setup{
         defaults = {
