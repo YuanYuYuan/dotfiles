@@ -13,6 +13,20 @@
     ],
     "description": "Import numpy"
   },
+  "pandas": {
+    "prefix": ["impd"],
+    "body": [
+      "import pandas as pd"
+    ],
+    "description": "Import pandas"
+  },
+  "glob": {
+    "prefix": ["imgb"],
+    "body": [
+      "from glob import glob"
+    ],
+    "description": "Import glob"
+  },
   "matplotlib": {
     "prefix": ["impl"],
     "body": [
