@@ -1,0 +1,18 @@
+set selection-clipboard clipboard
+set font "inconsolata 12"
+set adjust-open "width"
+
+# disable this to avoid xmonad freeze
+set window-title-page false
+set guioptions none
+map [normal]     F          toggle_fullscreen
+map [fullscreen] F          toggle_fullscreen
+map [fullscreen] q          toggle_fullscreen
+map [normal]     <PageDown> scroll half-down
+map [fullscreen] <PageDown> scroll half-down
+map [normal]     <C-j>      scroll half-down
+map [normal]     <PageUp>   scroll half-up
+map [fullscreen] <PageUp>   scroll half-up
+map [normal]     <C-k>      scroll half-up
+map [normal]     =          zoom in
+map [fullscreen] =          zoom in
