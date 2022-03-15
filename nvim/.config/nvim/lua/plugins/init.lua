@@ -10,13 +10,45 @@ return require('packer').startup(function(use)
   use { 'gutenye/json5.vim',
     ft = 'markdown',
   }
-  -- use 'b0o/mapx.nvim'
+
+  use { 'tpope/vim-fugitive' }
   use { 'lewis6991/gitsigns.nvim',
     config = function()
-      require 'gitsigns'.setup()
-      vim.cmd [[
-        nnoremap <Space>gb :Gitsigns blame_line<CR>
-      ]]
+      require('gitsigns').setup{
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
+          map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+
+          -- Actions
+          map('n', '<leader>gp', gs.preview_hunk)
+          map('n', '<leader>gb', function() gs.blame_line() end)
+          map('n', '<leader>gd', gs.diffthis)
+          -- map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+          -- map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+          -- map('n', '<leader>hS', gs.stage_buffer)
+          -- map('n', '<leader>hu', gs.undo_stage_hunk)
+          -- map('n', '<leader>hR', gs.reset_buffer)
+          -- map('n', '<leader>tb', gs.toggle_current_line_blame)
+          -- map('n', '<leader>hd', gs.diffthis)
+          -- map('n', '<leader>hD', function() gs.diffthis('~') end)
+          -- map('n', '<leader>td', gs.toggle_deleted)
+
+          -- Text object
+          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        end
+      }
+      -- vim.cmd [[
+      --   nnoremap <Space>gb :Gitsigns blame_line<CR>
+      -- ]]
     end
   }
   use { 'mattn/emmet-vim',
@@ -76,7 +108,7 @@ return require('packer').startup(function(use)
           auto_resize = true
         },
       }
-      vim.g["nvim_tree_quit_on_open"] = 1
+      -- vim.g["nvim_tree_quit_on_open"] = 1
       vim.cmd [[
         nnoremap <F1> :NvimTreeToggle<CR>
       ]]
@@ -98,9 +130,22 @@ return require('packer').startup(function(use)
     ]]
   }
 
-  -- -- -- colorscheme
-  use 'YuanYuYuan/zephyr-nvim'
-  use 'joshdick/onedark.vim'
+  -- -- colorscheme
+  -- use 'YuanYuYuan/zephyr-nvim'
+  -- use 'joshdick/onedark.vim'
+  use { 'EdenEast/nightfox.nvim',
+    config = function ()
+      local nightfox = require('nightfox')
+      nightfox.setup({
+        fox = 'duskfox',
+        transparent = true,
+        hlgroups = {
+          Folded = { bg = "${none}"}
+        }
+      })
+      nightfox.load()
+    end
+  }
 
   -- -- -- A high-performance color highlighter for Neovim
   -- use { 'norcalli/nvim-colorizer.lua',
@@ -162,7 +207,21 @@ return require('packer').startup(function(use)
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = [[require('plugins.treesitter')]]
+    -- config = [[require('plugins.treesitter')]]
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+        highlight = {
+          enable = true,              -- false will disable the whole extension
+          -- disable = { "tex"},  -- list of language that will be disabled
+          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+          -- Using this option may slow down your editor, and you may see some duplicate highlights.
+          -- Instead of true it can also be a list of languages
+          -- additional_vim_regex_highlighting = true,
+        },
+      }
+    end
   }
   -- -- use 'nvim-treesitter/playground'
 

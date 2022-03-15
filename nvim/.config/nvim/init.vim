@@ -5,8 +5,8 @@
 
     " { Syntax } {{{
         " syntax enable                         " syntax highlight
-        syntax on                         " syntax highlight
-        syntax sync fromstart
+        " syntax on                         " syntax highlight
+        " syntax sync fromstart
         autocmd BufReadPre * if getfsize(expand("%")) > 1000000 | syntax clear | endif
     " }}}
 
@@ -239,10 +239,10 @@ lua require('plugins')
     set background=dark
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
     set t_Co=256
+    set termguicolors
 
-    colorscheme zephyr
+    " colorscheme zephyr
     " colorscheme onedark
 
     " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
@@ -327,6 +327,7 @@ EOF
             autocmd FileType haskell setlocal foldmethod=marker foldmarker={{{,--\ }}}
             autocmd FileType vim setlocal foldmethod=marker
             autocmd FileType json,json5 setlocal foldmethod=syntax
+            autocmd FileType rust setlocal syntax=rust foldmethod=syntax
             autocmd FileType tex setlocal foldmethod=expr
 
             " Treesitter based folding
