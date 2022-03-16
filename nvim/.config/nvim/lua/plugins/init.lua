@@ -137,14 +137,11 @@ return require('packer').startup(function(use)
     config = function ()
       local nightfox = require('nightfox')
       nightfox.setup({
-        -- fox = 'duskfox',
-        fox = 'nightfox',
         transparent = false,
-        hlgroups = {
+        groups = {
           Folded = { bg = "${none}"},
         }
       })
-      nightfox.load()
     end
   }
 

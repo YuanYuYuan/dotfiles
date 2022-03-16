@@ -242,6 +242,7 @@ lua require('plugins')
     set t_Co=256
     set termguicolors
 
+    colorscheme nightfox
     " colorscheme zephyr
     " colorscheme onedark
 
