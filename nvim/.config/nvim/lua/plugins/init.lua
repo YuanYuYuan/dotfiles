@@ -135,13 +135,13 @@ return require('packer').startup(function(use)
   -- use 'joshdick/onedark.vim'
   use { 'EdenEast/nightfox.nvim',
     config = function ()
-      local nightfox = require('nightfox')
-      nightfox.setup({
+      require('nightfox').setup({
         transparent = false,
         groups = {
-          Folded = { bg = "${none}"},
+          Folded = { bg = 'bg1'},
         }
       })
+    vim.cmd('colorscheme nightfox')
     end
   }
 
