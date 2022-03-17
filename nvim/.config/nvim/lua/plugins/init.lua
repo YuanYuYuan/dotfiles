@@ -257,21 +257,21 @@ return require('packer').startup(function(use)
       nnoremap <silent> <Space>a :ArgWrap<CR>
     ]]
   }
-  -- use { 'SirVer/ultisnips',
-  --   ft = {
-  --     'tex',
-  --     -- 'asciidoctor',
-  --     'markdown'
-  --   },
-  --   config = vim.cmd [[
-  --     let g:UltiSnipsExpandTrigger="<c-e>"
-  --     let g:UltiSnipsJumpForwardTrigger="<CR>"
-  --     let g:UltiSnipsJumpBackwardTrigger="<S-CR>"
-  --     let g:UltiSnipsSnippetDirectories=['snips']
-  --     snoremap qq <Esc>
-  --     nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
-  --   ]]
-  -- }
+  use { 'SirVer/ultisnips',
+    ft = {
+      'tex',
+      -- 'asciidoctor',
+      -- 'markdown'
+    },
+    config = vim.cmd [[
+      let g:UltiSnipsExpandTrigger="<c-e>"
+      let g:UltiSnipsJumpForwardTrigger="<CR>"
+      let g:UltiSnipsJumpBackwardTrigger="<S-CR>"
+      let g:UltiSnipsSnippetDirectories=['snips']
+      snoremap qq <Esc>
+      nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
+    ]]
+  }
   use { 'hrsh7th/vim-vsnip',
     config = function()
       vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
