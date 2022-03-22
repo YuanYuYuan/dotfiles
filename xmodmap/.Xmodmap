@@ -1,0 +1,34 @@
+! ! Remove capslock key
+! clear Lock
+
+! ! Replace capslock key by left super
+! keycode 66 = Super_L
+
+! ! Replace menu key by right super
+! keycode 135 = Super_R
+
+
+! ! ! Swap left ctrl and left alt
+! ! clear control
+! ! clear mod1
+! ! keycode 37 = Alt_L Meta_L
+! ! keycode 64 = Control_L
+! ! add control = Control_L Control_R
+! ! add mod1 = Alt_L Meta_L
+
+! ! Map Esc to Mode_switch key and preserve its existence
+keycode 134 = Mode_switch
+! keycode any = Escape
+
+! keysym key = [key] [Shift+key] [Tab+key]
+! Press <Tab>+{h,j,k,l} now have been mapped to arrow keys
+keysym h = h H Left
+keysym j = j J Down
+keysym k = k K Up
+keysym l = l L Right
+
+! Additional mappings
+keysym y = y Y Home
+keysym u = u U Next
+keysym i = i I Prior
+keysym o = o O End
