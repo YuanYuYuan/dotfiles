@@ -1,0 +1,5 @@
+# disable color
+--color off
+
+# Exclude .git directories
+--exclude .git
