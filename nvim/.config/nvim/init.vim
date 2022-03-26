@@ -364,7 +364,7 @@ EOF
     set vop=folds,cursor,curdir  " save folds, cursor position, working directory only
     let blacklist = ['qf']
     autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
-    autocmd BufEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
+    autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
 
     " Auto search and clean trailing space after file written.
     autocmd BufWritePre * %s/\s\+$//e
