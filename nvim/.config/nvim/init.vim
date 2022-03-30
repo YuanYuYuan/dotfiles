@@ -95,9 +95,9 @@
         " tnoremap q<Tab> <C-\><C-n><C-w><C-p>
 
         " clean settings in terminal
-        autocmd TermOpen * set nonumber norelativenumber signcolumn=no
+        autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
         autocmd TermOpen * startinsert
-        autocmd BufWinEnter,WinEnter term://* startinsert
+        " autocmd BufWinEnter,WinEnter term://* startinsert
 
         " auto close after exited
         autocmd TermClose * call nvim_input("<CR>")
