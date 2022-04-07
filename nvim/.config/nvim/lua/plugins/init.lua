@@ -367,6 +367,17 @@ return require('packer').startup(function(use)
               ['<S-Tab>'] = 'move_selection_previous',
             }
           }
+        },
+        pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ["<c-d>"] = "delete_buffer",
+              }
+            }
+          }
         }
       }
     end
