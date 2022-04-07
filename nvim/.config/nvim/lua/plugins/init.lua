@@ -11,6 +11,18 @@ return require('packer').startup(function(use)
     ft = 'markdown',
   }
 
+  use { 'akinsho/toggleterm.nvim',
+    config=function ()
+      require('toggleterm').setup{
+        open_mapping = [[<c-\>]],
+        direction = 'float',
+        float_opts = {
+          border = 'curved',
+        }
+      }
+    end
+  }
+
   -- Git
   use { 'tpope/vim-fugitive' }
   use { 'lewis6991/gitsigns.nvim',
@@ -137,9 +149,13 @@ return require('packer').startup(function(use)
   use { 'EdenEast/nightfox.nvim',
     config = function ()
       require('nightfox').setup({
-        transparent = false,
+        options = {
+          transparent = true,
+        },
         groups = {
-          Folded = { bg = 'bg1'},
+          Folded = { bg = 'none' },
+          Comment = { fg = '#33cccc' },
+          Visual = { bg = '#e6faff' },
         }
       })
     vim.cmd('colorscheme nightfox')
