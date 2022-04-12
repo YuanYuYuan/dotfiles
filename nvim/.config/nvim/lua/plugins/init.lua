@@ -4,71 +4,28 @@ if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
+-- vim.api.nvim_create_autocmd({"BufWritePost"}, {
+--   pattern = {"init.lua"},
+--   command = "source <afile> | PackerCompile",
+-- })
+
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'rhysd/conflict-marker.vim'
-  use { 'gutenye/json5.vim',
-    ft = 'markdown',
-  }
+  use {'gutenye/json5.vim', ft = 'markdown'}
 
-  use { 'akinsho/toggleterm.nvim',
-    config=function ()
-      require('toggleterm').setup{
-        open_mapping = [[<c-\>]],
-        direction = 'float',
-        float_opts = {
-          border = 'curved',
-        }
-      }
-    end
-  }
+  use {'akinsho/toggleterm.nvim', config = [[require('plugins.toggleterm')]]}
 
   -- Git
-  use { 'tpope/vim-fugitive' }
-  use { 'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup{
-        on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
+  use 'tpope/vim-fugitive'
+  use {'lewis6991/gitsigns.nvim', config = [[require('plugins.gitsigns')]]}
 
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
-
-          -- Navigation
-          map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-          map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
-
-          -- Actions
-          map('n', '<leader>gp', gs.preview_hunk)
-          map('n', '<leader>gb', function() gs.blame_line() end)
-          map('n', '<leader>gd', gs.diffthis)
-          -- map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-          -- map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-          -- map('n', '<leader>hS', gs.stage_buffer)
-          -- map('n', '<leader>hu', gs.undo_stage_hunk)
-          -- map('n', '<leader>hR', gs.reset_buffer)
-          -- map('n', '<leader>tb', gs.toggle_current_line_blame)
-          -- map('n', '<leader>hd', gs.diffthis)
-          -- map('n', '<leader>hD', function() gs.diffthis('~') end)
-          -- map('n', '<leader>td', gs.toggle_deleted)
-
-          -- Text object
-          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-        end
-      }
-      -- vim.cmd [[
-      --   nnoremap <Space>gb :Gitsigns blame_line<CR>
-      -- ]]
-    end
-  }
   use { 'mattn/emmet-vim',
     config = vim.cmd [[
       let g:user_emmet_leader_key=','
     ]],
-    ft = 'html',
+    -- ft = 'html',
   }
   use 'AndrewRadev/switch.vim'
   use { 'habamax/vim-asciidoctor',
@@ -89,7 +46,6 @@ return require('packer').startup(function(use)
     end
   }
   use 'skywind3000/asyncrun.vim'
-  -- use 'mg979/vim-visual-multi'
   use { 'godlygeek/tabular',
     config = vim.cmd [[
         vnoremap \ :Tabularize /
@@ -222,47 +178,18 @@ return require('packer').startup(function(use)
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    -- config = [[require('plugins.treesitter')]]
     config = function()
       require'nvim-treesitter.configs'.setup {
-        -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
         highlight = {
-          enable = true,              -- false will disable the whole extension
-          -- disable = { "tex"},  -- list of language that will be disabled
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
-          -- additional_vim_regex_highlighting = true,
+          enable = true,
         },
       }
     end
   }
-  -- -- use 'nvim-treesitter/playground'
 
   use { 'lervag/vimtex',
     ft = 'tex',
-    config = vim.cmd [[
-      " viewer
-      let g:vimtex_view_method = 'zathura'
-      let g:vimtex_compiler_progname = 'nvr'
-
-      let maplocalleader = ";"
-
-      " avoid plaintex
-      let g:tex_flavor='latex'
-
-      " enable folding
-      " let g:vimtex_fold_manual=0
-      let g:vimtex_fold_enabled=1
-
-      let g:vimtex_quickfix_enabled = 0
-
-      " fix bug of mathznoe, ref: https://github.com/lervag/vimtex/issues/2346
-      autocmd BufNewFile,BufRead *.tex so $VIMRUNTIME/syntax/tex.vim
-
-      autocmd BufWinLeave *.tex silent! VimtexClean
-    ]]
+    config = [[require('plugins.vimtex')]]
   }
   use 'itchyny/vim-cursorword'
   use 'nvim-lua/popup.nvim'
