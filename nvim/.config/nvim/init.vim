@@ -196,7 +196,7 @@
     autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
     " less space of indention
-    autocmd FileType haskell,lua,yaml,json,json5,html,tex,javascript,typescript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType haskell,lua,yaml,json,json5,html,tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " }}}
 
