@@ -13,23 +13,52 @@ require('toggleterm').setup{
   end,
 }
 
--- local Terminal = require('toggleterm.terminal').Terminal
-local term = require('toggleterm')
 
-local toggle_term = function()
-  if vim.bo.filetype == 'cpp' then
-    local prev_win = vim.api.nvim_get_current_win()
-    local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
-    vim.api.nvim_command('write')
-    local cpp_file = vim.fn.expand('%')
-    local exe_file = vim.fn.expand('%<') .. '.out'
-    local cmd = string.format('g++ %s -o %s && ./%s', cpp_file, exe_file, exe_file)
-    term.exec(cmd)
-    vim.api.nvim_win_set_cursor(prev_win, prev_pos)
-    vim.api.nvim_set_current_win(prev_win)
-  else
-    print('Filetype: ' .. vim.bo.filetype .. ' is not supported.')
-  end
+local cmd_list = {
+  c = function(file)
+    local exe = file:gsub('.c', '.out')
+    return string.format('gcc %s -o %s && ./%s', file, exe, exe)
+  end,
+  cpp = function(file)
+    local exe = file:gsub('.cpp', '.out')
+    return string.format('g++ %s -o %s && ./%s', file, exe, exe)
+  end,
+  python = function(file)
+    return 'python ' .. file
+  end,
+  bash = function(file)
+    return 'bash ' .. file
+  end,
+}
+
+local supported_filetypes = {}
+for k, _ in pairs(cmd_list) do
+  supported_filetypes[#supported_filetypes + 1] = k
 end
 
-vim.keymap.set('n', '<space>g', toggle_term, {noremap = true, silent = false})
+local term = require('toggleterm')
+local toggle_term = function()
+  local prev_win = vim.api.nvim_get_current_win()
+  local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
+  vim.api.nvim_command('write')
+  term.exec(cmd_list[vim.bo.filetype](vim.fn.expand('%')))
+  vim.api.nvim_win_set_cursor(prev_win, prev_pos)
+  vim.api.nvim_set_current_win(prev_win)
+end
+
+local bind_toggle_term = function ()
+  vim.keymap.set(
+    {'i', 'n'},
+    '<F3>',
+    toggle_term,
+    {noremap = true, silent = false}
+  )
+end
+
+local au_group = vim.api.nvim_create_augroup('ToggleTermAuGroup', {clear = true})
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = supported_filetypes,
+  group = au_group,
+  callback = bind_toggle_term,
+})
+

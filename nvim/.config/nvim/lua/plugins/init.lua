@@ -9,6 +9,7 @@ end
 --   command = "source <afile> | PackerCompile",
 -- })
 
+require('plugins.autogroups')
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'

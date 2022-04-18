@@ -144,45 +144,45 @@
     " edit filetype plugin
     nnoremap <silent> <F5> :exec 'edit $HOME/.config/nvim/ftplugin/' .  &ft . '.vim' <CR>
 
-    " markdown
-    autocmd FileType markdown inoremap <buffer> <silent> <F3> <Esc>:MarkdownPreview<CR>
-    autocmd FileType markdown nnoremap <buffer> <silent> <F3> :MarkdownPreview<CR>
+    " " markdown
+    " autocmd FileType markdown inoremap <buffer> <silent> <F3> <Esc>:MarkdownPreview<CR>
+    " autocmd FileType markdown nnoremap <buffer> <silent> <F3> :MarkdownPreview<CR>
 
-    " json5
-    autocmd FileType json5 inoremap <buffer> <silent> <F3> <Esc>:!json5 -v %<CR>
-    autocmd FileType json5 nnoremap <buffer> <silent> <F3> :!json5 -v %<CR>
+    " " json5
+    " autocmd FileType json5 inoremap <buffer> <silent> <F3> <Esc>:!json5 -v %<CR>
+    " autocmd FileType json5 nnoremap <buffer> <silent> <F3> :!json5 -v %<CR>
 
-    " c
-    function! RunC()
-        exec "w"
-        exec "!gcc % -o %< && ./%<"
-    endfunction
-    autocmd FileType c inoremap <buffer> <silent> <F3> <Esc>:call RunC()<CR>
-    autocmd FileType c nnoremap <buffer> <silent> <F3> :call RunC()<CR>
+    " " c
+    " function! RunC()
+    "     exec "w"
+    "     exec "!gcc % -o %< && ./%<"
+    " endfunction
+    " autocmd FileType c inoremap <buffer> <silent> <F3> <Esc>:call RunC()<CR>
+    " autocmd FileType c nnoremap <buffer> <silent> <F3> :call RunC()<CR>
 
-    " cpp
-    function! RunCPP()
-        exec "w"
-        exec "!g++ % -o %<.out && ./%<.out"
-    endfunction
-    autocmd FileType cpp inoremap <buffer> <silent> <F3> <Esc>:call RunCPP()<CR>
-    autocmd FileType cpp nnoremap <buffer> <silent> <F3> :call RunCPP()<CR>
+    " " cpp
+    " function! RunCPP()
+    "     exec "w"
+    "     exec "!g++ % -o %<.out && ./%<.out"
+    " endfunction
+    " autocmd FileType cpp inoremap <buffer> <silent> <F3> <Esc>:call RunCPP()<CR>
+    " autocmd FileType cpp nnoremap <buffer> <silent> <F3> :call RunCPP()<CR>
 
-    " python
-    function! RunPython()
-        exec "w"
-        exec "!python %"
-    endfunction
-    autocmd FileType python inoremap <buffer> <silent> <F3> <Esc>:call RunPython()<CR>
-    autocmd FileType python nnoremap <buffer> <silent> <F3> :call RunPython()<CR>
+    " " python
+    " function! RunPython()
+    "     exec "w"
+    "     exec "!python %"
+    " endfunction
+    " autocmd FileType python inoremap <buffer> <silent> <F3> <Esc>:call RunPython()<CR>
+    " autocmd FileType python nnoremap <buffer> <silent> <F3> :call RunPython()<CR>
 
-    " bash
-    function! RunBash()
-        exec "w"
-        exec "!bash %"
-    endfunction
-    autocmd FileType sh,bash inoremap <buffer> <silent> <F3> <Esc>:call RunBash()<CR>
-    autocmd FileType sh,bash nnoremap <buffer> <silent> <F3> :call RunBash()<CR>
+    " " bash
+    " function! RunBash()
+    "     exec "w"
+    "     exec "!bash %"
+    " endfunction
+    " autocmd FileType sh,bash inoremap <buffer> <silent> <F3> <Esc>:call RunBash()<CR>
+    " autocmd FileType sh,bash nnoremap <buffer> <silent> <F3> :call RunBash()<CR>
 
     " asciidoc
     function! RunAsciidoc()
@@ -195,8 +195,8 @@
     " julia
     autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
-    " less space of indention
-    autocmd FileType haskell,lua,yaml,json,json5,html,tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    " " less space of indention
+    " autocmd FileType haskell,lua,yaml,json,json5,html,tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " }}}
 
