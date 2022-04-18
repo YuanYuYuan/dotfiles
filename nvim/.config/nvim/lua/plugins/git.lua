@@ -13,16 +13,15 @@ require('gitsigns').setup{
     map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
 
     -- Actions
-    map('n', '<leader>gp', gs.preview_hunk)
-    map('n', '<leader>gb', function() gs.blame_line() end)
-    map('n', '<leader>gd', gs.diffthis)
+    map('n', '<space>gp', gs.preview_hunk)
+    map('n', '<space>gb', gs.blame_line)
+    map('n', '<space>gd', gs.diffthis)
     -- map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
     -- map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
     -- map('n', '<leader>hS', gs.stage_buffer)
     -- map('n', '<leader>hu', gs.undo_stage_hunk)
     -- map('n', '<leader>hR', gs.reset_buffer)
     -- map('n', '<leader>tb', gs.toggle_current_line_blame)
-    -- map('n', '<leader>hd', gs.diffthis)
     -- map('n', '<leader>hD', function() gs.diffthis('~') end)
     -- map('n', '<leader>td', gs.toggle_deleted)
 
@@ -30,6 +29,3 @@ require('gitsigns').setup{
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
--- vim.cmd [[
---   nnoremap <Space>gb :Gitsigns blame_line<CR>
--- ]]

@@ -10,6 +10,7 @@ end
 -- })
 
 require('plugins.autogroups')
+require('plugins.git')
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -20,7 +21,7 @@ return require('packer').startup(function(use)
 
   -- Git
   use 'tpope/vim-fugitive'
-  use {'lewis6991/gitsigns.nvim', config = [[require('plugins.gitsigns')]]}
+  use 'lewis6991/gitsigns.nvim'
 
   use { 'mattn/emmet-vim',
     config = vim.cmd [[
