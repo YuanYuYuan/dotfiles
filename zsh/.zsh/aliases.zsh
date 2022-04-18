@@ -16,6 +16,7 @@
     alias tm='tmux attach-session || tmux'
     alias uv='urlview'
     alias v='nvim'
+    alias nv='neovide'
 # }}}
 
 # { Python } {{{
