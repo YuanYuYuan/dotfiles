@@ -75,8 +75,13 @@ return require('packer').startup(function(use)
         view = {
           side = 'left',
           hide_root_folder = false,
-          auto_resize = true
+          auto_resize = true,
         },
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          }
+        }
       }
       -- vim.g["nvim_tree_quit_on_open"] = 1
       vim.cmd [[
