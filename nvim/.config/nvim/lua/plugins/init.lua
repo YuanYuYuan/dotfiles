@@ -44,7 +44,7 @@ return require('packer').startup(function(use)
   }
   use { 'liuchengxu/vista.vim',
     config = function()
-      vim.api.nvim_set_keymap('n', '<Space><Space>v', '<cmd>Vista!!<CR>', {noremap = true})
+      vim.api.nvim_set_keymap('n', '<F2>', '<cmd>Vista!!<CR>', {noremap = true})
     end
   }
   use 'skywind3000/asyncrun.vim'
@@ -259,7 +259,7 @@ return require('packer').startup(function(use)
         use_diagnostic_signs = true,
         auto_close = true,
       }
-      vim.api.nvim_set_keymap("n", "<F2>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+      vim.api.nvim_set_keymap("n", "<F6>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
     end
   }
   use { 'tzachar/cmp-tabnine',

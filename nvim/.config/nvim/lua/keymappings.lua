@@ -29,7 +29,6 @@ function M.switch_brackets()
   -- print('bufline count: ', vim.api.nvim_buf_line_count(0))
   -- print(srow, scol, erow, ecol)
   -- vim.api.nvim_buf_set_text(0, srow, scol, erow, ecol, vim.split(x, '\n', true))
-  -- -- vim.api.nvim_buf_set_text(0, srow, scol, erow, ecol, {'wtf', 'wtf2'})
   -- -- print(vim.fn.getreg('v'))
 end
 
