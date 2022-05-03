@@ -1,3 +1,7 @@
+local augroup = function(group_name)
+  return vim.api.nvim_create_augroup(group_name, {clear = true})
+end
+
 vim.api.nvim_create_autocmd('Filetype', {
   pattern = {
     'haskell',
@@ -25,11 +29,11 @@ local cmd_list = {
   end
 }
 
-local f3_augroup = vim.api.nvim_create_augroup('F3AuGroup', {clear = true})
+local f3_group = augroup('F3AuGroup')
 for filetype, cmd in pairs(cmd_list) do
   vim.api.nvim_create_autocmd('Filetype', {
     pattern = filetype,
-    group = f3_augroup,
+    group = f3_group,
     callback = function()
       vim.keymap.set(
         {'i', 'n'},

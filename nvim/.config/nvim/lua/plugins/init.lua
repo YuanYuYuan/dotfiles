@@ -1,8 +1,5 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
 
 -- vim.api.nvim_create_autocmd({"BufWritePost"}, {
 --   pattern = {"init.lua"},
@@ -11,10 +8,10 @@ end
 
 require('plugins.autogroups')
 require('plugins.git')
+require('plugins.fold')
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'rhysd/conflict-marker.vim'
   use {'gutenye/json5.vim', ft = 'markdown'}
 
   use {'akinsho/toggleterm.nvim', config = [[require('plugins.toggleterm')]]}
@@ -76,7 +73,6 @@ return require('packer').startup(function(use)
         view = {
           side = 'left',
           hide_root_folder = false,
-          auto_resize = true,
         },
         actions = {
           open_file = {
@@ -106,9 +102,7 @@ return require('packer').startup(function(use)
     ]]
   }
 
-  -- -- colorscheme
-  -- use 'YuanYuYuan/zephyr-nvim'
-  -- use 'joshdick/onedark.vim'
+  -- colorscheme
   use { 'EdenEast/nightfox.nvim',
     config = function ()
       require('nightfox').setup({
@@ -124,11 +118,6 @@ return require('packer').startup(function(use)
     vim.cmd('colorscheme nightfox')
     end
   }
-
-  -- -- -- A high-performance color highlighter for Neovim
-  -- use { 'norcalli/nvim-colorizer.lua',
-  --   config = [[require 'colorizer'.setup()]]
-  -- }
 
   use { 'scrooloose/nerdcommenter',
     config = vim.cmd [[
@@ -157,11 +146,6 @@ return require('packer').startup(function(use)
       vmap <BS> <plug>NERDCommenterToggle
     ]]
   }
-  -- use { 'yegappan/mru',
-  --   config = vim.cmd [[
-  --     nnoremap <Space>f :MRU<CR>
-  --   ]]
-  -- }
   use { 'tpope/vim-surround',
     config = vim.cmd [[
       let g:surround_no_mappings = 1
@@ -230,16 +214,6 @@ return require('packer').startup(function(use)
       ]]
     end
   }
-  -- use { 'hrsh7th/vim-vsnip-integ',
-  --   config = vim.cmd [[
-  --     let g:vsnip_snippet_dir = '$XDG_CONFIG_HOME/nvim/snips'
-  --     imap <expr> <C-e> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-e>'
-  --     smap <expr> <C-e> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-e>'
-  --     nnoremap <F4> :VsnipOpenEdit<CR>
-  --     inoremap <F4> <Esc>:VsnipOpenEdit<CR>
-  --   ]]
-
-  -- }
 
   -- lsp
   use 'neovim/nvim-lspconfig'
@@ -345,12 +319,13 @@ return require('packer').startup(function(use)
       })
     end
   }
+
   use { 'petertriho/nvim-scrollbar',
     config = function()
       require('scrollbar').setup()
-      vim.cmd [[
-        hi default link HlSearchLens IncSearch
-      ]]
+      -- vim.cmd [[
+      --   hi default link HlSearchLens IncSearch
+      -- ]]
     end
   }
 
