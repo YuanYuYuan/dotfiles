@@ -45,6 +45,7 @@ map('v', 'gs', "<Cmd>silent lua require('keymappings').switch_brackets()<CR>", {
 -- https://github.com/nvim-telescope/telescope.nvim/issues/592
 M.my_livegrep = function(opts)
   opts = opts or {}
+  opts.path_display = {'absolute'}
   opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
   if vim.v.shell_error ~= 0 then
     -- if not git then active lsp client root
