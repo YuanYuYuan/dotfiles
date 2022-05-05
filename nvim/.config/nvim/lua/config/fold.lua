@@ -20,6 +20,7 @@ function _G.my_fold_text()
   tail = tail:gsub('^%s*', '')
   return head .. ' … ' .. tail
 end
+
 vim.opt.fillchars:append({fold = ' '})
 vim.opt.foldtext = 'v:lua.my_fold_text()'
 vim.opt.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
@@ -54,3 +55,5 @@ vim.api.nvim_create_autocmd('Filetype', {
   group = disable_fold_augroup,
   callback = toggle_folding,
 })
+
+vim.keymap.set({'n'}, '<Tab>', 'zazz', { noremap = true })

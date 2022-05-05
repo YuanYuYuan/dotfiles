@@ -21,10 +21,12 @@ vim.api.nvim_create_autocmd('Filetype', {
 
 local cmd_list = {
   makrdown = function()
-    vim.api.nvim_command('MarkdownPreview')
+    vim.cmd('write')
+    vim.cmd('MarkdownPreview')
   end,
   lua = function()
-    vim.api.nvim_command('luafile %')
+    vim.cmd('write')
+    vim.cmd('luafile %')
     print('Executed lua file.')
   end
 }
@@ -35,16 +37,7 @@ for filetype, cmd in pairs(cmd_list) do
     pattern = filetype,
     group = f3_group,
     callback = function()
-      vim.keymap.set(
-        {'i', 'n'},
-        '<F3>',
-        cmd,
-        {
-          noremap = true,
-          silent = false
-        }
-      )
+      vim.keymap.set({'i', 'n'}, '<F3>', cmd)
     end
   })
 end
-

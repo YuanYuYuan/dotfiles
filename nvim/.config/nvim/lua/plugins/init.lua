@@ -6,15 +6,17 @@ local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 --   command = "source <afile> | PackerCompile",
 -- })
 
-require('plugins.autogroups')
-require('plugins.git')
-require('plugins.fold')
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+local use = packer.use
+
+local startup = function()
   use 'wbthomason/packer.nvim'
   use {'gutenye/json5.vim', ft = 'markdown'}
 
-  use {'akinsho/toggleterm.nvim', config = [[require('plugins.toggleterm')]]}
+  use { 'akinsho/toggleterm.nvim',
+    config = function() require('plugins.toggleterm') end
+  }
 
   -- Git
   use 'tpope/vim-fugitive'
@@ -255,40 +257,7 @@ return require('packer').startup(function(use)
 
 
   use { 'nvim-telescope/telescope.nvim',
-    config = function()
-      vim.cmd [[
-        nnoremap <leader>f         <cmd> lua require('telescope.builtin').oldfiles()<cr>
-        nnoremap <leader>ff        <cmd> lua require('telescope.builtin').find_files()<cr>
-        nnoremap <leader>fg        <cmd> lua require('telescope.builtin').git_files()<cr>
-        nnoremap <leader>fb        <cmd> lua require('telescope.builtin').buffers()<cr>
-        nnoremap <leader>fh        <cmd> lua require('telescope.builtin').help_tags()<cr>
-        nnoremap <leader><leader>a <cmd> lua require('telescope.builtin').lsp_code_actions()<cr>
-      ]]
-      require'telescope'.setup{
-        defaults = {
-          path_display = { 'smart'},
-          mappings = {
-            i = {
-              ['<C-j>']   = 'move_selection_next',
-              ['<Tab>']   = 'move_selection_next',
-              ['<C-k>']   = 'move_selection_previous',
-              ['<S-Tab>'] = 'move_selection_previous',
-            }
-          }
-        },
-        pickers = {
-          buffers = {
-            show_all_buffers = true,
-            sort_lastused = true,
-            mappings = {
-              i = {
-                ["<c-d>"] = "delete_buffer",
-              }
-            }
-          }
-        }
-      }
-    end
+    config = function() require('plugins.config_telescope') end
   }
   use {
     'nvim-telescope/telescope-frecency.nvim',
@@ -331,6 +300,18 @@ return require('packer').startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
-    require('packer').sync()
+    packer.sync()
   end
-end)
+end
+
+packer.startup {
+  startup,
+  config = {
+    max_jobs = tonumber(vim.fn.system 'nproc 2>/dev/null || echo 4'),
+  },
+  -- rocks = {
+  --   'base64',
+  -- },
+}
+
+require('plugins.gitsigns')
