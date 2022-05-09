@@ -1,23 +1,22 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
 
 -- vim.api.nvim_create_autocmd({"BufWritePost"}, {
 --   pattern = {"init.lua"},
 --   command = "source <afile> | PackerCompile",
 -- })
 
-require('plugins.autogroups')
-require('plugins.git')
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+local use = packer.use
+
+local startup = function()
   use 'wbthomason/packer.nvim'
-  use 'rhysd/conflict-marker.vim'
   use {'gutenye/json5.vim', ft = 'markdown'}
 
-  use {'akinsho/toggleterm.nvim', config = [[require('plugins.toggleterm')]]}
+  use { 'akinsho/toggleterm.nvim',
+    config = function() require('plugins.toggleterm') end
+  }
 
   -- Git
   use 'tpope/vim-fugitive'
@@ -76,7 +75,6 @@ return require('packer').startup(function(use)
         view = {
           side = 'left',
           hide_root_folder = false,
-          auto_resize = true,
         },
         actions = {
           open_file = {
@@ -106,9 +104,7 @@ return require('packer').startup(function(use)
     ]]
   }
 
-  -- -- colorscheme
-  -- use 'YuanYuYuan/zephyr-nvim'
-  -- use 'joshdick/onedark.vim'
+  -- colorscheme
   use { 'EdenEast/nightfox.nvim',
     config = function ()
       require('nightfox').setup({
@@ -124,11 +120,6 @@ return require('packer').startup(function(use)
     vim.cmd('colorscheme nightfox')
     end
   }
-
-  -- -- -- A high-performance color highlighter for Neovim
-  -- use { 'norcalli/nvim-colorizer.lua',
-  --   config = [[require 'colorizer'.setup()]]
-  -- }
 
   use { 'scrooloose/nerdcommenter',
     config = vim.cmd [[
@@ -157,11 +148,6 @@ return require('packer').startup(function(use)
       vmap <BS> <plug>NERDCommenterToggle
     ]]
   }
-  -- use { 'yegappan/mru',
-  --   config = vim.cmd [[
-  --     nnoremap <Space>f :MRU<CR>
-  --   ]]
-  -- }
   use { 'tpope/vim-surround',
     config = vim.cmd [[
       let g:surround_no_mappings = 1
@@ -230,16 +216,6 @@ return require('packer').startup(function(use)
       ]]
     end
   }
-  -- use { 'hrsh7th/vim-vsnip-integ',
-  --   config = vim.cmd [[
-  --     let g:vsnip_snippet_dir = '$XDG_CONFIG_HOME/nvim/snips'
-  --     imap <expr> <C-e> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-e>'
-  --     smap <expr> <C-e> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-e>'
-  --     nnoremap <F4> :VsnipOpenEdit<CR>
-  --     inoremap <F4> <Esc>:VsnipOpenEdit<CR>
-  --   ]]
-
-  -- }
 
   -- lsp
   use 'neovim/nvim-lspconfig'
@@ -279,43 +255,7 @@ return require('packer').startup(function(use)
     end
   }
 
-
-  use { 'nvim-telescope/telescope.nvim',
-    config = function()
-      vim.cmd [[
-        nnoremap <leader>f         <cmd> lua require('telescope.builtin').oldfiles()<cr>
-        nnoremap <leader>ff        <cmd> lua require('telescope.builtin').find_files()<cr>
-        nnoremap <leader>fg        <cmd> lua require('telescope.builtin').git_files()<cr>
-        nnoremap <leader>fb        <cmd> lua require('telescope.builtin').buffers()<cr>
-        nnoremap <leader>fh        <cmd> lua require('telescope.builtin').help_tags()<cr>
-        nnoremap <leader><leader>a <cmd> lua require('telescope.builtin').lsp_code_actions()<cr>
-      ]]
-      require'telescope'.setup{
-        defaults = {
-          path_display = { 'smart'},
-          mappings = {
-            i = {
-              ['<C-j>']   = 'move_selection_next',
-              ['<Tab>']   = 'move_selection_next',
-              ['<C-k>']   = 'move_selection_previous',
-              ['<S-Tab>'] = 'move_selection_previous',
-            }
-          }
-        },
-        pickers = {
-          buffers = {
-            show_all_buffers = true,
-            sort_lastused = true,
-            mappings = {
-              i = {
-                ["<c-d>"] = "delete_buffer",
-              }
-            }
-          }
-        }
-      }
-    end
-  }
+  use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-telescope/telescope-frecency.nvim',
     config = function()
@@ -345,17 +285,31 @@ return require('packer').startup(function(use)
       })
     end
   }
+
   use { 'petertriho/nvim-scrollbar',
     config = function()
       require('scrollbar').setup()
-      vim.cmd [[
-        hi default link HlSearchLens IncSearch
-      ]]
+      -- vim.cmd [[
+      --   hi default link HlSearchLens IncSearch
+      -- ]]
     end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
-    require('packer').sync()
+    packer.sync()
   end
-end)
+end
+
+packer.startup {
+  startup,
+  config = {
+    max_jobs = tonumber(vim.fn.system 'nproc 2>/dev/null || echo 4'),
+  },
+  -- rocks = {
+  --   'base64',
+  -- },
+}
+
+require('plugins.gitsigns')
+require('plugins.config_telescope')

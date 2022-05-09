@@ -87,45 +87,6 @@
         nnoremap k gk
     " }}}
 
-    " { Terminal } {{{
-        " exit key mappings
-        tnoremap <Esc> <C-\><C-n>
-        " Deprecated
-        " tnoremap qq <C-\><C-n>
-        " tnoremap q<Tab> <C-\><C-n><C-w><C-p>
-
-        " clean settings in terminal
-        autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
-        autocmd TermOpen * startinsert
-        " autocmd BufWinEnter,WinEnter term://* startinsert
-
-        " auto close after exited
-        autocmd TermClose * call nvim_input("<CR>")
-
-        " function to toggle terminal
-        let g:term_buf = 0
-        let g:term_win = 0
-        function! ToggleTerminal(height)
-            if win_gotoid(g:term_win)
-                hide
-            else
-                if bufexists(g:term_buf) && g:term_buf != 0
-                    exec "split | buffer " . g:term_buf
-                else
-                    exec "split | terminal"
-                    let g:term_buf = bufnr("")
-                endif
-                let g:term_win = win_getid()
-                exec "resize " . a:height
-            endif
-        endfunction
-
-        " press <F7> to toggle terminal
-        nnoremap <silent> <F7> :call ToggleTerminal(12)<CR>
-        inoremap <silent> <F7> <Esc>:call ToggleTerminal(12)<CR>
-        tnoremap <silent> <F7> <C-\><C-n>:call ToggleTerminal(12)<CR>
-    " }}}
-
     " { Completion } {{{
         " The tab trigger is done by SuperTab.
         " And the intelligent completion relies on coc.vim.
@@ -287,53 +248,54 @@ EOF
 
 " { Folding } {{{
 
-    augroup MyFoldGroup
-        autocmd!
-        " disable folding if file size > 1 MB
-        if getfsize(expand("%")) > 1000000
-            setlocal foldmethod=manual
-        else
-            set foldenable
-            setlocal foldmethod=syntax
+    " augroup MyFoldGroup
+    "     autocmd!
+    "     " disable folding if file size > 1 MB
+    "     if getfsize(expand("%")) > 1000000
+    "         echo 'Large File!'
+    "         " setlocal foldmethod=manual
+    "     else
+    "         " set foldenable
+    "         " setlocal foldmethod=syntax
 
-            set fillchars=fold:\ " use trailing space as the padding of folding
-            set foldtext=MyFoldText()
-            function! MyFoldText()
-                let head = getline(v:foldstart)
-                let head = substitute(head, '{{{', '', 'g')
-                let head = substitute(head, '\s\+$', '', 'g')
-                let tail = substitute(trim(getline(v:foldend)), '.*}}}', '', 'g')
-                return head . ' ... ' . tail
-            endfunction
+    "         set fillchars=fold:\ " use trailing space as the padding of folding
+    "         set foldtext=MyFoldText()
+    "         function! MyFoldText()
+    "             let head = getline(v:foldstart)
+    "             let head = substitute(head, '{{{', '', 'g')
+    "             let head = substitute(head, '\s\+$', '', 'g')
+    "             let tail = substitute(trim(getline(v:foldend)), '.*}}}', '', 'g')
+    "             return head . ' ... ' . tail
+    "         endfunction
 
-            " Open the folding automatically in conditions of
-            "   all             any
-            "   block           (, {, [[, [{, etc.
-            "   hor             horizontal movements
-            "   insert          any command in Insert mode
-            "   jump            far jumps
-            "   mark            mark jumps
-            "   percent         pair match
-            "   quickfix        :cn, :crew, :make, etc.
-            "   search          search for a pattern: /, n, *, gd, etc.
-            "                   (not for a search pattern in a : command) Also for [s and ]s.
-            "   tag             jumping to a tag: :ta, CTRL-T, etc.
-            "   undo            undo or redo: u and CTRL-R
-            set foldopen=hor,mark,percent,quickfix,search,tag,undo
+    "         " Open the folding automatically in conditions of
+    "         "   all             any
+    "         "   block           (, {, [[, [{, etc.
+    "         "   hor             horizontal movements
+    "         "   insert          any command in Insert mode
+    "         "   jump            far jumps
+    "         "   mark            mark jumps
+    "         "   percent         pair match
+    "         "   quickfix        :cn, :crew, :make, etc.
+    "         "   search          search for a pattern: /, n, *, gd, etc.
+    "         "                   (not for a search pattern in a : command) Also for [s and ]s.
+    "         "   tag             jumping to a tag: :ta, CTRL-T, etc.
+    "         "   undo            undo or redo: u and CTRL-R
+    "         set foldopen=hor,mark,percent,quickfix,search,tag,undo
 
 
-            " fold methods for different filetypes
-            autocmd FileType tmux,zsh,snippets setlocal foldmethod=marker foldmarker={{{,#\ }}}
-            autocmd FileType haskell setlocal foldmethod=marker foldmarker={{{,--\ }}}
-            autocmd FileType vim setlocal foldmethod=marker
-            autocmd FileType json,json5 setlocal foldmethod=syntax
-            autocmd FileType rust setlocal syntax=rust foldmethod=syntax
-            autocmd FileType tex setlocal foldmethod=expr
+    "         " fold methods for different filetypes
+    "         autocmd FileType tmux,zsh,snippets setlocal foldmethod=marker foldmarker={{{,#\ }}}
+    "         autocmd FileType haskell setlocal foldmethod=marker foldmarker={{{,--\ }}}
+    "         autocmd FileType vim setlocal foldmethod=marker
+    "         " autocmd FileType json,json5 setlocal foldmethod=syntax
+    "         autocmd FileType rust setlocal syntax=rust foldmethod=syntax
+    "         autocmd FileType tex setlocal foldmethod=expr
 
-            " Treesitter based folding
-            autocmd FileType python,lua,javascript setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
-        endif
-    augroup END
+    "         " Treesitter based folding
+    "         autocmd FileType python,lua,javascript setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+    "     endif
+    " augroup END
 
     " " FIXME: adress the treesitter folding issuse
     " autocmd BufWritePost * lua vim.opt.foldmethod = vim.opt.foldmethod
@@ -363,8 +325,10 @@ EOF
     " auto save and restore
     set vop=folds,cursor,curdir  " save folds, cursor position, working directory only
     let blacklist = ['qf']
-    autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
-    autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
+
+    " FIXME: disable since large file folding
+    " autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
+    " autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
 
     " Auto search and clean trailing space after file written.
     autocmd BufWritePre * %s/\s\+$//e

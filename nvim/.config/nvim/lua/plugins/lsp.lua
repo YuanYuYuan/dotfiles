@@ -1,7 +1,6 @@
 local lsp_config = require('lspconfig')
 local lsp_status = require('lsp-status')
 local lsp_kind = require('lspkind')
-local map = vim.api.nvim_set_keymap
 
 require ('lsp_signature').setup()
 
@@ -132,41 +131,9 @@ local servers = {
   html = {},
 }
 
--- local on_attach = function(client, bufnr)
---   lsp_status.on_attach(client)
---   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
---   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
---   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
---   -- Set autocommands conditional on server_capabilities
---   if client.resolved_capabilities.document_highlight then
---     vim.api.nvim_exec([[
---     hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
---     hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
---     hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
---     augroup lsp_document_highlight
---     autocmd! * <buffer>
---     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
---     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
---     augroup END
---     ]], false)
---   end
--- end
-
 
 -- from cmp_nvim_lsp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = {
---     'documentation',
---     'detail',
---     'additionalTextEdits',
---   }
--- }
 
 for server, config in pairs(servers) do
   config.autostart = true
@@ -184,19 +151,9 @@ require('rust-tools').setup{
 }
 
 -- set lsp diagnostic sign: neovim 0.6.1
-vim.fn.sign_define(
-  'DiagnosticSignError',
-  {text = '', texthl = "DiagnosticDefaultError"}
-)
-vim.fn.sign_define(
-  'DiagnosticSignWarn',
-  {text = '', texthl = 'DiagnosticSignWarn'}
-)
-vim.fn.sign_define(
-  'DiagnosticSignInfo',
-  { text = '', texthl = 'DiagnosticSignInfo' }
-)
-vim.fn.sign_define(
-  'DiagnosticSignHint',
-  { text = '', texthl = 'DiagnosticSignHint' }
-)
+for sign, config in pairs({
+  DiagnosticSignError = {text = '', texthl = "DiagnosticDefaultError"},
+  DiagnosticSignWarn = {text = '', texthl = 'DiagnosticSignWarn'},
+  DiagnosticSignInfo = {text = '', texthl = 'DiagnosticSignInfo'},
+  DiagnosticSignHint = {text = '', texthl = 'DiagnosticSignHint'},
+}) do vim.fn.sign_define(sign, config) end
