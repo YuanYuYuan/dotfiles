@@ -26,7 +26,7 @@ local cmd_list = {
   python = function(file)
     return 'python ' .. file
   end,
-  bash = function(file)
+  sh = function(file)
     return 'bash ' .. file
   end,
 }
@@ -40,19 +40,14 @@ local term = require('toggleterm')
 local toggle_term = function()
   local prev_win = vim.api.nvim_get_current_win()
   local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
-  vim.api.nvim_command('write')
+  vim.cmd('write')
   term.exec(cmd_list[vim.bo.filetype](vim.fn.expand('%')))
   vim.api.nvim_win_set_cursor(prev_win, prev_pos)
   vim.api.nvim_set_current_win(prev_win)
 end
 
 local bind_toggle_term = function ()
-  vim.keymap.set(
-    {'i', 'n'},
-    '<F3>',
-    toggle_term,
-    {noremap = true, silent = false}
-  )
+  vim.keymap.set({'i', 'n'}, '<F3>', toggle_term)
 end
 
 local au_group = vim.api.nvim_create_augroup('ToggleTermAuGroup', {clear = true})

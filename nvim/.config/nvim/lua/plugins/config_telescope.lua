@@ -1,3 +1,6 @@
+local utils = require('utils')
+local builtin = require('telescope.builtin')
+
 require('telescope').setup{
   defaults = {
     path_display = { 'smart'},
@@ -23,21 +26,6 @@ require('telescope').setup{
   }
 }
 
-vim.cmd [[
-  nnoremap <Space>f         <cmd> lua require('telescope.builtin').oldfiles()<cr>
-  nnoremap <Space>ff        <cmd> lua require('telescope.builtin').find_files()<cr>
-  nnoremap <Space>fg        <cmd> lua require('telescope.builtin').git_files()<cr>
-  nnoremap <Space>fb        <cmd> lua require('telescope.builtin').buffers()<cr>
-  nnoremap <Space>fh        <cmd> lua require('telescope.builtin').help_tags()<cr>
-  nnoremap <Space><Space>a <cmd> lua require('telescope.builtin').lsp_code_actions()<cr>
-]]
-
--- local builtin = require('telescope.builtin')
--- bindings = {
---   ['<Space>f'] = function() builtin.oldfiles() end,
--- }
-
--- telescope
 -- https://github.com/nvim-telescope/telescope.nvim/issues/592
 local my_livegrep = function(opts)
   opts = opts or {}
@@ -50,4 +38,12 @@ local my_livegrep = function(opts)
   end
   require'telescope.builtin'.live_grep(opts)
 end
-vim.keymap.set('n', '?', my_livegrep)
+
+utils.bind_mappings({
+  ['<Space>f'] = builtin.oldfiles,
+  ['<Space>tf'] = builtin.find_files,
+  ['<Space>tg'] = builtin.git_files,
+  ['<Space>th'] = builtin.help_tags,
+  ['<Space>ta'] = builtin.lsp_code_actions,
+  ['?'] = my_livegrep,
+})

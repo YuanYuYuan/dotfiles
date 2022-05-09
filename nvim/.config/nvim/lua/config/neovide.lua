@@ -1,7 +1,5 @@
-local map = vim.api.nvim_set_keymap
-
 -- adjust color
-vim.api.nvim_command('highlight CursorLine guibg=#1B2229')
+vim.cmd('highlight CursorLine guibg=#1B2229')
 
 -- font size & font list
 local font_size = 9
@@ -22,20 +20,18 @@ for _, str in ipairs(font_list) do
   end
 end
 
-local function set_font(fsize)
+local set_font = function(fsize)
   vim.opt.guifont = fonts .. ':h'..  tostring(fsize)
 end
 
-local M = {}
-function M.change_size(change)
-  font_size = font_size + change
-  vim.opt.guifont = fonts .. ':h'..  tostring(font_size)
+local change_size = function(change)
+  return function ()
+    font_size = font_size + change
+    vim.opt.guifont = fonts .. ':h'..  tostring(font_size)
+  end
 end
 
 set_font(font_size)
-map('n', '<C-=>', "<cmd>lua require('neovide').change_size(1)<CR>", {noremap = true})
-map('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
-map('n', '<C-->', "<cmd>lua require('neovide').change_size(-1)<CR>", {noremap = true})
-map('c', '<C-v>', '<C-r>+', {noremap = true})
-
-return M
+vim.keymap.set('n', '<C-=>', change_size(1))
+vim.keymap.set('n', '<C-->', change_size(-1))
+vim.keymap.set('c', '<C-v>', '<C-r>+')

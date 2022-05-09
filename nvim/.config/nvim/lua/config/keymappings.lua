@@ -1,5 +1,4 @@
-local map = vim.api.nvim_set_keymap
-local M = {}
+local utils = require('utils')
 
 local yank_and_display_path = function()
   local file_path = vim.fn.expand('%:p')
@@ -40,12 +39,6 @@ vim.keymap.set(
 )
 
 vim.cmd [[
-    " Auto search and clean trailing space after file written.
-    autocmd BufWritePre * %s/\s\+$//e
-
-    " And replace tab automatically
-    autocmd BufWritePre * retab
-
     " save and (force) exit
     autocmd WinEnter * if &buftype ==# 'quickfix' && winnr('$') == 1 | bdelete | endif
 
@@ -58,15 +51,15 @@ vim.cmd [[
             exec 'bd!'
         endif
     endfunction
+
+    nnoremap <Space>q :call QuitOrBufferDelete()<CR>
 ]]
 
 
-local key_mappings = {
+utils.bind_mapping_collection({
   basics = {
     -- view in middle while editing
     ['zz'] = {i = '<C-o>zz'},
-
-    ['aa'] = {i = '<C-o>a'},
 
     -- select last pasted
     ['gp'] = '`[v`]',
@@ -81,8 +74,36 @@ local key_mappings = {
 
     ['vv'] = '<C-v>',
 
-    ['<C-g>'] = yank_and_display_path,
     ['gs'] = {v = switch_brackets},
+
+    -- paste last yank
+    ['<Space>p'] = {['n,v'] = '"0p'},
+
+    ['U'] = '<C-r>',
+    ['uu'] = {i = '<Esc>u'}
+  },
+
+  clipboard = {
+    ['<C-g>'] = yank_and_display_path,
+    -- open the file stored in clipboard
+    ['<Space>o'] = '<Cmd>e <C-r>+<CR>',
+  },
+
+  movement_tricks = {
+    ['aa'] = {i = '<C-o>a'},
+    ['B'] = {['n,v'] = '^'},
+    ['E'] = {['n,v'] = 'g_'},
+
+    -- movement in too long lines
+    ['j'] = 'gj',
+    ['k'] = 'gk',
+  },
+
+  window_resize = {
+    ['='] = '<C-w>+',
+    ['-'] = '<C-w>-',
+    ['_'] = '<C-w><',
+    ['+'] = '<C-w>>',
   },
 
   buffer ={
@@ -93,7 +114,7 @@ local key_mappings = {
     ['<Space>x'] = '<Cmd>x<CR>',
   },
 
-  search = {
+  search_and_replace = {
     ['n'] = {n = 'nzv', v = '"ny/<C-r>n<CR>zv'},
     ['N'] = {n = 'Nzv', v = '"ny/<C-r>n<CR>NNzv'},
     ['C'] = {v = '"ny/<C-r>n<CR>Ncgn'},
@@ -130,19 +151,14 @@ local key_mappings = {
     ['>'] = {n = '>>', v = '>gv'},
     ['<'] = {n = '<<', v = '<gv'},
   },
-}
 
-for _, mapping in pairs(key_mappings) do
-  for key, binding in pairs(mapping) do
-    if type(binding) == 'table' then
-      for mode, mode_binding in pairs(binding) do
-        vim.keymap.set(mode, key, mode_binding)
-      end
-    else
-      vim.keymap.set('n', key, binding)
-    end
-  end
-end
+  break_points = {
+    [','] = {i = ',<C-g>u'},
+    ['.'] = {i = '.<C-g>u'},
+    ['!'] = {i = '!<C-g>u'},
+    ['?'] = {i = '?<C-g>u'},
+  }
+})
 
 -- map('n', '<Space><Space>l', '<Cmd>LspStart<CR>', {noremap = true})
 -- map('n', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})

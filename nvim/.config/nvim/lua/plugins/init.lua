@@ -255,10 +255,7 @@ local startup = function()
     end
   }
 
-
-  use { 'nvim-telescope/telescope.nvim',
-    config = function() require('plugins.config_telescope') end
-  }
+  use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-telescope/telescope-frecency.nvim',
     config = function()
@@ -315,3 +312,4 @@ packer.startup {
 }
 
 require('plugins.gitsigns')
+require('plugins.config_telescope')
