@@ -92,13 +92,13 @@
     # }}}
 
     # { Terminal } {{{
-        # export TERM=xterm-256color
-        if [[ "$TERM" =~ "xterm" ]]; then
-            export TERM=xterm-256color
-        elif [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
-            export TERM=screen-256color
-            unset TERMCAP
-        fi
+        export TERM=xterm-256color
+        # if [[ "$TERM" =~ "xterm" ]]; then
+        #     export TERM=xterm-256color
+        # elif [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
+        #     export TERM=screen-256color
+        #     unset TERMCAP
+        # fi
     # }}}
 
 # }}}
@@ -118,3 +118,5 @@
         # exec startx
     fi
 # }}}
+
+# vim:foldmethod=marker
