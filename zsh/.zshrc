@@ -92,7 +92,7 @@
     # }}}
 
     # { Terminal } {{{
-        export TERM=xterm-256color
+        export TERM=screen-256color
         # if [[ "$TERM" =~ "xterm" ]]; then
         #     export TERM=xterm-256color
         # elif [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
