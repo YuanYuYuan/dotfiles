@@ -86,7 +86,7 @@ utils.bind_mapping_collection({
   clipboard = {
     ['<C-g>'] = yank_and_display_path,
     -- open the file stored in clipboard
-    ['<Space>o'] = '<Cmd>e <C-r>+<CR>',
+    ['<Space>o'] = ':e <C-r>+<CR>',
   },
 
   movement_tricks = {
