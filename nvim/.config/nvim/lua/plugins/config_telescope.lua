@@ -19,7 +19,7 @@ require('telescope').setup{
       sort_lastused = true,
       mappings = {
         i = {
-          ["<c-d>"] = "delete_buffer",
+          ['<c-d>'] = 'delete_buffer',
         }
       }
     }
@@ -39,11 +39,13 @@ local my_livegrep = function(opts)
   require'telescope.builtin'.live_grep(opts)
 end
 
+
 utils.bind_mappings({
   ['<Space>f'] = builtin.oldfiles,
   ['<Space>tf'] = builtin.find_files,
   ['<Space>tg'] = builtin.git_files,
   ['<Space>th'] = builtin.help_tags,
   ['<Space>ta'] = builtin.lsp_code_actions,
+  ['<Space>tq'] = require('telescope').extensions.frecency.frecency,
   ['?'] = my_livegrep,
 })

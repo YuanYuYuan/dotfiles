@@ -237,15 +237,6 @@ local startup = function()
   use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-telescope/telescope-frecency.nvim',
-    config = function()
-      require'telescope'.load_extension('frecency')
-      vim.api.nvim_set_keymap(
-        'n',
-        '<leader>fq',
-        '<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>',
-        {noremap = true, silent = true}
-      )
-    end,
     requires = {'tami5/sqlite.lua'}
   }
   use { 'nvim-lualine/lualine.nvim',
