@@ -64,6 +64,9 @@ utils.bind_mapping_collection({
     -- select last pasted
     ['gp'] = '`[v`]',
 
+    ['va\''] = 'v2i\'',
+    ['va\"'] = 'v2i\"',
+
     -- macros
     ['T'] = 'qt',
     ['t'] = '@t',

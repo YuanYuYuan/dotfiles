@@ -1,9 +1,9 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
--- vim.api.nvim_create_autocmd({"BufWritePost"}, {
---   pattern = {"init.lua"},
---   command = "source <afile> | PackerCompile",
+-- vim.api.nvim_create_autocmd({'BufWritePost'}, {
+--   pattern = {'init.lua'},
+--   command = 'source <afile> | PackerCompile',
 -- })
 
 
@@ -62,10 +62,10 @@ local startup = function()
         diagnostics = {
           enable = true,
           icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
+            hint = '',
+            info = '',
+            warning = '',
+            error = '',
           }
         },
         update_focused_file = {
@@ -105,21 +105,7 @@ local startup = function()
   }
 
   -- colorscheme
-  use { 'EdenEast/nightfox.nvim',
-    config = function ()
-      require('nightfox').setup({
-        options = {
-          transparent = true,
-        },
-        groups = {
-          Folded = { bg = 'none' },
-          Comment = { fg = '#33cccc' },
-          Visual = { bg = '#e6faff' },
-        }
-      })
-    vim.cmd('colorscheme nightfox')
-    end
-  }
+  use 'EdenEast/nightfox.nvim'
 
   use { 'scrooloose/nerdcommenter',
     config = vim.cmd [[
@@ -171,13 +157,6 @@ local startup = function()
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function()
-      require'nvim-treesitter.configs'.setup {
-        highlight = {
-          enable = true,
-        },
-      }
-    end
   }
 
   use { 'lervag/vimtex',
@@ -199,9 +178,9 @@ local startup = function()
       -- 'markdown'
     },
     config = vim.cmd [[
-      let g:UltiSnipsExpandTrigger="<c-e>"
-      let g:UltiSnipsJumpForwardTrigger="<CR>"
-      let g:UltiSnipsJumpBackwardTrigger="<S-CR>"
+      let g:UltiSnipsExpandTrigger='<c-e>'
+      let g:UltiSnipsJumpForwardTrigger='<CR>'
+      let g:UltiSnipsJumpBackwardTrigger='<S-CR>'
       let g:UltiSnipsSnippetDirectories=['snips']
       snoremap qq <Esc>
       nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
@@ -235,7 +214,7 @@ local startup = function()
         use_diagnostic_signs = true,
         auto_close = true,
       }
-      vim.api.nvim_set_keymap("n", "<F6>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+      vim.api.nvim_set_keymap('n', '<F6>', '<cmd>TroubleToggle<cr>', {silent = true, noremap = true})
     end
   }
   use { 'tzachar/cmp-tabnine',
@@ -261,9 +240,9 @@ local startup = function()
     config = function()
       require'telescope'.load_extension('frecency')
       vim.api.nvim_set_keymap(
-        "n",
-        "<leader>fq",
-        "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
+        'n',
+        '<leader>fq',
+        '<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>',
         {noremap = true, silent = true}
       )
     end,
@@ -313,3 +292,5 @@ packer.startup {
 
 require('plugins.gitsigns')
 require('plugins.config_telescope')
+require('plugins.colorscheme')
+require('plugins.treesitter')
