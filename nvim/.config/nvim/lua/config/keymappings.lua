@@ -2,7 +2,7 @@ local utils = require('utils')
 
 local yank_and_display_path = function()
   local file_path = vim.fn.expand('%:p')
-  vim.api.nvim_command("call setreg('+', '" .. file_path.. "')")
+  vim.cmd("call setreg('+', '" .. file_path.. "')")
   print(file_path)
 end
 
@@ -34,8 +34,7 @@ end
 vim.keymap.set(
   {'i', 'n'},
   '<F8>',
-  '<Cmd>silent !alacritty --working-directory %:p:h&<CR>',
-  { noremap = true }
+  '<Cmd>silent !alacritty --working-directory %:p:h&<CR>'
 )
 
 vim.cmd [[
@@ -162,7 +161,3 @@ utils.bind_mapping_collection({
     ['?'] = {i = '?<C-g>u'},
   }
 })
-
--- map('n', '<Space><Space>l', '<Cmd>LspStart<CR>', {noremap = true})
--- map('n', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})
--- map('v', '<Space><Space>n', '<Cmd>nohlsearch<CR>', {noremap = true})

@@ -14,48 +14,90 @@ vim.api.nvim_create_autocmd('Filetype', {
     'html',
     'tex'
   },
-  group = vim.api.nvim_create_augroup(
-    'ShorterSpaceAuGroup',
-    {clear = true}
-  ),
-  command = 'setlocal tabstop=2 softtabstop=2 shiftwidth=2',
+  group = augroup('ShorterSpaceAuGroup'),
+  callback = function ()
+    for _, opt in ipairs({'tabstop', 'softtabstop', 'shiftwidth'}) do
+      vim.opt[opt] = 2
+    end
+  end,
 })
 
-
--- local term = require('toggleterm')
--- local toggle_term = function()
---   local prev_win = vim.api.nvim_get_current_win()
---   local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
---   vim.cmd('write')
---   term.exec(cmd_list[vim.bo.filetype](vim.fn.expand('%')))
---   vim.api.nvim_win_set_cursor(prev_win, prev_pos)
---   vim.api.nvim_set_current_win(prev_win)
--- end
-
-
-local cmd_table = utils.Table {
-  makrdown = 'MarkdownPreview',
-  lua = 'luafile %',
-  tex = 'VimtexCompile',
-}
-:map(function(cmd)
-  return function()
-    vim.cmd('write')
-    vim.cmd(cmd)
-  end
-end)
-
-
-local f3_group = augroup('F3AuGroup')
-for ft, cmd in pairs(cmd_table) do
-  vim.api.nvim_create_autocmd('Filetype', {
-    pattern = ft,
-    group = f3_group,
-    callback = function()
-      vim.keymap.set({'i', 'n'}, '<F3>', cmd)
-    end
-  })
+local toggle_term = function(cmd)
+  local prev_win = vim.api.nvim_get_current_win()
+  local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
+  require('toggleterm').exec(cmd(vim.fn.expand('%')))
+  vim.api.nvim_win_set_cursor(prev_win, prev_pos)
+  vim.api.nvim_set_current_win(prev_win)
 end
+
+local cmd_table_collection = {
+  vim_cmd_table = utils.Table {
+    makrdown = 'MarkdownPreview',
+    lua = 'luafile %',
+    tex = 'VimtexCompile',
+    json5 = '!json5 -v %',
+  }
+  :map(function(cmd)
+    return function()
+      vim.cmd('write')
+      vim.cmd(cmd)
+    end
+  end),
+
+  toggleterm_cmd_table = utils.Table {
+    c = function(file)
+      local exe = file:gsub('.c', '.out')
+      return string.format('gcc %s -o %s && ./%s', file, exe, exe)
+    end,
+    cpp = function(file)
+      local exe = file:gsub('.cpp', '.out')
+      return string.format('g++ %s -o %s && ./%s', file, exe, exe)
+    end,
+    python = function(file)
+      return 'python ' .. file
+    end,
+    sh = function(file)
+      return 'bash ' .. file
+    end,
+  }
+  :map(function(cmd)
+    return function()
+      vim.cmd('write')
+      toggle_term(cmd)
+    end
+  end)
+}
+
+local cmd_table = {}
+local filetypes = {}
+for _, tbl in pairs(cmd_table_collection) do
+  for ft, cmd in pairs(tbl) do
+    cmd_table[ft] = cmd
+    filetypes[#filetypes + 1] = ft
+  end
+end
+
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = filetypes,
+  group = augroup('F3AuGroup'),
+  callback = function()
+    vim.keymap.set(
+      {'i', 'n'},
+      '<F3>',
+      function()
+        cmd_table[vim.bo.filetype]()
+      end
+    )
+  end,
+})
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'python',
+  callback = function()
+    vim.keymap.set({'v'}, '<F3>', ':ToggleTermSendVisualSelection<CR>')
+  end,
+})
 
 
 vim.cmd[[
