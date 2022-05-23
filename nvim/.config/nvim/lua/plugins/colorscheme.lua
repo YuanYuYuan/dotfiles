@@ -15,5 +15,5 @@ require('nightfox').setup({
     }
   }
 })
--- vim.cmd('colorscheme nightfox')
-vim.cmd('colorscheme nordfox')
+vim.cmd('colorscheme nightfox')
+-- vim.cmd('colorscheme nordfox')
