@@ -46,6 +46,7 @@ utils.bind_mappings({
   ['<Space>tg'] = builtin.git_files,
   ['<Space>th'] = builtin.help_tags,
   ['<Space>ta'] = builtin.lsp_code_actions,
+  ['<Space>tb'] = builtin.buffers,
   ['<Space>tq'] = require('telescope').extensions.frecency.frecency,
   ['?'] = my_livegrep,
 })
