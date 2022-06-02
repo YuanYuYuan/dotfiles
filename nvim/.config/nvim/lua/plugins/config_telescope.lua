@@ -3,7 +3,8 @@ local builtin = require('telescope.builtin')
 
 require('telescope').setup{
   defaults = {
-    path_display = { 'smart'},
+    -- path_display = { 'smart'},
+    wrap_results = true,
     mappings = {
       i = {
         ['<C-j>']   = 'move_selection_next',
