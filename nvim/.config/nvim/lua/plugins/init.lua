@@ -234,11 +234,13 @@ local startup = function()
     end
   }
 
+  use 'stevearc/dressing.nvim'
   use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-telescope/telescope-frecency.nvim',
     requires = {'tami5/sqlite.lua'}
   }
+
   use { 'nvim-lualine/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
