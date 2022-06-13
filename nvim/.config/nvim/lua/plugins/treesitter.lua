@@ -9,6 +9,7 @@ require('nvim-treesitter.configs').setup {
     'html',
     'json',
     'json5',
+    'yaml',
     'haskell',
     'python',
   },
