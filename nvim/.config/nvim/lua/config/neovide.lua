@@ -38,4 +38,4 @@ vim.keymap.set('c', '<C-v>', '<C-r>+')
 
 -- transparency
 vim.opt['background'] = 'dark'
-vim.g.neovide_transparency = 0.75
+vim.g.neovide_transparency = 0.8
