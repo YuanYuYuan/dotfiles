@@ -1,5 +1,5 @@
 -- adjust color
-vim.cmd('highlight CursorLine guibg=#1B2229')
+-- vim.cmd('highlight CursorLine guibg=#1B2229')
 
 -- font size & font list
 local font_size = 9
@@ -35,3 +35,7 @@ set_font(font_size)
 vim.keymap.set('n', '<C-=>', change_size(1))
 vim.keymap.set('n', '<C-->', change_size(-1))
 vim.keymap.set('c', '<C-v>', '<C-r>+')
+
+-- transparency
+vim.opt['background'] = 'dark'
+vim.g.neovide_transparency = 0.75
