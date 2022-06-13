@@ -44,46 +44,47 @@ require'lualine'.setup {
           hint = ' '
         },
       },
-      -- function() return require"lsp-status".status() end,
-      {
-        'lsp_progress',
-        display_components = {
-          'lsp_client_name',
-          'spinner',
-          {
-            'title',
-            'percentage',
-            'message'
-          }
-        },
-        colors = {
-          lsp_client_name = colors.yellow,
-          spinner = colors.blue,
-          title  = colors.red,
-          percentage  = colors.red,
-          message  = colors.red,
-          use = true,
-        },
-        separators = {
-          component = ' ',
-          progress = ' | ',
-          percentage = { pre = '', post = '%% ' },
-          title = { pre = '', post = ': ' },
-          lsp_client_name = { pre = '[', post = ']' },
-          spinner = { pre = '', post = '' },
-          message = {
-            commenced = 'In Progress',
-            completed = 'Completed',
-            pre = '(', post = ')'
-          },
-        },
-        timer = {
-          progress_enddelay = 500,
-          spinner = 500,
-          lsp_client_name_enddelay = 500
-        },
-        spinner_symbols = {'⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'},
-      }
+      function() return require"lsp-status".status() end,
+      -- -- FIXME: https://github.com/arkav/lualine-lsp-progress/issues/16
+      -- {
+      --   'lsp_progress',
+      --   display_components = {
+      --     'lsp_client_name',
+      --     'spinner',
+      --     {
+      --       'title',
+      --       'percentage',
+      --       'message'
+      --     }
+      --   },
+      --   colors = {
+      --     lsp_client_name = colors.yellow,
+      --     spinner = colors.blue,
+      --     title  = colors.red,
+      --     percentage  = colors.red,
+      --     message  = colors.red,
+      --     use = true,
+      --   },
+      --   separators = {
+      --     component = ' ',
+      --     progress = ' | ',
+      --     percentage = { pre = '', post = '%% ' },
+      --     title = { pre = '', post = ': ' },
+      --     lsp_client_name = { pre = '[', post = ']' },
+      --     spinner = { pre = '', post = '' },
+      --     message = {
+      --       commenced = 'In Progress',
+      --       completed = 'Completed',
+      --       pre = '(', post = ')'
+      --     },
+      --   },
+      --   timer = {
+      --     progress_enddelay = 500,
+      --     spinner = 500,
+      --     lsp_client_name_enddelay = 500
+      --   },
+      --   spinner_symbols = {'⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'},
+      -- }
     },
     lualine_x = {
       'location',
