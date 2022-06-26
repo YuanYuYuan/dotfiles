@@ -12,6 +12,7 @@ require('nvim-treesitter.configs').setup {
     'yaml',
     'haskell',
     'python',
+    'markdown',
   },
   highlight = {
     enable = true,
