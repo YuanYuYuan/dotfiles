@@ -18,7 +18,11 @@ function _G.my_fold_text()
   -- head = head:gsub('%s+', '')
   local tail = vim.fn.getline(vim.v.foldend):gsub('.*}}}', '')
   tail = tail:gsub('^%s*', '')
-  return head .. ' … ' .. tail
+  if tail == "" then
+    return head
+  else
+    return head .. ' … ' .. tail
+  end
 end
 
 vim.opt.fillchars:append({fold = ' '})
