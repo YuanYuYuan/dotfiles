@@ -1,13 +1,12 @@
 local lsp_config = require('lspconfig')
 local lsp_status = require('lsp-status')
-local lsp_kind = require('lspkind')
 
 require ('lsp_signature').setup()
 
-local kind_symbols = require('plugins.kind_symbols')
+local symbols = require('plugins.symbols')
 
 lsp_status.config {
-  kind_labels = kind_symbols,
+  -- kind_labels = symbols.kind_labels,
   diagnostics = false,
   status_symbol = '',
   select_symbol = function(cursor_pos, symbol)
@@ -24,7 +23,6 @@ lsp_status.config {
 }
 
 lsp_status.register_progress()
-lsp_kind.init {symbol_map = kind_symbols}
 
 -- disable inline diagnostic
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -152,8 +150,8 @@ require('rust-tools').setup{
 
 -- set lsp diagnostic sign: neovim 0.6.1
 for sign, config in pairs({
-  DiagnosticSignError = {text = '', texthl = "DiagnosticDefaultError"},
-  DiagnosticSignWarn = {text = '', texthl = 'DiagnosticSignWarn'},
-  DiagnosticSignInfo = {text = '', texthl = 'DiagnosticSignInfo'},
-  DiagnosticSignHint = {text = '', texthl = 'DiagnosticSignHint'},
+  DiagnosticSignError = {text = symbols.signs.error, texthl = 'DiagnosticSignError'},
+  DiagnosticSignWarn  = {text = symbols.signs.warn, texthl  = 'DiagnosticSignWarn'},
+  DiagnosticSignInfo  = {text = symbols.signs.info, texthl  = 'DiagnosticSignInfo'},
+  DiagnosticSignHint  = {text = symbols.signs.hint, texthl  = 'DiagnosticSignHint'},
 }) do vim.fn.sign_define(sign, config) end

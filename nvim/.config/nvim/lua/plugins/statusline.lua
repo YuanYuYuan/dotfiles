@@ -11,7 +11,18 @@ local colors = {
   red = '#ec7063'
 }
 
-require'lualine'.setup {
+local symbols = require('plugins.symbols')
+
+local gps = require('nvim-gps')
+gps.setup({
+  icons = {
+    ['class-name'] = symbols.kind_labels.Class,
+    ['container-name'] = symbols.kind_labels.Struct,
+    ['tag-name'] = "",
+  },
+})
+
+require('lualine').setup {
   options = {
     icons_enabled = true,
     -- theme = 'nightfox',
@@ -29,22 +40,21 @@ require'lualine'.setup {
       'filetype',
     },
     lualine_c = {
-      {
-        'filename',
-        file_status = true,
-        path = 0,
-      },
+      -- {
+      --   'filename',
+      --   file_status = true,
+      --   path = 0,
+      -- },
       {
         'diagnostics',
         sources={'nvim_diagnostic'},
-        symbols = {
-          error = ' ',
-          warn = ' ',
-          info = ' ',
-          hint = ' '
-        },
+        symbols = symbols.signs
       },
-      function() return require"lsp-status".status() end,
+      {
+        gps.get_location,
+        cond = gps.is_available
+      },
+      function() return require('lsp-status').status() end,
       -- -- FIXME: https://github.com/arkav/lualine-lsp-progress/issues/16
       -- {
       --   'lsp_progress',

@@ -17,6 +17,7 @@ local startup = function()
   use { 'akinsho/toggleterm.nvim',
     config = function() require('plugins.toggleterm') end
   }
+  use 'SmiteshP/nvim-gps'
 
   -- Git
   use 'tpope/vim-fugitive'
