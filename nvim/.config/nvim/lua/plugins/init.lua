@@ -98,7 +98,6 @@ local startup = function()
       autocmd FileType markdown nnoremap <buffer> <silent> <F3> :MarkdownPreview<CR>
     ]]
   }
-  use 'alvan/vim-closetag'
   use { 'lukas-reineke/indent-blankline.nvim',
     config = vim.cmd [[
       let g:indent_blankline_use_treesitter = v:true
@@ -164,7 +163,10 @@ local startup = function()
     ft = 'tex',
     config = [[require('plugins.vimtex')]]
   }
-  use 'itchyny/vim-cursorword'
+
+  -- -- TODO: Disable since too slow
+  -- use 'itchyny/vim-cursorword'
+
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use { 'FooSoft/vim-argwrap',
