@@ -2,7 +2,7 @@
 -- vim.cmd('highlight CursorLine guibg=#1B2229')
 
 -- font size & font list
-local font_size = 9
+local font_size = 10
 local font_list = {
   'FiraCode Nerd Font',
   'Font Awesome 5 Free',
@@ -38,4 +38,4 @@ vim.keymap.set('c', '<C-v>', '<C-r>+')
 
 -- transparency
 vim.opt['background'] = 'dark'
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_transparency = 0.75
