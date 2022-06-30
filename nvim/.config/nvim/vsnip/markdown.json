@@ -2,8 +2,8 @@
   "Code Block": {
   "prefix": ["cbl"],
   "body": [
-    "```",
-    "$1",
+    "```${1:bash}",
+    "$2",
     "```"
   ],
   "description": "Code Block"
