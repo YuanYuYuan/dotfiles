@@ -69,10 +69,11 @@ local startup = function()
             error = '',
           }
         },
-        update_focused_file = {
-          enable = true,
-          update_cwd  = true,
-        },
+        -- -- XXX: Disable since auto opening while switching buffers
+        -- update_focused_file = {
+        --   enable = true,
+        --   update_cwd  = true,
+        -- },
         view = {
           side = 'left',
           hide_root_folder = false,
