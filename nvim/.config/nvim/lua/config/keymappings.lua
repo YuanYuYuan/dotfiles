@@ -74,6 +74,9 @@ utils.bind_mapping_collection({
     ['g;'] = 'g;zz',
     ['g,'] = 'g,zz',
 
+    -- jump forward
+    ['<C-m>'] = '<C-i>',
+
     ['vv'] = '<C-v>',
 
     ['gs'] = {v = switch_brackets},
