@@ -12,6 +12,15 @@ require('telescope').setup{
         ['<C-k>']   = 'move_selection_previous',
         ['<S-Tab>'] = 'move_selection_previous',
       }
+    },
+    vimgrep_arguments = {
+      'rg',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--smart-case',
+      '--column',
+      '--fixed-strings',   -- disable regex
     }
   },
   pickers = {
