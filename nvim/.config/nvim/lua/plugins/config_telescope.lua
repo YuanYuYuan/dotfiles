@@ -38,7 +38,7 @@ require('telescope').setup{
 
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/592
-local my_livegrep = function(opts)
+local my_live_grep = function(opts)
   opts = opts or {}
   opts.path_display = {'absolute'}
   opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
@@ -50,6 +50,20 @@ local my_livegrep = function(opts)
   require('telescope.builtin').live_grep(opts)
 end
 
+-- https://github.com/nvim-telescope/telescope.nvim/issues/1923#issuecomment-1123136065
+local get_visual_selection = function()
+  vim.cmd('noau normal! "vy"')
+  local text = vim.fn.getreg('v')
+  vim.fn.setreg('v', {})
+
+  text = string.gsub(text, '\n', '')
+  if #text > 0 then
+    return text
+  else
+    return ''
+  end
+end
+
 
 utils.bind_mappings({
   ['<Space>f'] = builtin.oldfiles,
@@ -59,7 +73,12 @@ utils.bind_mappings({
   ['<Space><Space>c'] = vim.lsp.buf.code_action,
   ['<Space><Space>b'] = builtin.buffers,
   ['<Space><Space>q'] = require('telescope').extensions.frecency.frecency,
-  ['?'] = my_livegrep,
+  ['?'] = {
+    v = function()
+      my_live_grep({default_text = get_visual_selection()})
+    end,
+    n = my_live_grep
+  },
 })
 
 
