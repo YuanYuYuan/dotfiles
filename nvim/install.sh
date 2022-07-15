@@ -1,14 +1,33 @@
 #!/usr/bin/env bash
 
-# tag="v0.6.1"
+neovim_dir="$HOME/neovim"
+
 # tag="v0.7.0"
 tag="nightly"
-git clone --depth 1 --branch "$tag" https://github.com/neovim/neovim $HOME/neovim
-cd $HOME/neovim
+
+packer_dir="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+
+if [ -d $neovim_dir ]; then
+    echo ">>> Pulling the lateset neovim ..."
+    cd $neovim_dir
+    git pull --depth 1
+else
+    echo ">>> Cloneing neovim source code ..."
+    git clone --depth 1 --branch "$tag" https://github.com/neovim/neovim $neovim_dir
+    cd $neovim_dir
+fi
+
+echo ">>> Start building ..."
+make clean
 make -j CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local/
 make install
 
-# install packer
-git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+if [ -d $packer_dir ]; then
+    echo ">>> Pulling the lateset packer ..."
+    cd $packer_dir
+    git pull --depth 1
+else
+    echo ">>> Cloneing packer source code ..."
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim $packer_dir
+fi
 nvim --headless +PackerInstall +q
