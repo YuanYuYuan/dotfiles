@@ -6,6 +6,7 @@
         export EDITOR="/usr/bin/nvim"
         export TERMINAL='/usr/bin/alacritty'
         export VISUAL="nvim"
+        export STARDICT_DATA_DIR=$XDG_CONFIG_HOME/stardict
     # }}}
 
     # { Rust } {{{
