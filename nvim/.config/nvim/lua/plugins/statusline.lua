@@ -13,14 +13,7 @@ local colors = {
 
 local symbols = require('plugins.symbols')
 
-local gps = require('nvim-gps')
-gps.setup({
-  icons = {
-    ['class-name'] = symbols.kind_labels.Class,
-    ['container-name'] = symbols.kind_labels.Struct,
-    ['tag-name'] = "",
-  },
-})
+local navic = require('nvim-navic')
 
 require('lualine').setup {
   options = {
@@ -51,8 +44,8 @@ require('lualine').setup {
         symbols = symbols.signs
       },
       {
-        gps.get_location,
-        cond = gps.is_available
+        navic.get_location,
+        cond = navic.is_available
       },
       function() return require('lsp-status').status() end,
       -- -- FIXME: https://github.com/arkav/lualine-lsp-progress/issues/16

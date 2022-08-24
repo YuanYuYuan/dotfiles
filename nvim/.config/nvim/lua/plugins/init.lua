@@ -17,7 +17,10 @@ local startup = function()
   use { 'akinsho/toggleterm.nvim',
     config = function() require('plugins.toggleterm') end
   }
-  use 'SmiteshP/nvim-gps'
+  use {
+      'SmiteshP/nvim-navic',
+      requires = "neovim/nvim-lspconfig"
+  }
 
   -- Git
   use 'tpope/vim-fugitive'
