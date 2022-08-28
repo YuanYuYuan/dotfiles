@@ -114,7 +114,5 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'calc' },
     { name = 'vsnip' },
-    { name = 'cmp_tabnine' },
-    -- { name = 'emoji' }
   },
 }

@@ -224,9 +224,6 @@ local startup = function()
       vim.api.nvim_set_keymap('n', '<F6>', '<cmd>TroubleToggle<cr>', {silent = true, noremap = true})
     end
   }
-  use { 'tzachar/cmp-tabnine',
-    run='./install.sh'
-  }
   use { 'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-vsnip',
