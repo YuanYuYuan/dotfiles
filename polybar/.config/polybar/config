@@ -127,7 +127,7 @@ font-4 = FontAwesome5Free:style=Solid:size=10;4
 font-5 = FontAwesome5Free:style=Regular:size=10;4
 font-6 = FontAwesome5Brands:style=Regular:size=10;4
 
-modules-left = filesystem backlight alsa memory cpu wlan eth battery date powermenu
+modules-left = filesystem backlight pulseaudio memory cpu wlan eth battery date powermenu
 
 enable-ipc = true
 override-redirect = true
@@ -277,7 +277,7 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 time = %c
 time-alt = %H:%M
@@ -288,19 +288,32 @@ format-underline = #0a6cf5
 
 label = %date% %time%
 
-[module/alsa]
-type = internal/alsa
+; [module/alsa]
+; type = internal/alsa
 
-; format-prefix-font = 4
+; ; format-prefix-font = 4
+; format-volume = <ramp-volume> <label-volume>
+; label-volume = %percentage:2%%
+; label-volume-foreground = ${root.foreground}
+; ramp-volume-0 = 奄
+; ramp-volume-1 = 奔
+; ramp-volume-2 = 墳
+
+; format-muted-foreground = ${colors.foreground-alt}
+; label-muted =  muted
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = true
+interval = 5
 format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage:2%%
 label-volume-foreground = ${root.foreground}
 ramp-volume-0 = 奄
 ramp-volume-1 = 奔
 ramp-volume-2 = 墳
-
 format-muted-foreground = ${colors.foreground-alt}
 label-muted =  muted
+click-right = pavucontrol
 
 [module/battery]
 type = internal/battery
