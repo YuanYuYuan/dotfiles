@@ -7,3 +7,4 @@
 : ${ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim}
 # }}} End configuration added by Zim install
 . "$HOME/.cargo/env"
+source $HOME/.zsh/env.zsh
