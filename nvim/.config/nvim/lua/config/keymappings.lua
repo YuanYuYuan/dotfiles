@@ -84,8 +84,12 @@ utils.bind_mapping_collection({
     -- paste last yank
     ['<Space>p'] = {['n,v'] = '"0p'},
 
+    -- undo/redo
     ['U'] = '<C-r>',
-    ['uu'] = {i = '<Esc>u'}
+    ['uu'] = {i = '<Esc>u'},
+
+    -- window
+    ['qw'] = '<C-w>',
   },
 
   clipboard = {
