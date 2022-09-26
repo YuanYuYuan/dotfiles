@@ -18,6 +18,10 @@ else
 fi
 
 echo ">>> Start building ..."
+[ command -v make &> /dev/null ] || {
+    echo "Install make before building!"
+    exit
+}
 make clean
 make -j CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local/
 make install
