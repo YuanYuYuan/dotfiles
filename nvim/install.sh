@@ -18,7 +18,7 @@ else
 fi
 
 echo ">>> Start building ..."
-[ command -v make &> /dev/null ] || {
+command -v make &> /dev/null || {
     echo "Install make before building!"
     exit
 }
