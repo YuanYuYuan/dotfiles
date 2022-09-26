@@ -18,10 +18,12 @@ else
 fi
 
 echo ">>> Start building ..."
-command -v make &> /dev/null || {
-    echo "Install make before building!"
-    exit
-}
+for program in "make cmake unzip"; do
+    command -v $program &> /dev/null || {
+        echo "Install $program before building!"
+        exit
+    }
+done
 make clean
 make -j CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local/
 make install
