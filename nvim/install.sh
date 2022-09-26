@@ -18,7 +18,7 @@ else
 fi
 
 echo ">>> Start building ..."
-for program in "make cmake unzip"; do
+for program in make cmake unzip; do
     command -v $program &> /dev/null || {
         echo "Install $program before building!"
         exit
