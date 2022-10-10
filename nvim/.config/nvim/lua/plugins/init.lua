@@ -24,7 +24,7 @@ local startup = function()
 
   -- Git
   use 'tpope/vim-fugitive'
-  use 'lewis6991/gitsigns.nvim'
+  -- use 'lewis6991/gitsigns.nvim'
 
   use { 'mattn/emmet-vim',
     config = vim.cmd [[
@@ -190,18 +190,20 @@ local startup = function()
       let g:UltiSnipsJumpBackwardTrigger='<S-CR>'
       let g:UltiSnipsSnippetDirectories=['snips']
       snoremap qq <Esc>
-      nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
+      " nnoremap <silent> <F4> :exec 'edit $HOME/.config/nvim/snips/' .  &ft . '.snippets' <CR>
     ]]
   }
-  use { 'hrsh7th/vim-vsnip',
-    config = function()
-      vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
-      vim.cmd [[
-        nmap <C-e> <Plug>(vsnip-cut-text)
-        xmap <C-e> <Plug>(vsnip-cut-text)
-      ]]
-    end
-  }
+
+  use {'L3MON4D3/LuaSnip', tag = 'v<CurrentMajor>.*'}
+  -- use { 'hrsh7th/vim-vsnip',
+  --   config = function()
+  --     vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
+  --     vim.cmd [[
+  --       nmap <C-e> <Plug>(vsnip-cut-text)
+  --       xmap <C-e> <Plug>(vsnip-cut-text)
+  --     ]]
+  --   end
+  -- }
 
   -- lsp
   use 'neovim/nvim-lspconfig'
@@ -253,14 +255,14 @@ local startup = function()
   }
   use 'arkav/lualine-lsp-progress'
 
-  -- improve highlight searching
-  use { 'kevinhwang91/nvim-hlslens',
-    config = function()
-      require('hlslens').setup({
-        calm_down = true,
-      })
-    end
-  }
+  -- -- improve highlight searching
+  -- use { 'kevinhwang91/nvim-hlslens',
+  --   config = function()
+  --     require('hlslens').setup({
+  --       calm_down = true,
+  --     })
+  --   end
+  -- }
 
   use { 'petertriho/nvim-scrollbar',
     config = function()
@@ -287,7 +289,8 @@ packer.startup {
   -- },
 }
 
-require('plugins.gitsigns')
+-- require('plugins.gitsigns')
 require('plugins.config_telescope')
 require('plugins.colorscheme')
 require('plugins.treesitter')
+require('plugins.luasnip')

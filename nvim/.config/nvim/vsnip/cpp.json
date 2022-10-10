@@ -2,7 +2,7 @@
   "inclde": {
     "prefix": ["in"],
     "body": [
-      "#include <$1>"
+      "#include <${1|vector,string,iostream,unordered_map,map,queue,stack|}>"
     ],
     "description": "include"
   },
