@@ -11,7 +11,7 @@ require('nightfox').setup({
     all = {
       Folded = { bg = 'none' },
       Comment = { fg = '#33cccc' },
-      Visual = { bg = '#e6faff' },
+      Visual = { bg = '#01779c'},
     }
   }
 })
