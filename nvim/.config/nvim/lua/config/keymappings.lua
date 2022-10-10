@@ -131,8 +131,8 @@ utils.bind_mapping_collection({
   },
 
   page_scrolling = {
-    ['<C-k>'] = {n = '<C-u>', v = '5k'},
-    ['<C-j>'] = {n = '<C-d>', v = '5j'},
+    ['<C-k>'] = {n = '<C-u>'},
+    ['<C-j>'] = {n = '<C-d>'},
   },
 
   command_mode = {
