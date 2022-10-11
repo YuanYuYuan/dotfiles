@@ -5,11 +5,10 @@ local sno = ls.snippet_node
 local fno = ls.function_node
 local tno = ls.text_node
 local cno = ls.choice_node
-local dno = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 local extras = require("luasnip.extras")
 local rep = extras.rep
-local conds_expand = require("luasnip.extras.conditions.expand")
+local line_begin_cond = { condition = require("luasnip.extras.conditions.expand").line_begin }
 
 local snippets = {}
 local auto_snippets = {
@@ -49,7 +48,7 @@ local auto_snippets = {
         todo = ino(2),
       }
     ),
-    {condition = conds_expand.line_begin}
+    line_begin_cond
   ),
 
   -- include
@@ -63,17 +62,11 @@ local auto_snippets = {
         return string.sub(arg[1][1], -1) == ">" and "" or ">"
       end, 1)
     },
-    {condition = conds_expand.line_begin}
+    line_begin_cond
   ),
 
   -- std namespace
-  snp(
-    "un ",
-    {
-      tno("using namespace std;"),
-    },
-    {condition = conds_expand.line_begin}
-  ),
+  snp("un ", tno("using namespace std;"), line_begin_cond),
 
   -- cout
   snp(
@@ -84,7 +77,7 @@ local auto_snippets = {
       tno(" << "),
       cno(2, {ino(1, "str"), tno("endl;")})
     },
-    {condition = conds_expand.line_begin}
+    line_begin_cond
   ),
 
   -- main
@@ -99,7 +92,7 @@ local auto_snippets = {
       ]],
       ino(1)
     ),
-    {condition = conds_expand.line_begin}
+    line_begin_cond
   ),
 
   -- vector<T>
@@ -109,7 +102,7 @@ local auto_snippets = {
   snp("if ", fmt("if ({})", {ino(1)})),
 
   -- while
-  snp("wh ", fmt("while ({})", {ino(1)}), {condition = conds_expand.line_begin}),
+  snp("wh ", fmt("while ({})", {ino(1)}), line_begin_cond),
 }
 
 return snippets, auto_snippets
