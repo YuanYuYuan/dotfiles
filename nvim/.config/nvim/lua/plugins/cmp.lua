@@ -1,7 +1,6 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 local symbols = require("plugins.symbols")
-local luasnip = require("luasnip")
 lspkind.init {symbol_map = symbols.kind_labels}
 
 vim.opt.completeopt = "menuone,noselect"
@@ -19,7 +18,7 @@ end
 cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   formatting = {
@@ -31,6 +30,7 @@ cmp.setup {
         nvim_lsp = "[LSP]",
         buffer = "[Buffer]",
         nvim_lua = "[Lua]",
+        luasnip = "[Luasnip]",
       })[entry.source.name]
 
       return vim_item
@@ -41,50 +41,6 @@ cmp.setup {
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    -- ["<C-j>"] = cmp.mapping(
-    --   function(fallback)
-    --     if luasnip.expand_or_jumpable() then
-    --       luasnip.expand_or_jump()
-    --     elseif has_words_before() then
-    --       cmp.complete()
-    --     else
-    --       fallback()
-    --     end
-    --   end,
-    --   { "i", "s" }
-    -- ),
-    -- ["<C-e>"] = cmp.mapping(
-    --   function(fallback)
-    --     if luasnip.expand_or_jumpable() then
-    --       luasnip.expand_or_jump()
-    --     elseif has_words_before() then
-    --       cmp.complete()
-    --     else
-    --       fallback()
-    --     end
-    --   end,
-    --   { "i", "s" }
-    -- ),
-    -- ["<C-j>"] = cmp.mapping(
-    --   function(fallback)
-    --     if luasnip.jumpable() then
-    --       luasnip.jump(1)
-    --     else
-    --       fallback()
-    --     end
-    --   end,
-    --   { "i", "s" }
-    -- ),
-    -- ["<C-k>"] = cmp.mapping(
-    --   function(fallback)
-    --     if luasnip.jumpable() then
-    --       luasnip.jump(-1)
-    --     else
-    --       fallback()
-    --     end
-    --   end,
-    --   { "i", "s" }
-    -- ),
     ["<C-c>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     -- ["<CR>"] = cmp.mapping(
@@ -121,11 +77,11 @@ cmp.setup {
     ),
   },
   sources = {
+    { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "path" },
     { name = "buffer" },
     { name = "calc" },
-    { name = "luasnip" },
   },
 }

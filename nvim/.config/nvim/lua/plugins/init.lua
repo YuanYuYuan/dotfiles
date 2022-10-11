@@ -195,15 +195,7 @@ local startup = function()
   }
 
   use {'L3MON4D3/LuaSnip', tag = 'v<CurrentMajor>.*'}
-  -- use { 'hrsh7th/vim-vsnip',
-  --   config = function()
-  --     vim.g['vsnip_snippet_dir'] = '$XDG_CONFIG_HOME/nvim/vsnip'
-  --     vim.cmd [[
-  --       nmap <C-e> <Plug>(vsnip-cut-text)
-  --       xmap <C-e> <Plug>(vsnip-cut-text)
-  --     ]]
-  --   end
-  -- }
+  use 'saadparwaiz1/cmp_luasnip'
 
   -- lsp
   use 'neovim/nvim-lspconfig'
@@ -228,8 +220,6 @@ local startup = function()
   }
   use { 'hrsh7th/nvim-cmp',
     requires = {
-      'hrsh7th/cmp-vsnip',
-      -- 'hrsh7th/vim-vsnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
