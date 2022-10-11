@@ -100,15 +100,16 @@ vim.api.nvim_create_autocmd('Filetype', {
 })
 
 
-vim.cmd[[
-    " auto save and restore
-    let blacklist = ['qf']
-    autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
-    autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
+-- TODO: Rewrite the logic, enable toggle
+-- vim.cmd[[
+--     " auto save and restore
+--     let blacklist = ['qf']
+--     autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
+--     autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
 
-    " Auto search and clean trailing space after file written.
-    autocmd BufWritePre * %s/\s\+$//e
+--     " Auto search and clean trailing space after file written.
+--     autocmd BufWritePre * %s/\s\+$//e
 
-    " And replace tab automatically
-    autocmd BufWritePre * retab
-]]
+--     " And replace tab automatically
+--     autocmd BufWritePre * retab
+-- ]]
