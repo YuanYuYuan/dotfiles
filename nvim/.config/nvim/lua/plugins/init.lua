@@ -57,6 +57,8 @@ local startup = function()
     ]]
   }
   use 'simrat39/rust-tools.nvim'
+
+  -- TODO: clean up this mess
   use { 'kyazdani42/nvim-tree.lua',
     config = function()
       require'nvim-tree'.setup {
@@ -90,6 +92,7 @@ local startup = function()
       -- vim.g["nvim_tree_quit_on_open"] = 1
       vim.cmd [[
         nnoremap <F1> :NvimTreeToggle<CR>
+        nnoremap <Space>1 :NvimTreeToggle<CR>
       ]]
     end
   }
@@ -98,8 +101,6 @@ local startup = function()
     run = 'cd app && yarn install',
     config = vim.cmd [[
       let g:mkdp_auto_close = 0
-      autocmd FileType markdown inoremap <buffer> <silent> <F3> <Esc>:MarkdownPreview<CR>
-      autocmd FileType markdown nnoremap <buffer> <silent> <F3> :MarkdownPreview<CR>
     ]]
   }
   use { 'lukas-reineke/indent-blankline.nvim',

@@ -32,7 +32,7 @@ end
 
 local cmd_table_collection = {
   vim_cmd_table = utils.Table {
-    makrdown = 'MarkdownPreview',
+    markdown = 'MarkdownPreview',
     lua = 'luafile %',
     tex = 'VimtexCompile',
     json5 = '!json5 -v %',
@@ -77,7 +77,7 @@ for _, tbl in pairs(cmd_table_collection) do
   end
 end
 
-
+-- F3AuGroup for insert & normal mode
 vim.api.nvim_create_autocmd('Filetype', {
   pattern = filetypes,
   group = augroup('F3AuGroup'),
@@ -93,9 +93,16 @@ vim.api.nvim_create_autocmd('Filetype', {
 })
 
 vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'python',
+  pattern = filetypes,
+  group = augroup('Space3AuGroup'),
   callback = function()
-    vim.keymap.set({'v'}, '<F3>', ':ToggleTermSendVisualSelection<CR>')
+    vim.keymap.set(
+      {'n'},
+      '<Space>3',
+      function()
+        cmd_table[vim.bo.filetype]()
+      end
+    )
   end,
 })
 
@@ -106,10 +113,4 @@ vim.api.nvim_create_autocmd('Filetype', {
 --     let blacklist = ['qf']
 --     autocmd BufWritePost,BufWinLeave *.* if index(blacklist, &ft) < 0 | mkview
 --     autocmd BufWinEnter *.* if index(blacklist, &ft) < 0 | silent! loadview
-
---     " Auto search and clean trailing space after file written.
---     autocmd BufWritePre * %s/\s\+$//e
-
---     " And replace tab automatically
---     autocmd BufWritePre * retab
 -- ]]

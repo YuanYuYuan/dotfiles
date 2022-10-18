@@ -25,12 +25,12 @@ for key, fcn in pairs(mappings) do
 end
 
 
-local cmd = require('bufferline.commands')
-for idx = 1, 9 do
-  vim.keymap.set(
-    'n',
-    '<Space>' .. idx,
-    function () cmd.go_to(idx) end,
-    {noremap = true, silent = true}
-  )
-end
+-- local cmd = require('bufferline.commands')
+-- for idx = 1, 9 do
+--   vim.keymap.set(
+--     'n',
+--     '<Space>' .. idx,
+--     function () cmd.go_to(idx) end,
+--     {noremap = true, silent = true}
+--   )
+-- end

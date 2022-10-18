@@ -34,3 +34,12 @@ vim.api.nvim_create_autocmd('Filetype', {
     vim.keymap.set({'n'}, '<Space>3', function() speak_and_trans(vim.api.nvim_get_current_line()) end)
   end,
 })
+
+-- python send visual selection
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'python',
+  callback = function()
+    vim.keymap.set({'v'}, '<F3>', ':ToggleTermSendVisualSelection<CR>')
+    vim.keymap.set({'v'}, '<Space>3', ':ToggleTermSendVisualSelection<CR>')
+  end,
+})
