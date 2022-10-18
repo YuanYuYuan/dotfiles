@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
+for pkg in libtool gettext wget; do
+    command -v $pkg &> /dev/null || {
+        echo "$pkg not installed!"
+        exit
+    }
+done
+
 neovim_dir="$HOME/neovim"
+stow_dir="$(realpath ${BASH_SOURCE[0]})"
+stow_dir=${stow_dir%/*/*}
 
 # tag="v0.7.0"
 tag="nightly"
@@ -36,4 +45,6 @@ else
     echo ">>> Cloneing packer source code ..."
     git clone --depth 1 https://github.com/wbthomason/packer.nvim $packer_dir
 fi
+cd $stow_dir
+stow nvim
 nvim --headless +PackerInstall +q
