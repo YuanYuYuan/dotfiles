@@ -75,7 +75,7 @@ local auto_snippets = {
       tno("cout << "),
       ino(1, "str"),
       tno(" << "),
-      cno(2, {ino(1, "str"), tno("endl;")})
+      cno(2, {tno("endl;"), ino(1, "str")})
     },
     line_begin_cond
   ),

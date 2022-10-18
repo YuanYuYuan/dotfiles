@@ -14,5 +14,7 @@ local auto_snippets = {
     ]], {ino(1, "bash"), ino(2)}),
     line_begin_cond
   ),
+  snp("img", fmt("![{}]({})", {ino(2, "NAME"), ino(1, "PATH")})),
+  parse("wtf", "$1 is wtf"),
 }
 return snippets, auto_snippets
