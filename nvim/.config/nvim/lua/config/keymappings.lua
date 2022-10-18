@@ -31,12 +31,14 @@ local switch_brackets = function()
   -- -- print(vim.fn.getreg('v'))
 end
 
+
 vim.keymap.set(
   {'i', 'n'},
   '<F8>',
   '<Cmd>silent !alacritty --working-directory %:p:h&<CR>'
 )
 
+-- TODO: rewrite it in lua
 vim.cmd [[
     " save and (force) exit
     autocmd WinEnter * if &buftype ==# 'quickfix' && winnr('$') == 1 | bdelete | endif
@@ -54,6 +56,21 @@ vim.cmd [[
     nnoremap <Space>q :call QuitOrBufferDelete()<CR>
 ]]
 
+local write_and_format = function()
+  vim.cmd[[
+    " remove trailing whitespaces
+    %s/\s\+$//e
+
+    " convert spaces to tab
+    retab
+
+    " remove trailing lines
+    silent! %s#\($\n\s*\)\+\%$##
+
+    " write the buffer
+    w
+  ]]
+end
 
 utils.bind_mapping_collection({
   basics = {
@@ -119,7 +136,8 @@ utils.bind_mapping_collection({
     ['Q'] = '<Cmd>q<CR>',
     ['!'] = '<Cmd>q!<CR>',
     ['X'] = '<Cmd>x<CR>',
-    ['<Space>w'] = '<Cmd>w<CR>',
+    -- ['<Space>w'] = '<Cmd>w<CR>',
+    ['<Space>w'] = write_and_format,
     ['<Space>x'] = '<Cmd>x<CR>',
   },
 
@@ -166,5 +184,5 @@ utils.bind_mapping_collection({
     ['.'] = {i = '.<C-g>u'},
     ['!'] = {i = '!<C-g>u'},
     ['?'] = {i = '?<C-g>u'},
-  }
+  },
 })
