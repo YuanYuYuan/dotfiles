@@ -7,6 +7,7 @@
         export TERMINAL='/usr/bin/alacritty'
         export VISUAL="nvim"
         export STARDICT_DATA_DIR=$XDG_CONFIG_HOME/stardict
+        export UE4_ROOT=~/UnrealEngine_4.26
     # }}}
 
     # { Rust } {{{
@@ -60,5 +61,10 @@
     #     export LD_LIBRARY_PATH="/usr/local/cuda-${CUDA_VER}/lib64:$LD_LIBRARY_PATH"
     #     export LIBRARY_PATH="/usr/local/cuda-${CUDA_VER}/lib64:$LIBRARY_PATH"
     # # }}}
+
+    # { Poetry } {{{
+        # https://github.com/python-poetry/poetry/issues/5250#issuecomment-1067193647
+        export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
+    # }}}
 
 # }}}
