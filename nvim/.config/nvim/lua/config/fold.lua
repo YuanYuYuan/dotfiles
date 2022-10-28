@@ -65,4 +65,13 @@ vim.api.nvim_create_autocmd('Filetype', {
   callback = toggle_folding,
 })
 
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = {'zsh', 'tmux'},
+  callback = function ()
+    local win_set = vim.api.nvim_win_set_option
+    win_set(0, 'foldmethod', 'marker')
+    win_set(0, 'foldmarker', '{{{,# }}}')
+  end,
+})
+
 vim.keymap.set({'n'}, '<Tab>', 'zazz', { noremap = true })
