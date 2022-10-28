@@ -8,12 +8,11 @@ local snippets = {}
 local auto_snippets = {
   snp("cbl",
     fmt([[
-     ```{}
-     {}
-     ```
-    ]], {ino(1, "bash"), ino(2)}),
+      # { <> } {{{
+          <>
+      # }}}
+    ]], {ino(1, "NAME"), ino(2)}, {delimiters = "<>"}),
     line_begin_cond
   ),
-  snp("img", fmt("![{}]({})", {ino(2, "NAME"), ino(1, "PATH")})),
 }
 return snippets, auto_snippets
