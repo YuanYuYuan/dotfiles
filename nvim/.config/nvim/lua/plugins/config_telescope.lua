@@ -3,8 +3,8 @@ local builtin = require('telescope.builtin')
 
 require('telescope').setup{
   defaults = {
-    -- path_display = { 'smart'},
-    wrap_results = true,
+    path_display = { 'smart' },
+    -- wrap_results = true,
     mappings = {
       i = {
         ['<C-j>']   = 'move_selection_next',
@@ -15,11 +15,14 @@ require('telescope').setup{
     },
     vimgrep_arguments = {
       'rg',
+
+      -- these four are required
       '--no-heading',
       '--with-filename',
       '--line-number',
-      '--smart-case',
       '--column',
+
+      '--smart-case',
       '--fixed-strings',   -- disable regex
     }
   },
