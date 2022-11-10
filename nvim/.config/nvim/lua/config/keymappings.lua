@@ -185,4 +185,8 @@ utils.bind_mapping_collection({
     ['!'] = {i = '!<C-g>u'},
     ['?'] = {i = '?<C-g>u'},
   },
+
+  git = {
+    ['<Space>gb'] = {n = '<Cmd>Git blame<CR>'}
+  },
 })
