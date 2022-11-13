@@ -6,7 +6,7 @@ if [ -z "$(ls /sys/class/power_supply/ | grep 'BAT')" ]; then
     exit
 fi
 
-acpi_info=$(acpi -b | grep -v 'Unknown' | grep -v 'unavailable' | head -n 1 | cut -d ":" -f 2- | sed "s/,//g")
+acpi_info=$(acpi -b | grep -v 'Unknown' | grep -v 'unavailable' | head -n 1 | cut -d ":" -f 2- | sed "s/,//g" | sed "s/Not charging/Discharging/g")
 percentage=$(echo $acpi_info | cut -d " " -f 2)
 case $(echo $acpi_info | cut -d " " -f 1) in
     D*) case $percentage in
