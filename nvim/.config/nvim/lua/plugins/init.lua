@@ -233,6 +233,7 @@ local startup = function()
 
   use 'stevearc/dressing.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use 'smartpde/telescope-recent-files'
   use {
     'nvim-telescope/telescope-frecency.nvim',
     requires = {'tami5/sqlite.lua'}
