@@ -1,6 +1,8 @@
 local utils = require('utils')
 local builtin = require('telescope.builtin')
 
+require('telescope').load_extension('recent_files')
+
 require('telescope').setup{
   defaults = {
     path_display = { 'smart' },
@@ -54,7 +56,9 @@ local my_live_grep = function(opts)
 end
 
 utils.bind_mappings({
-  ['<Space>f'] = builtin.oldfiles,
+  -- ['<Space>f'] = builtin.oldfiles,
+  -- ['gd'] = builtin.lsp_definitions,
+  ['<Space>f'] = require('telescope').extensions.recent_files.pick,
   ['<Space><Space>f'] = builtin.find_files,
   ['<Space><Space>g'] = builtin.git_files,
   ['<Space><Space>h'] = builtin.help_tags,

@@ -8,6 +8,13 @@
         export VISUAL="nvim"
         export STARDICT_DATA_DIR=$XDG_CONFIG_HOME/stardict
         export UE4_ROOT=~/UnrealEngine_4.26
+
+        # /usr/local/lib
+        export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+        # $HOME/.local
+        export CPATH="$HOME/.local/include:$CPATH"
+        export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
     # }}}
 
     # { Rust } {{{
