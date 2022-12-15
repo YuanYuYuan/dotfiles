@@ -82,7 +82,7 @@ local auto_snippets = {
 
   -- main
   snp(
-    "mai ",
+    "ma ",
     fmt(
       [[
         int main() {{
@@ -103,7 +103,9 @@ local auto_snippets = {
 
   -- while
   snp("wh ", fmt("while ({})", {ino(1)}), line_begin_cond),
+
+  -- sort
+  snp("so ", fmt("sort({}.begin(), {}.end());", {ino(1), rep(1)}), line_begin_cond),
 }
 
 return snippets, auto_snippets
-
