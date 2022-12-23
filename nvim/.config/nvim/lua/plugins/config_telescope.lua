@@ -57,7 +57,7 @@ end
 
 utils.bind_mappings({
   -- ['<Space>f'] = builtin.oldfiles,
-  -- ['gd'] = builtin.lsp_definitions,
+  ['gd'] = builtin.lsp_definitions,
   ['<Space>f'] = require('telescope').extensions.recent_files.pick,
   ['<Space><Space>f'] = builtin.find_files,
   ['<Space><Space>g'] = builtin.git_files,
