@@ -22,6 +22,8 @@ local startup = function()
       requires = "neovim/nvim-lspconfig"
   }
 
+  use 'declancm/maximize.nvim'
+
   -- Git
   use 'tpope/vim-fugitive'
   -- use 'lewis6991/gitsigns.nvim'
@@ -286,3 +288,4 @@ require('plugins.config_telescope')
 require('plugins.colorscheme')
 require('plugins.treesitter')
 require('plugins.luasnip')
+require('plugins.general')

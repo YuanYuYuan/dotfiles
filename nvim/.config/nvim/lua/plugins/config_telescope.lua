@@ -58,19 +58,26 @@ end
 utils.bind_mappings({
   -- ['<Space>f'] = builtin.oldfiles,
   ['gd'] = builtin.lsp_definitions,
-  ['<Space>f'] = require('telescope').extensions.recent_files.pick,
-  ['<Space><Space>f'] = builtin.find_files,
-  ['<Space><Space>g'] = builtin.git_files,
-  ['<Space><Space>h'] = builtin.help_tags,
-  ['<Space><Space>c'] = vim.lsp.buf.code_action,
-  ['<Space><Space>b'] = builtin.buffers,
-  ['<Space><Space>q'] = require('telescope').extensions.frecency.frecency,
+  ['<Space>gf'] = require('telescope').extensions.recent_files.pick,
+  -- ['<Space>gf'] = builtin.find_files,
+  ['<Space>gg'] = builtin.git_files,
+  ['<Space>gh'] = builtin.help_tags,
+  ['<Space>gb'] = builtin.buffers,
+  ['<Space>gq'] = require('telescope').extensions.frecency.frecency,
   ['?'] = {
     v = function()
       my_live_grep({default_text = utils.get_visual_selection()})
     end,
     n = my_live_grep
   },
+
+  -- lsp related
+  ['K'] = vim.lsp.buf.hover,
+  ['[e'] = vim.diagnostic.goto_prev,
+  [']e'] = vim.diagnostic.goto_next,
+  ['<Space><Space>e'] = vim.diagnostic.setloclist,
+  ['<Space><Space>c'] = vim.lsp.buf.code_action,
+  ['<Space><Space>f'] = { ['n,v'] = vim.lsp.buf.format },
 })
 
 
