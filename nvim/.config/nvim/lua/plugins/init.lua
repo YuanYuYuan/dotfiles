@@ -209,6 +209,7 @@ local startup = function()
       require('plugins.lsp')
     end
   }
+  use 'mrcjkb/haskell-tools.nvim'
 
   -- cmp / lspkind
   use { 'folke/trouble.nvim',
