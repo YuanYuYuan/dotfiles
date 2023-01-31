@@ -25,21 +25,24 @@ lsp_status.config {
 lsp_status.register_progress()
 
 -- disable inline diagnostic
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
-    update_in_insert = false,
+    update_in_insert = true,
     underline = true
   }
 )
 
-local navic = require('nvim-navic')
+local navic = require("nvim-navic")
+local inlayhints = require("lsp-inlayhints")
+inlayhints.setup()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   navic.attach(client, bufnr)
+  inlayhints.on_attach(client, bufnr)
 
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -142,6 +145,7 @@ local servers = {
     cmd = { "/usr/bin/lemminx" }
   },
   html = {},
+  rust_analyzer = {},
 }
 
 
@@ -155,13 +159,13 @@ for server, config in pairs(servers) do
   lsp_config[server].setup(config)
 end
 
-require('rust-tools').setup{
-  server = {
-    autostart = false,
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
-}
+-- require('rust-tools').setup{
+--   server = {
+--     autostart = false,
+--     on_attach = on_attach,
+--     capabilities = capabilities
+--   }
+-- }
 
 -- set lsp diagnostic sign: neovim 0.6.1
 for sign, config in pairs({

@@ -58,7 +58,7 @@ local startup = function()
         vnoremap \ :Tabularize /
     ]]
   }
-  use 'simrat39/rust-tools.nvim'
+  -- use 'simrat39/rust-tools.nvim'
 
   -- TODO: clean up this mess
   use { 'kyazdani42/nvim-tree.lua',
@@ -204,6 +204,7 @@ local startup = function()
   use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
+  use 'lvimuser/lsp-inlayhints.nvim'
   use { 'nvim-lua/lsp-status.nvim',
     config = function()
       require('plugins.lsp')
