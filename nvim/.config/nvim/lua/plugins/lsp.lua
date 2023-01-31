@@ -142,6 +142,7 @@ local servers = {
     cmd = { "/usr/bin/lemminx" }
   },
   html = {},
+  rust_analyzer = {},
 }
 
 
@@ -155,13 +156,13 @@ for server, config in pairs(servers) do
   lsp_config[server].setup(config)
 end
 
-require('rust-tools').setup{
-  server = {
-    autostart = false,
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
-}
+-- require('rust-tools').setup{
+--   server = {
+--     autostart = false,
+--     on_attach = on_attach,
+--     capabilities = capabilities
+--   }
+-- }
 
 -- set lsp diagnostic sign: neovim 0.6.1
 for sign, config in pairs({
