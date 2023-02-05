@@ -76,8 +76,9 @@ utils.bind_mappings({
   ['[e'] = vim.diagnostic.goto_prev,
   [']e'] = vim.diagnostic.goto_next,
   ['<Space><Space>e'] = vim.diagnostic.setloclist,
+  ['<Space><Space>d'] = builtin.diagnostics,
   ['<Space><Space>c'] = vim.lsp.buf.code_action,
-  ['<Space><Space>f'] = { ['n,v'] = vim.lsp.buf.format },
+  ['<Space><Space>w'] = { ['n,v'] = vim.lsp.buf.format },
 })
 
 
