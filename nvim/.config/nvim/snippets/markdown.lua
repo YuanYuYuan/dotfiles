@@ -11,9 +11,10 @@ local auto_snippets = {
      ```{}
      {}
      ```
-    ]], {ino(1, "bash"), ino(2)}),
+    ]], { ino(1, "bash"), ino(2) }),
     line_begin_cond
   ),
-  snp("img", fmt("![{}]({})", {ino(2, "NAME"), ino(1, "PATH")})),
+  snp("img", fmt("![{}]({})", { ino(2, "NAME"), ino(1, "PATH") })),
+  snp("lnk", fmt("[{}]({})", { ino(1, "NAME"), ino(2, "LINK") })),
 }
 return snippets, auto_snippets

@@ -2,7 +2,7 @@ local ls = require("luasnip")
 local snp = ls.snippet
 local ino = ls.insert_node
 local sno = ls.snippet_node
-local fno = ls.function_node
+-- local fno = ls.function_node
 local tno = ls.text_node
 local cno = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -51,19 +51,19 @@ local auto_snippets = {
     line_begin_cond
   ),
 
-  -- include
-  snp(
-    "in ",
-    {
-      tno("#include <"),
-      ino(1, "vector"),
-      fno(function(arg, _)
-        if arg[1][1] == "" then  return "" end
-        return string.sub(arg[1][1], -1) == ">" and "" or ">"
-      end, 1)
-    },
-    line_begin_cond
-  ),
+  -- -- include
+  -- snp(
+  --   "in ",
+  --   {
+  --     tno("#include <"),
+  --     ino(1, "vector"),
+  --     fno(function(arg, _)
+  --       if arg[1][1] == "" then  return "" end
+  --       return string.sub(arg[1][1], -1) == ">" and "" or ">"
+  --     end, 1)
+  --   },
+  --   line_begin_cond
+  -- ),
 
   -- std namespace
   snp("un ", tno("using namespace std;"), line_begin_cond),
@@ -75,7 +75,7 @@ local auto_snippets = {
       tno("cout << "),
       ino(1, "str"),
       tno(" << "),
-      cno(2, {tno("endl;"), ino(1, "str")})
+      cno(2, { tno("endl;"), ino(1, "str") })
     },
     line_begin_cond
   ),
@@ -96,16 +96,16 @@ local auto_snippets = {
   ),
 
   -- vector<T>
-  snp("v<", fmt("vector<{}>", {ino(1, "int")})),
+  snp("v<", fmt("vector<{}>", { ino(1, "int") })),
 
   -- if
-  snp("if ", fmt("if ({})", {ino(1)})),
+  snp("if ", fmt("if ({})", { ino(1) })),
 
   -- while
-  snp("wh ", fmt("while ({})", {ino(1)}), line_begin_cond),
+  snp("wh ", fmt("while ({})", { ino(1) }), line_begin_cond),
 
   -- sort
-  snp("so ", fmt("sort({}.begin(), {}.end());", {ino(1), rep(1)}), line_begin_cond),
+  snp("so ", fmt("sort({}.begin(), {}.end());", { ino(1), rep(1) }), line_begin_cond),
 }
 
 return snippets, auto_snippets
