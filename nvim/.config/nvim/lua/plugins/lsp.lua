@@ -1,7 +1,7 @@
 local lsp_config = require('lspconfig')
 local lsp_status = require('lsp-status')
 
-require ('lsp_signature').setup()
+require('lsp_signature').setup()
 
 local symbols = require('plugins.symbols')
 
@@ -12,8 +12,8 @@ lsp_status.config {
   select_symbol = function(cursor_pos, symbol)
     if symbol.valueRange then
       local value_range = {
-        ['start'] = {character = 0, line = vim.fn.byte2line(symbol.valueRange[1])},
-        ['end'] = {character = 0, line = vim.fn.byte2line(symbol.valueRange[2])}
+        ['start'] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[1]) },
+        ['end'] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[2]) }
       }
 
       return require('lsp-status/util').in_range(cursor_pos, value_range)
@@ -24,15 +24,14 @@ lsp_status.config {
 
 lsp_status.register_progress()
 
--- disable inline diagnostic
+-- inline diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-    underline = true
-  }
-)
+  virtual_text = true,
+  signs = true,
+  update_in_insert = true,
+  underline = true
+})
 
 local navic = require("nvim-navic")
 local inlayhints = require("lsp-inlayhints")
@@ -43,6 +42,7 @@ inlayhints.setup()
 local on_attach = function(client, bufnr)
   navic.attach(client, bufnr)
   inlayhints.on_attach(client, bufnr)
+  client.config.flags.debounce_text_changes = 500
 
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -57,36 +57,6 @@ local on_attach = function(client, bufnr)
   --   silent=true
   -- }
 
-  -- local mapping = {
-  --   ['K'] = vim.lsp.buf.hover,
-  --   ['[e'] = vim.diagnostic.goto_prev,
-  --   [']e'] = vim.diagnostic.goto_next,
-  --   ['<Space><Space>e'] = vim.diagnostic.setloclist,
-  -- }
-
-
-  -- -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- -- buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  -- buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  -- buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  -- -- buf_set_keymap('n', '<space><space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  -- vim.keymap.set('n', '<space><space>e', vim.diagnostic.setloclist, opts)
-  -- buf_set_keymap('n', '<space>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- -- buf_set_keymap('n', '<space>gd', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  -- buf_set_keymap('n', '<space>gw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- -- vim.cmd('autocmd CursorHold * lua vim.lsp.buf.signature_help()')
-  -- -- vim.cmd('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
-  -- -- vim.cmd('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()')
-  -- -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  -- -- buf_set_keymap('n', '<Space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- -- buf_set_keymap('n', '<Space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
 end
 
 
@@ -108,7 +78,7 @@ local servers = {
   cmake = {},
   texlab = {},
   sumneko_lua = {
-    cmd = {'lua-language-server'};
+    cmd = { 'lua-language-server' };
     settings = {
       Lua = {
         runtime = {
@@ -119,7 +89,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
+          globals = { 'vim' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -135,7 +105,7 @@ local servers = {
     commands = {
       Format = {
         function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
         end
       }
     }
@@ -145,7 +115,19 @@ local servers = {
     cmd = { "/usr/bin/lemminx" }
   },
   html = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        -- checkOnSave = {
+        --   command = "clippy",
+        -- },
+        check = {
+          command = "clippy",
+          allTargets = false,
+        }
+      }
+    }
+  },
 }
 
 
@@ -167,13 +149,15 @@ end
 --   }
 -- }
 
--- set lsp diagnostic sign: neovim 0.6.1
-for sign, config in pairs({
-  DiagnosticSignError = {text = symbols.signs.error, texthl = 'DiagnosticSignError'},
-  DiagnosticSignWarn  = {text = symbols.signs.warn, texthl  = 'DiagnosticSignWarn'},
-  DiagnosticSignInfo  = {text = symbols.signs.info, texthl  = 'DiagnosticSignInfo'},
-  DiagnosticSignHint  = {text = symbols.signs.hint, texthl  = 'DiagnosticSignHint'},
-}) do vim.fn.sign_define(sign, config) end
+for suffix, icon in pairs({
+  Error = symbols.signs.error,
+  Warn  = symbols.signs.warn,
+  Info  = symbols.signs.info,
+  Hint  = symbols.signs.hint,
+}) do
+  local hl = "DiagnosticSign" .. suffix
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 local ht = require('haskell-tools')
 local def_opts = { noremap = true, silent = true, }

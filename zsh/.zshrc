@@ -128,3 +128,9 @@
 # }}}
 
 # vim:foldmethod=marker
+
+[ -f "/home/circle/.ghcup/env" ] && source "/home/circle/.ghcup/env" # ghcup-env
+# pnpm
+export PNPM_HOME="/home/circle/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
