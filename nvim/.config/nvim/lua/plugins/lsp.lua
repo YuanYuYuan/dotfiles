@@ -116,20 +116,24 @@ local servers = {
   },
   html = {},
   rust_analyzer = {
+    -- cmd = { "ra-multiplex" },
     settings = {
-      ["rust-analyzer"] = {
-        -- checkOnSave = {
-        --   command = "clippy",
-        -- },
-        check = {
-          command = "clippy",
-          allTargets = false,
+        ["rust-analyzer"] = {
+            check = {
+                -- command = "clippy",
+                allTargets = false,
+                -- overrideCommand = {
+                --     "cargo",
+                --     "clippy",
+                --     "--message-format=json-diagnostic-rendered-ansi",
+                --     "--fix",
+                --     "--allow-dirty"
+                -- }
+            }
         }
-      }
     }
   },
 }
-
 
 -- from cmp_nvim_lsp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -141,13 +145,33 @@ for server, config in pairs(servers) do
   lsp_config[server].setup(config)
 end
 
--- require('rust-tools').setup{
---   server = {
---     autostart = false,
---     on_attach = on_attach,
---     capabilities = capabilities
---   }
--- }
+local rt = require("rust-tools")
+rt.setup{
+  server = {
+    autostart = true,
+    on_attach = function(_, bufnr)
+      vim.keymap.set("n", "<Space>rk", rt.hover_actions.hover_actions, { buffer = bufnr })
+      vim.keymap.set("n", "<Space>rc", rt.code_action_group.code_action_group, { buffer = bufnr })
+      vim.keymap.set("n", "<Space>re", rt.expand_macro.expand_macro, { buffer = bufnr })
+    end,
+    capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            check = {
+                -- command = "clippy",
+                allTargets = false,
+                -- overrideCommand = {
+                --     "cargo",
+                --     "clippy",
+                --     "--message-format=json-diagnostic-rendered-ansi",
+                --     "--fix",
+                --     "--allow-dirty"
+                -- }
+            }
+        }
+    }
+  }
+}
 
 for suffix, icon in pairs({
   Error = symbols.signs.error,

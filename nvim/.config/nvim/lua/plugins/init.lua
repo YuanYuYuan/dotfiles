@@ -58,7 +58,7 @@ local startup = function()
         vnoremap \ :Tabularize /
     ]]
   }
-  -- use 'simrat39/rust-tools.nvim'
+  use 'simrat39/rust-tools.nvim'
 
   -- TODO: clean up this mess
   use { 'kyazdani42/nvim-tree.lua',

@@ -1,7 +1,9 @@
-local utils = require('utils')
-local builtin = require('telescope.builtin')
+local utils = require("utils")
+local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
 
 require('telescope').load_extension('recent_files')
+
 
 require('telescope').setup{
   defaults = {
@@ -9,10 +11,14 @@ require('telescope').setup{
     -- wrap_results = true,
     mappings = {
       i = {
-        ['<C-j>']   = 'move_selection_next',
+        ['<C-j>']   = actions.preview_scrolling_down,
+        ['<C-k>']   = actions.preview_scrolling_up,
         ['<Tab>']   = 'move_selection_next',
-        ['<C-k>']   = 'move_selection_previous',
         ['<S-Tab>'] = 'move_selection_previous',
+      },
+      n = {
+        ['J']   = actions.preview_scrolling_down,
+        ['K']   = actions.preview_scrolling_up,
       }
     },
     vimgrep_arguments = {
