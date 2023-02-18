@@ -32,7 +32,10 @@
     # Fish-like history search (up arrow) for Zsh. (Must be after completion.)
     zmodule zsh-users/zsh-history-substring-search
 
-    # Intelligent jump
-    zmodule rupa/z
+    # zoxide
+    zmodule kiesman99/zim-zoxide
+
+    # starship prompt
+    zmodule joke/zim-starship
 
 # }}}
