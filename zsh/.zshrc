@@ -5,10 +5,11 @@
     if [ ! -d $ZIM_HOME ]; then
         mkdir -p $ZIM_HOME
     fi
-    if [ ! -f ${ZIM_HOME}/zimfw.zsh ]; then
-        wget https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh -O ${ZIM_HOME}/zimfw.zsh
-        zsh ${ZIM_HOME}/zimfw.zsh install
-        exec zsh
+
+    # Download zimfw plugin manager if missing.
+    if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+        curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+            https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
     fi
 
     # Set editor default keymap to emacs (`-e`) or vi (`-v`)
