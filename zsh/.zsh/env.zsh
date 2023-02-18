@@ -18,26 +18,30 @@
     # }}}
 
     # { Rust } {{{
-        source "$HOME/.cargo/env"
+        [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
         export RUST_LOG=info
         # SCCACHE_IDLE_TIMEOUT=0 sccache --start-server &> /dev/null
     # }}}
 
     # { Ruby } {{{
-        ! command -v ruby &> /dev/null || {
+        command -v ruby &> /dev/null && {
             export GEM_HOME=$(ruby -e 'print Gem.user_dir')
             export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
         }
     # }}}
 
     # { Golang } {{{
-        export GOPATH=$HOME/go
-        export PATH="$GOPATH/bin:$PATH"
+        command -v go &> /dev/null && {
+            export GOPATH=$HOME/go
+            export PATH="$GOPATH/bin:$PATH"
+        }
     # }}}
 
     # { NPM } {{{
-        export PATH="$HOME/.node_modules/bin:$PATH"
-        export npm_config_prefix="$HOME/.node_modules"
+        command -v npm &> /dev/null && {
+            export PATH="$HOME/.node_modules/bin:$PATH"
+            export npm_config_prefix="$HOME/.node_modules"
+        }
     # }}}
 
     # { PATH } {{{

@@ -69,18 +69,6 @@
 
 # }}}
 
-# # { Prompt: Starship } {{{
-#     command -v starship &> /dev/null || {
-#         command -v cargo &> /dev/null || {
-#             echo "Please finish Rustup installation first!"
-#             exit
-#         }
-#         cargo install starship
-#     }
-#     eval "$(starship init zsh)"
-#     export STARSHIP_CONFIG=$HOME/.config/starship/config.toml
-# # }}}
-
 # { ZSH Config } {{{
     export ZSH_HOME="$HOME/.zsh"
     source "${ZSH_HOME}/aliases.zsh"
