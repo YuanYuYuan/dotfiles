@@ -1,8 +1,7 @@
 # Notes
 
-## Prerequisites
+## Installation
 
 ```bash
-wget
-starship
+./install.sh
 ```
