@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-for cmd in zsh git stow curl; do
+cmd_list="zsh git stow curl"
+for cmd in $cmd_list; do
     command -v $cmd &> /dev/null || {
         echo "$cmd not found! Exiting..."
+        echo "For Ubuntu users, try using: sudo apt install -y $cmd_list"
         exit
     }
 done
