@@ -17,6 +17,7 @@
     alias uv='urlview'
     alias v='nvim'
     alias nv='neovide'
+    alias cd='z'
 # }}}
 
 # { Python } {{{
