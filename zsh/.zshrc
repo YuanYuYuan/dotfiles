@@ -1,3 +1,19 @@
+# { Configs } {{{
+    # disable Software Flow Control (XON/XOFF flow control)
+    stty -ixon
+
+    # completion
+    autoload -U compinit && compinit
+
+    # enable completion after =
+    setopt magicequalsubst
+
+    # Starting X11 on console login
+    if [[ ! ${DISPLAY} && ${XDG_VTNR} == 1 ]]; then
+        # exec startx
+    fi
+# }}}
+
 # { ZIM } {{{
     export ZIM_HOME="$HOME/.zim"
 
@@ -100,21 +116,6 @@
 
 # }}}
 
-# { Configs } {{{
-    # disable Software Flow Control (XON/XOFF flow control)
-    stty -ixon
-
-    # completion
-    autoload -U compinit && compinit
-
-    # enable completion after =
-    setopt magicequalsubst
-
-    # Starting X11 on console login
-    if [[ ! ${DISPLAY} && ${XDG_VTNR} == 1 ]]; then
-        # exec startx
-    fi
-# }}}
 
 # vim:foldmethod=marker
 
