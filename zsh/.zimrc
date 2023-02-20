@@ -20,9 +20,6 @@
     # Additional completion definitions for Zsh.
     zmodule zsh-users/zsh-completions
 
-    # Enables and configures smart and extensive tab completion. (Must be After zsh-completions)
-    zmodule completion
-
     # Fish-like autosuggestions for Zsh.
     zmodule zsh-users/zsh-autosuggestions
 
@@ -37,5 +34,8 @@
 
     # starship prompt
     zmodule joke/zim-starship
+
+    # Enables and configures smart and extensive tab completion. (Must be After zsh-completions and zim-zoxide)
+    zmodule completion
 
 # }}}

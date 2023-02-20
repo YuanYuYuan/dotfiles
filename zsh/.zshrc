@@ -2,8 +2,9 @@
     # disable Software Flow Control (XON/XOFF flow control)
     stty -ixon
 
-    # completion
-    autoload -U compinit && compinit
+    # This would be called by zim
+    # # completion
+    # autoload -U compinit && compinit
 
     # enable completion after =
     setopt magicequalsubst
