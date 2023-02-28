@@ -23,8 +23,11 @@ function _G.my_fold_text()
     text = text .. ' … ' .. tail
   end
 
-  if vim.bo.filetype == 'python' then
-    text = string.match(text, '([^:]+)')
+  if vim.bo.filetype == "python" then
+    -- class or function
+    if string.find(text, ":") then
+      text = string.match(text, "(.*:)")
+    end
   end
 
   return text
