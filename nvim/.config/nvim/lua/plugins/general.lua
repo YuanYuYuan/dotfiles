@@ -1,5 +1,5 @@
 -- maximize
-require('maximize').setup({
+require("maximize").setup({
   default_keymaps = true,
 })
-vim.keymap.set('n', '<space>z', "<Cmd>lua require('maximize').toggle()<CR>")
+vim.keymap.set("n", "<space>z", "<Cmd>lua require('maximize').toggle()<CR>")

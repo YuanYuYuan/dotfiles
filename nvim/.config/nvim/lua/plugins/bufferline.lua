@@ -1,29 +1,28 @@
-require'bufferline'.setup{
+require("bufferline").setup({
   options = {
-    diagnostics = 'nvim_lsp',
+    diagnostics = "nvim_lsp",
     -- separator_style = 'slant'
     offsets = {
       {
-        filetype = 'NvimTree',
-        text = 'File Explorer',
-        highlight = 'Directory',
-        text_align = 'left'
-      }
-    }
-  }
-}
+        filetype = "NvimTree",
+        text = "File Explorer",
+        highlight = "Directory",
+        text_align = "left",
+      },
+    },
+  },
+})
 
 local mappings = {
-  ['<C-l>'] = 'BufferLineCycleNext',
-  ['<C-h>'] = 'BufferLineCyclePrev',
-  ['L'] = 'BufferLineMoveNext',
-  ['H'] = 'BufferLineMovePrev',
+  ["<C-l>"] = "BufferLineCycleNext",
+  ["<C-h>"] = "BufferLineCyclePrev",
+  ["L"] = "BufferLineMoveNext",
+  ["H"] = "BufferLineMovePrev",
 }
 
 for key, fcn in pairs(mappings) do
-  vim.keymap.set('n', key, '<cmd>' .. fcn .. '<cr>', {noremap = true, silent = true})
+  vim.keymap.set("n", key, "<cmd>" .. fcn .. "<cr>", { noremap = true, silent = true })
 end
-
 
 -- local cmd = require('bufferline.commands')
 -- for idx = 1, 9 do

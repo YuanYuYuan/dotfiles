@@ -1,36 +1,35 @@
-local lsp_config = require('lspconfig')
-local lsp_status = require('lsp-status')
+local lsp_config = require("lspconfig")
+local lsp_status = require("lsp-status")
 
-require('lsp_signature').setup()
+require("lsp_signature").setup()
 
-local symbols = require('plugins.symbols')
+local symbols = require("plugins.symbols")
 
-lsp_status.config {
+lsp_status.config({
   -- kind_labels = symbols.kind_labels,
   diagnostics = false,
-  status_symbol = '',
+  status_symbol = "",
   select_symbol = function(cursor_pos, symbol)
     if symbol.valueRange then
       local value_range = {
-        ['start'] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[1]) },
-        ['end'] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[2]) }
+        ["start"] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[1]) },
+        ["end"] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[2]) },
       }
 
-      return require('lsp-status/util').in_range(cursor_pos, value_range)
+      return require("lsp-status/util").in_range(cursor_pos, value_range)
     end
   end,
-  current_function = true
-}
+  current_function = true,
+})
 
 lsp_status.register_progress()
 
 -- inline diagnostic
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
   signs = true,
   update_in_insert = true,
-  underline = true
+  underline = true,
 })
 
 local navic = require("nvim-navic")
@@ -56,9 +55,7 @@ local on_attach = function(client, bufnr)
   --   noremap=true,
   --   silent=true
   -- }
-
 end
-
 
 local servers = {
   eslint = {},
@@ -70,32 +67,32 @@ local servers = {
   ccls = {
     init_options = {
       clang = {
-        extraArgs = { "-std=c++17" }
-      }
-    }
+        extraArgs = { "-std=c++17" },
+      },
+    },
   },
   -- hls = {},
   cmake = {},
   texlab = {},
   lua_ls = {
-    cmd = { 'lua-language-server' };
+    cmd = { "lua-language-server" },
     settings = {
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT',
+          version = "LuaJIT",
           -- Setup your lua path
-          path = vim.split(package.path, ';'),
+          path = vim.split(package.path, ";"),
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { 'vim' },
+          globals = { "vim" },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
         },
       },
@@ -106,37 +103,37 @@ local servers = {
       Format = {
         function()
           vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-        end
-      }
-    }
+        end,
+      },
+    },
   },
   julials = {},
   lemminx = {
-    cmd = { "/usr/bin/lemminx" }
+    cmd = { "/usr/bin/lemminx" },
   },
   html = {},
   rust_analyzer = {
     -- cmd = { "ra-multiplex" },
     settings = {
-        ["rust-analyzer"] = {
-            check = {
-                -- command = "clippy",
-                allTargets = false,
-                -- overrideCommand = {
-                --     "cargo",
-                --     "clippy",
-                --     "--message-format=json-diagnostic-rendered-ansi",
-                --     "--fix",
-                --     "--allow-dirty"
-                -- }
-            }
-        }
-    }
+      ["rust-analyzer"] = {
+        check = {
+          -- command = "clippy",
+          allTargets = false,
+          -- overrideCommand = {
+          --     "cargo",
+          --     "clippy",
+          --     "--message-format=json-diagnostic-rendered-ansi",
+          --     "--fix",
+          --     "--allow-dirty"
+          -- }
+        },
+      },
+    },
   },
 }
 
 -- from cmp_nvim_lsp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for server, config in pairs(servers) do
   config.autostart = true
@@ -146,7 +143,7 @@ for server, config in pairs(servers) do
 end
 
 local rt = require("rust-tools")
-rt.setup{
+rt.setup({
   server = {
     autostart = true,
     on_attach = function(_, bufnr)
@@ -156,52 +153,52 @@ rt.setup{
     end,
     capabilities = capabilities,
     settings = {
-        ["rust-analyzer"] = {
-            check = {
-                -- command = "clippy",
-                allTargets = false,
-                -- overrideCommand = {
-                --     "cargo",
-                --     "clippy",
-                --     "--message-format=json-diagnostic-rendered-ansi",
-                --     "--fix",
-                --     "--allow-dirty"
-                -- }
-            }
-        }
-    }
-  }
-}
+      ["rust-analyzer"] = {
+        check = {
+          -- command = "clippy",
+          allTargets = false,
+          -- overrideCommand = {
+          --     "cargo",
+          --     "clippy",
+          --     "--message-format=json-diagnostic-rendered-ansi",
+          --     "--fix",
+          --     "--allow-dirty"
+          -- }
+        },
+      },
+    },
+  },
+})
 
 for suffix, icon in pairs({
   Error = symbols.signs.error,
-  Warn  = symbols.signs.warn,
-  Info  = symbols.signs.info,
-  Hint  = symbols.signs.hint,
+  Warn = symbols.signs.warn,
+  Info = symbols.signs.info,
+  Hint = symbols.signs.hint,
 }) do
   local hl = "DiagnosticSign" .. suffix
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local ht = require('haskell-tools')
-local def_opts = { noremap = true, silent = true, }
-ht.setup {
+local ht = require("haskell-tools")
+local def_opts = { noremap = true, silent = true }
+ht.setup({
   hls = {
     on_attach = function(client, bufnr)
-      local opts = vim.tbl_extend('keep', def_opts, { buffer = bufnr, })
+      local opts = vim.tbl_extend("keep", def_opts, { buffer = bufnr })
       -- haskell-language-server relies heavily on codeLenses,
       -- so auto-refresh (see advanced configuration) is enabled by default
-      vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, opts)
-      vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+      vim.keymap.set("n", "<space>ca", vim.lsp.codelens.run, opts)
+      vim.keymap.set("n", "<space>hs", ht.hoogle.hoogle_signature, opts)
       -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
     end,
   },
-}
+})
 -- Suggested keymaps that do not depend on haskell-language-server
 -- Toggle a GHCi repl for the current package
-vim.keymap.set('n', '<Space>rr', ht.repl.toggle, def_opts)
+vim.keymap.set("n", "<Space>rr", ht.repl.toggle, def_opts)
 -- Toggle a GHCi repl for the current buffer
-vim.keymap.set('n', '<Space>rf', function()
+vim.keymap.set("n", "<Space>rf", function()
   ht.repl.toggle(vim.api.nvim_buf_get_name(0))
 end, def_opts)
-vim.keymap.set('n', '<Space>rq', ht.repl.quit, def_opts)
+vim.keymap.set("n", "<Space>rq", ht.repl.quit, def_opts)

@@ -1,36 +1,36 @@
 -- Color for highlights
 local colors = {
-  yellow = '#f9e79f',
-  cyan = '#008080',
-  darkblue = '#081633',
-  green = '#76d7c4',
-  orange = '#FF8800',
-  violet = '#a9a1e1',
-  magenta = '#c678dd',
-  blue = '#51afef',
-  red = '#ec7063'
+  yellow = "#f9e79f",
+  cyan = "#008080",
+  darkblue = "#081633",
+  green = "#76d7c4",
+  orange = "#FF8800",
+  violet = "#a9a1e1",
+  magenta = "#c678dd",
+  blue = "#51afef",
+  red = "#ec7063",
 }
 
-local symbols = require('plugins.symbols')
+local symbols = require("plugins.symbols")
 
-local navic = require('nvim-navic')
+local navic = require("nvim-navic")
 
-require('lualine').setup {
+require("lualine").setup({
   options = {
     icons_enabled = true,
     -- theme = 'nightfox',
     -- theme = 'material',
-    theme = 'onedark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = "onedark",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = true,
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = { "mode" },
     lualine_b = {
-      'filetype',
+      "filetype",
     },
     lualine_c = {
       -- {
@@ -39,15 +39,17 @@ require('lualine').setup {
       --   path = 0,
       -- },
       {
-        'diagnostics',
-        sources={'nvim_diagnostic'},
-        symbols = symbols.signs
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        symbols = symbols.signs,
       },
       {
         navic.get_location,
-        cond = navic.is_available
+        cond = navic.is_available,
       },
-      function() return require('lsp-status').status() end,
+      function()
+        return require("lsp-status").status()
+      end,
       -- -- FIXME: https://github.com/arkav/lualine-lsp-progress/issues/16
       -- {
       --   'lsp_progress',
@@ -90,31 +92,31 @@ require('lualine').setup {
       -- }
     },
     lualine_x = {
-      'location',
-      'progress',
+      "location",
+      "progress",
     },
     lualine_y = {
       {
-        'diff',
+        "diff",
         symbols = {
-          added = ' ',
-          modified = '柳',
-          removed = ' '
-        }
-      }
+          added = " ",
+          modified = "柳",
+          removed = " ",
+        },
+      },
     },
     lualine_z = {
-      'branch',
-    }
+      "branch",
+    },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   tabline = {},
-  extensions = {'nvim-tree'}
-}
+  extensions = { "nvim-tree" },
+})

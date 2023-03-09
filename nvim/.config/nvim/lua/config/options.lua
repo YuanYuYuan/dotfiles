@@ -4,9 +4,9 @@ local option_collection = {
     history = 10000,
     cursorline = true,
     autochdir = true,
-    mouse = 'a',
+    mouse = "a",
     hidden = true,
-    clipboard = 'unnamedplus',
+    clipboard = "unnamedplus",
     timeoutlen = 400, -- shorter timeout for key combinations
 
     -- line number
@@ -42,7 +42,7 @@ local option_collection = {
   split = {
     splitbelow = true,
     splitright = true,
-  }
+  },
 }
 
 for _, options in pairs(option_collection) do

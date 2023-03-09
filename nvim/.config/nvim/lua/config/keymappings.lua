@@ -1,17 +1,17 @@
-local utils = require('utils')
+local utils = require("utils")
 
 local yank_and_display_path = function()
-  local file_path = vim.fn.expand('%:p')
-  vim.cmd("call setreg('+', '" .. file_path.. "')")
+  local file_path = vim.fn.expand("%:p")
+  vim.cmd("call setreg('+', '" .. file_path .. "')")
   print(file_path)
 end
 
 local switch_brackets = function()
   vim.cmd('noau normal! "vy"')
-  vim.cmd[[
+  vim.cmd([[
     '<,'>s/\[/{/g
     '<,'>s/\]/}/g
-  ]]
+  ]])
   -- local _, srow, scol, _ = unpack(vim.fn.getpos("'<"))
   -- local _, erow, ecol, _ = unpack(vim.fn.getpos("'>"))
   -- if ecol > 999 then
@@ -31,15 +31,10 @@ local switch_brackets = function()
   -- -- print(vim.fn.getreg('v'))
 end
 
-
-vim.keymap.set(
-  {'i', 'n'},
-  '<F8>',
-  '<Cmd>silent !alacritty --working-directory %:p:h&<CR>'
-)
+vim.keymap.set({ "i", "n" }, "<F8>", "<Cmd>silent !alacritty --working-directory %:p:h&<CR>")
 
 -- TODO: rewrite it in lua
-vim.cmd [[
+vim.cmd([[
     " save and (force) exit
     autocmd WinEnter * if &buftype ==# 'quickfix' && winnr('$') == 1 | bdelete | endif
 
@@ -54,10 +49,10 @@ vim.cmd [[
     endfunction
 
     nnoremap <Space>q :call QuitOrBufferDelete()<CR>
-]]
+]])
 
 local write_and_format = function()
-  vim.cmd[[
+  vim.cmd([[
     " remove trailing whitespaces
     %s/\s\+$//e
 
@@ -69,124 +64,124 @@ local write_and_format = function()
 
     " write the buffer
     w
-  ]]
+  ]])
 end
 
 utils.bind_mapping_collection({
   basics = {
     -- view in middle while editing
-    ['zz'] = {i = '<C-o>zz'},
+    ["zz"] = { i = "<C-o>zz" },
 
     -- select last pasted
-    ['gp'] = '`[v`]',
+    ["gp"] = "`[v`]",
 
-    ['va\''] = 'v2i\'',
-    ['va\"'] = 'v2i\"',
+    ["va'"] = "v2i'",
+    ['va"'] = 'v2i"',
 
     -- macros
-    ['T'] = 'qt',
-    ['t'] = '@t',
+    ["T"] = "qt",
+    ["t"] = "@t",
 
     -- jump between changes and then view it in middle
-    ['g;'] = 'g;zz',
-    ['g,'] = 'g,zz',
+    ["g;"] = "g;zz",
+    ["g,"] = "g,zz",
 
     -- jump forward
-    ['<C-m>'] = '<C-i>',
+    ["<C-m>"] = "<C-i>",
 
-    ['vv'] = '<C-v>',
+    ["vv"] = "<C-v>",
 
-    ['gs'] = {v = switch_brackets},
+    ["gs"] = { v = switch_brackets },
 
     -- paste last yank
-    ['<Space>p'] = {['n,v'] = '"0p'},
+    ["<Space>p"] = { ["n,v"] = '"0p' },
 
     -- undo/redo
-    ['U'] = '<C-r>',
-    ['uu'] = {i = '<Esc>u'},
+    ["U"] = "<C-r>",
+    ["uu"] = { i = "<Esc>u" },
 
     -- window
-    ['qw'] = '<C-w>',
+    ["qw"] = "<C-w>",
   },
 
   clipboard = {
-    ['<C-g>'] = yank_and_display_path,
+    ["<C-g>"] = yank_and_display_path,
     -- open the file stored in clipboard
-    ['<Space>o'] = ':e <C-r>+<CR>',
+    ["<Space>o"] = ":e <C-r>+<CR>",
   },
 
   movement_tricks = {
-    ['aa'] = {i = '<C-o>a'},
-    ['B'] = {['n,v'] = '^'},
-    ['E'] = {['n,v'] = 'g_'},
+    ["aa"] = { i = "<C-o>a" },
+    ["B"] = { ["n,v"] = "^" },
+    ["E"] = { ["n,v"] = "g_" },
 
     -- movement in too long lines
-    ['j'] = 'gj',
-    ['k'] = 'gk',
+    ["j"] = "gj",
+    ["k"] = "gk",
   },
 
   window_resize = {
-    ['='] = '<C-w>+',
-    ['-'] = '<C-w>-',
-    ['_'] = '<C-w><',
-    ['+'] = '<C-w>>',
+    ["="] = "<C-w>+",
+    ["-"] = "<C-w>-",
+    ["_"] = "<C-w><",
+    ["+"] = "<C-w>>",
   },
 
-  buffer ={
-    ['Q'] = '<Cmd>q<CR>',
-    ['!'] = '<Cmd>q!<CR>',
-    ['X'] = '<Cmd>x<CR>',
+  buffer = {
+    ["Q"] = "<Cmd>q<CR>",
+    ["!"] = "<Cmd>q!<CR>",
+    ["X"] = "<Cmd>x<CR>",
     -- ['<Space>w'] = '<Cmd>w<CR>',
-    ['<Space>w'] = write_and_format,
-    ['<Space>x'] = '<Cmd>x<CR>',
+    ["<Space>w"] = write_and_format,
+    ["<Space>x"] = "<Cmd>x<CR>",
   },
 
   search_and_replace = {
-    ['n'] = {n = 'nzv', v = '"ny/<C-r>n<CR>zv'},
-    ['N'] = {n = 'Nzv', v = '"ny/<C-r>n<CR>NNzv'},
-    ['C'] = {v = '"ny/<C-r>n<CR>Ncgn'},
-    ['S'] = {v = ':s///gc<Left><Left><Left><Left>'},
+    ["n"] = { n = "nzv", v = '"ny/<C-r>n<CR>zv' },
+    ["N"] = { n = "Nzv", v = '"ny/<C-r>n<CR>NNzv' },
+    ["C"] = { v = '"ny/<C-r>n<CR>Ncgn' },
+    ["S"] = { v = ":s///gc<Left><Left><Left><Left>" },
   },
 
   page_scrolling = {
-    ['<C-k>'] = {n = '<C-u>'},
-    ['<C-j>'] = {n = '<C-d>'},
+    ["<C-k>"] = { n = "<C-u>" },
+    ["<C-j>"] = { n = "<C-d>" },
   },
 
   command_mode = {
     -- NOTE: silent map would cause mapping failed
     -- https://github.com/vim/vim/issues/6832
-    ['<A-b>'] = {c = '<S-Left>'},
-    ['<A-f>'] = {c = '<S-Right>'},
-    ['<C-a>'] = {c = '<Home>'},
+    ["<A-b>"] = { c = "<S-Left>" },
+    ["<A-f>"] = { c = "<S-Right>" },
+    ["<C-a>"] = { c = "<Home>" },
   },
 
   line_dragging = {
     -- vertical
-    ['<C-u>'] = {
-      n = '<Cmd>move .-2<CR>',
-      v = '<Cmd>move \'<-2<CR>gv=gv',
+    ["<C-u>"] = {
+      n = "<Cmd>move .-2<CR>",
+      v = "<Cmd>move '<-2<CR>gv=gv",
       -- i = '<Cmd>move .-2<CR>gi',
     },
-    ['<C-d>'] = {
-      n = '<Cmd>move .+1<CR>',
-      v = '<Cmd>move \'>+1<CR>gv=gv',
+    ["<C-d>"] = {
+      n = "<Cmd>move .+1<CR>",
+      v = "<Cmd>move '>+1<CR>gv=gv",
       -- i = '<Cmd>move .+1<CR>gi',
     },
 
     -- horizontal
-    ['>'] = {n = '>>', v = '>gv'},
-    ['<'] = {n = '<<', v = '<gv'},
+    [">"] = { n = ">>", v = ">gv" },
+    ["<"] = { n = "<<", v = "<gv" },
   },
 
   break_points = {
-    [','] = {i = ',<C-g>u'},
-    ['.'] = {i = '.<C-g>u'},
-    ['!'] = {i = '!<C-g>u'},
-    ['?'] = {i = '?<C-g>u'},
+    [","] = { i = ",<C-g>u" },
+    ["."] = { i = ".<C-g>u" },
+    ["!"] = { i = "!<C-g>u" },
+    ["?"] = { i = "?<C-g>u" },
   },
 
   git = {
-    ['<Space>gb'] = {n = '<Cmd>Git blame<CR>'}
+    ["<Space>gb"] = { n = "<Cmd>Git blame<CR>" },
   },
 })
