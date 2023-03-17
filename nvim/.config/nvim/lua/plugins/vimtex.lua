@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
   " viewer
   let g:vimtex_view_method = 'zathura'
   let g:vimtex_compiler_progname = 'nvr'
@@ -18,4 +18,4 @@ vim.cmd [[
   autocmd BufNewFile,BufRead *.tex so $VIMRUNTIME/syntax/tex.vim
 
   autocmd BufWinLeave *.tex silent! VimtexClean
-]]
+]])

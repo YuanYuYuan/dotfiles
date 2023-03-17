@@ -1,4 +1,4 @@
-require('gitsigns').setup{
+require("gitsigns").setup({
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -9,13 +9,13 @@ require('gitsigns').setup{
     end
 
     -- Navigation
-    map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-    map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+    map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
+    map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
     -- Actions
-    map('n', '<space>gp', gs.preview_hunk)
-    map('n', '<space>gb', gs.blame_line)
-    map('n', '<space>gd', gs.diffthis)
+    map("n", "<space>gp", gs.preview_hunk)
+    map("n", "<space>gb", gs.blame_line)
+    map("n", "<space>gd", gs.diffthis)
     -- map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
     -- map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
     -- map('n', '<leader>hS', gs.stage_buffer)
@@ -26,6 +26,6 @@ require('gitsigns').setup{
     -- map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
-}
+    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+  end,
+})

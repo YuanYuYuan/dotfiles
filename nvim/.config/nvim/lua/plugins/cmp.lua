@@ -1,7 +1,7 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 local symbols = require("plugins.symbols")
-lspkind.init {symbol_map = symbols.kind_labels}
+lspkind.init({ symbol_map = symbols.kind_labels })
 
 vim.opt.completeopt = "menuone,noselect"
 
@@ -15,7 +15,7 @@ local feedkey = function(key, mode)
 end
 
 -- nvim-cmp setup
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
@@ -56,25 +56,20 @@ cmp.setup {
     --   end,
     --   { "i", "s" }
     -- ),
-    ["<Tab>"] = cmp.mapping(
-      function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          fallback()
-        end
-      end,
-      {"i", "s"}
-    ),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
         fallback()
       end
-    end,
-    {"i", "s"}
-    ),
+    end, { "i", "s" }),
   },
   sources = {
     { name = "luasnip" },
@@ -83,12 +78,12 @@ cmp.setup {
       option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
-        end
-      }
+        end,
+      },
     },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "path" },
     { name = "calc" },
   },
-}
+})
