@@ -19,6 +19,21 @@ function _G.my_fold_text()
   local tail = vim.fn.getline(vim.v.foldend):gsub('.*}}}', '')
   tail = tail:gsub('^%s*', '')
   local text = head
+
+  -- Markdown
+  if vim.bo.filetype == "markdown" then
+    -- Section
+    if string.find(text, "#") then
+      return text
+    end
+
+    -- Codeblock
+    if string.find(text, "```") then
+      text = text:gsub("```", "")
+      return "Code " .. text
+    end
+  end
+
   if tail ~= "" then
     text = text .. ' … ' .. tail
   end
@@ -29,6 +44,7 @@ function _G.my_fold_text()
       text = string.match(text, "(.*:)")
     end
   end
+
 
   return text
 end
