@@ -29,11 +29,11 @@
     # Fish-like history search (up arrow) for Zsh. (Must be after completion.)
     zmodule zsh-users/zsh-history-substring-search
 
-    # zoxide
-    zmodule kiesman99/zim-zoxide
-
     # starship prompt
     zmodule joke/zim-starship
+
+    # zoxide
+    zmodule kiesman99/zim-zoxide
 
     # Enables and configures smart and extensive tab completion. (Must be After zsh-completions and zim-zoxide)
     zmodule completion
