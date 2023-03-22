@@ -3,3 +3,6 @@ rustc-wrapper = "/usr/bin/sccache"
 
 [target.armv7-unknown-linux-musleabihf]
 linker = "/opt/muslcc/arm-linux-musleabihf-cross/bin/arm-linux-musleabihf-gcc"
+
+# [registries.crates-io]
+# protocol = "sparse"
