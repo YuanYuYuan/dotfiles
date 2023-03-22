@@ -16,5 +16,14 @@ local auto_snippets = {
   ),
   snp("img", fmt("![{}]({})", { ino(2, "NAME"), ino(1, "PATH") })),
   snp("lnk", fmt("[{}]({})", { ino(1, "NAME"), ino(2, "LINK") })),
+  snp("smm",
+    fmt([[
+      <details>
+      <summary>{}</summary>
+      {}
+      </details>
+    ]], { ino(1, "Click Me"), ino(2) }),
+    line_begin_cond
+  ),
 }
 return snippets, auto_snippets
