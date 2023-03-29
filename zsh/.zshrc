@@ -101,8 +101,8 @@
         setopt HIST_IGNORE_ALL_DUPS
         export HISTFILE="$HOME/.zsh_history"
         export HIST_STAMPS="mm/dd/yyyy"
-        export HISTSIZE=999999999
-        export SAVEHIST=999999999
+        # export HISTSIZE=999999999
+        # export SAVEHIST=999999999
     # }}}
 
     # { Terminal } {{{
