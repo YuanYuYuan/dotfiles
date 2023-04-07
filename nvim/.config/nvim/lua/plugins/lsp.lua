@@ -60,7 +60,7 @@ end
 local servers = {
   eslint = {},
   tsserver = {},
-  sqls = {},
+  sqlls = {},
   gopls = {},
   pyright = {},
   -- clangd = {},
