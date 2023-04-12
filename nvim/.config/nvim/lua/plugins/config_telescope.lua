@@ -54,7 +54,12 @@ local my_live_grep = function(opts)
   if vim.v.shell_error ~= 0 then
     -- if not git then active lsp client root
     -- will get the configured root directory of the first attached lsp. You will have problems if you are using multiple lsps
-    opts.cwd = vim.lsp.get_active_clients()[1].config.root_dir
+    local active_clients = vim.lsp.get_active_clients()
+    if next(active_clients) == nil then
+      opts.cwd = nil
+    else
+      opts.cwd = active_clients[1].config.root_dir
+    end
   end
   require("telescope.builtin").live_grep(opts)
 end
