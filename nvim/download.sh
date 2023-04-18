@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for pkg in wget; do
+for pkg in curl; do
     command -v $pkg &> /dev/null || {
         echo "$pkg not installed!"
         exit
