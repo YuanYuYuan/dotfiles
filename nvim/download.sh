@@ -26,4 +26,4 @@ fi
 # Relocate to the project root
 cd $(git rev-parse --show-toplevel)
 stow nvim
-nvim --headless +PackerInstall +q
+# $HOME/.local/bin/nvim --headless +PackerInstall +PackerCompile +q
