@@ -9,9 +9,7 @@ for cmd in $cmd_list; do
     }
 done
 
-dotfiles_dir=$(git rev-parse --show-toplevel)
 
-cd $dotfiles_dir
 
 # command -v cargo &> /dev/null || {
 #     ./rust/install-rust.sh
@@ -19,13 +17,13 @@ cd $dotfiles_dir
 
 command -v starship &> /dev/null || {
     # cargo install --locked starship
-    curl -sS https://starship.rs/install.sh | sh
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
 }
 
 command -v z &> /dev/null || {
     # cargo install --locked zoxide
-    curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+    curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh -s -- -y
 }
 
+cd $(git rev-parse --show-toplevel)
 stow zsh
-zsh
