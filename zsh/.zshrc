@@ -4,7 +4,7 @@
 
     # This would be called by zim
     # # completion
-    # autoload -U compinit && compinit
+    autoload -U compinit && compinit
 
     # enable completion after =
     setopt magicequalsubst
@@ -118,11 +118,13 @@
 
 # }}}
 
-[ -f "/home/circle/.ghcup/env" ] && source "/home/circle/.ghcup/env" # ghcup-env
-# pnpm
-export PNPM_HOME="/home/circle/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+# Setup ghcup if installed
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
+# Setup pnpm if installed
+command -v pnpm &> /dev/null && {
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    export PATH="$PNPM_HOME:$PATH"
+}
 
 # vim:foldmethod=marker
