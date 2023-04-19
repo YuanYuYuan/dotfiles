@@ -8,7 +8,7 @@ cd dotfiles
 
 # tmux
 stow tmux
-ln -s $HOME/.config/tmux.conf $HOME/.tmux.conf
+ln -s $HOME/.config/tmux/tmux.conf $HOME/.tmux.conf
 
 # zsh
 cd $(git rev-parse --show-toplevel)
