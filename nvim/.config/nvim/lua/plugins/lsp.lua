@@ -112,6 +112,8 @@ local servers = {
     cmd = { "/usr/bin/lemminx" },
   },
   html = {},
+  docker_compose_language_service = {},
+  dockerls = {},
   rust_analyzer = {
     -- cmd = { "ra-multiplex" },
     settings = {
