@@ -1,6 +1,7 @@
 add_newline = true
 
 format = """
+$container\
 $username\
 $hostname\
 $shlvl\
