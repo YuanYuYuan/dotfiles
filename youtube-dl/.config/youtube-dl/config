@@ -4,4 +4,7 @@
 # at most 50 characters in filename
 -o "%(title).50s"
 
+# Download only videos not listed in the archive
+--download-archive downloaded.txt
+
 # vim:ft=bash
