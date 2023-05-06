@@ -65,13 +65,17 @@ return {
   {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
-    dependencies = { "nvim-telescope/telescope.nvim" },
+    dependencies = {
+      { "nvim-telescope/telescope.nvim" },
+      { "loichyan/neo-tree.nvim" },
+    },
     config = function()
       require("dashboard").setup({
         theme = "hyper",
         config = {
           week_header = { enable = true },
           shortcut = {
+            { desc = "Tree", action = "NeoTreeFloatToggle", key = "t" },
             { desc = "Lazy", action = "Lazy", key = "l" },
             { desc = "Find files", action = "Telescope find_files", key = "f" },
             { desc = "Grep string", action = "Telescope live_grep", key = "g" },
@@ -130,7 +134,7 @@ return {
     branch = "fix-obsolete-icons",
     dependencies = { "MunifTanjim/nui.nvim" },
     keys = {
-      { "<Space>1", "<cmd>Neotree float<cr>" },
+      { "<Space>1", "<cmd>NeoTreeFloatToggle<cr>" },
     },
   },
 
@@ -140,12 +144,12 @@ return {
     lazy = false,
     config = function()
       vim.opt.list = true
-      vim.opt.listchars:append("space:⋅")
-      vim.opt.listchars:append("eol:↴")
+      -- vim.opt.listchars:append("space:⋅")
+      -- vim.opt.listchars:append("eol:↴")
       require("indent_blankline").setup({
         space_char_blankline = " ",
         show_current_context = true,
-        show_current_context_start = true,
+        -- show_current_context_start = true,
       })
     end,
   },

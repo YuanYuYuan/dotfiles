@@ -5,6 +5,6 @@ local line_begin_cond = { condition = require("luasnip.extras.conditions.expand"
 
 local snippets = {}
 local auto_snippets = {
-  snp("shb", tno("#!/usr/bin/env bash"), line_begin_cond)
+  snp("shb", tno("#!/usr/bin/env bash"), line_begin_cond),
 }
 return snippets, auto_snippets

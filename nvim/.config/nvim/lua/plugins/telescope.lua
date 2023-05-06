@@ -2,6 +2,11 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "debugloop/telescope-undo.nvim",
+    },
+
     config = function()
       local utils = require("utils")
       local builtin = require("telescope.builtin")
@@ -48,6 +53,8 @@ return {
           },
         },
       })
+
+      require("telescope").load_extension("undo")
 
       -- https://github.com/nvim-telescope/telescope.nvim/issues/592
       local my_live_grep = function(opts)

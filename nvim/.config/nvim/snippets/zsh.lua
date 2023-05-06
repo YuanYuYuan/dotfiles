@@ -6,12 +6,17 @@ local line_begin_cond = { condition = require("luasnip.extras.conditions.expand"
 
 local snippets = {}
 local auto_snippets = {
-  snp("cbl",
-    fmt([[
+  snp(
+    "cbl",
+    fmt(
+      [[
       # { <> } {{{
           <>
       # }}}
-    ]], {ino(1, "NAME"), ino(2)}, {delimiters = "<>"}),
+    ]],
+      { ino(1, "NAME"), ino(2) },
+      { delimiters = "<>" }
+    ),
     line_begin_cond
   ),
 }

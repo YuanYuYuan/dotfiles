@@ -6,23 +6,31 @@ local line_begin_cond = { condition = require("luasnip.extras.conditions.expand"
 
 local snippets = {}
 local auto_snippets = {
-  snp("cbl",
-    fmt([[
+  snp(
+    "cbl",
+    fmt(
+      [[
      ```{}
      {}
      ```
-    ]], { ino(1, "bash"), ino(2) }),
+    ]],
+      { ino(1, "bash"), ino(2) }
+    ),
     line_begin_cond
   ),
   snp("img", fmt("![{}]({})", { ino(2, "NAME"), ino(1, "PATH") })),
   snp("lnk", fmt("[{}]({})", { ino(1, "NAME"), ino(2, "LINK") })),
-  snp("smm",
-    fmt([[
+  snp(
+    "smm",
+    fmt(
+      [[
       <details>
       <summary>{}</summary>
       {}
       </details>
-    ]], { ino(1, "Click Me"), ino(2) }),
+    ]],
+      { ino(1, "Click Me"), ino(2) }
+    ),
     line_begin_cond
   ),
 }

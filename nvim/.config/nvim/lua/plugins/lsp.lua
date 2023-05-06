@@ -73,7 +73,6 @@ local config_lspconfig = function()
   local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
       navic.attach(client, bufnr)
-      print("navic is loaded")
     end
     inlayhints.on_attach(client, bufnr)
     client.config.flags.debounce_text_changes = 500

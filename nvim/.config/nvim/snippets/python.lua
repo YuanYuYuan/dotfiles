@@ -12,14 +12,18 @@ local auto_snippets = {
   snp("imnp", tno("import numpy as np"), line_begin_cond),
   snp("impd", tno("import pandas as pd"), line_begin_cond),
   snp("impt", tno("import matplotlib.pyplot as plt"), line_begin_cond),
-  snp("imap",
-    fmt([[
+  snp(
+    "imap",
+    fmt(
+      [[
       import argparse
       
       parser = argparse.ArgumentParser()
       parser.add_argument({})
       args = parser.parse_args()
-    ]], ino(1)),
+    ]],
+      ino(1)
+    ),
     line_begin_cond
   ),
 }

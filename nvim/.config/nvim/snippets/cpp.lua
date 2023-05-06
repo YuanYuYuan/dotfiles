@@ -25,25 +25,25 @@ local auto_snippets = {
       {
         cond = cno(1, {
           -- for (int i = 0; i < N; i++)
-          sno(2, fmt(
-            "int {} = {}; {} < {}; {}++",
-            {
+          sno(
+            2,
+            fmt("int {} = {}; {} < {}; {}++", {
               ino(1, "i"),
               ino(2, "0"),
               rep(1),
               ino(3, "N"),
               rep(1),
-            }
-          )),
+            })
+          ),
 
           -- for (auto v: vec)
-          sno(1, fmt(
-            "auto {}: {}",
-            {
+          sno(
+            1,
+            fmt("auto {}: {}", {
               ino(1, "v"),
-              ino(2, "vec")
-            }
-          )),
+              ino(2, "vec"),
+            })
+          ),
         }),
         todo = ino(2),
       }
@@ -69,16 +69,12 @@ local auto_snippets = {
   snp("un ", tno("using namespace std;"), line_begin_cond),
 
   -- cout
-  snp(
-    "co ",
-    {
-      tno("cout << "),
-      ino(1, "str"),
-      tno(" << "),
-      cno(2, { tno("endl;"), ino(1, "str") })
-    },
-    line_begin_cond
-  ),
+  snp("co ", {
+    tno("cout << "),
+    ino(1, "str"),
+    tno(" << "),
+    cno(2, { tno("endl;"), ino(1, "str") }),
+  }, line_begin_cond),
 
   -- main
   snp(
