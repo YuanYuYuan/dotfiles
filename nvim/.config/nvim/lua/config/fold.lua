@@ -43,7 +43,6 @@ function _G.my_fold_text()
     end
   end
 
-
   return text
 end
 

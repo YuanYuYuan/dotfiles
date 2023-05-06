@@ -23,10 +23,10 @@ return {
     Field = " ",
   },
   signs = {
-    error = ' ',
-    warn  = ' ',
-    info  = ' ',
-    hint  = '󰌵 '
+    error = " ",
+    warn = " ",
+    info = " ",
+    hint = "󰌵 ",
     -- error = "󰅚 ",
     -- warn = "󰀪 ",
     -- info = " ",
@@ -36,5 +36,5 @@ return {
     added = " ",
     modified = " ",
     removed = " ",
-  }
+  },
 }

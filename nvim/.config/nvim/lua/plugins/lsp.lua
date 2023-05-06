@@ -57,7 +57,7 @@ local servers = {
 }
 
 local config_lspconfig = function()
-  local lspconfig = require "lspconfig"
+  local lspconfig = require("lspconfig")
 
   require("lspconfig.ui.windows").default_options.border = "rounded"
   -- lspconfig.util.default_config =
@@ -72,8 +72,8 @@ local config_lspconfig = function()
 
   local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-        print("navic is loaded")
+      navic.attach(client, bufnr)
+      print("navic is loaded")
     end
     inlayhints.on_attach(client, bufnr)
     client.config.flags.debounce_text_changes = 500
@@ -124,6 +124,15 @@ return {
       { "lvimuser/lsp-inlayhints.nvim" },
       { "SmiteshP/nvim-navic" },
       { "simrat39/rust-tools.nvim" },
+      {
+        -- "simrat39/symbols-outline.nvim",
+        "loichyan/symbols-outline.nvim",
+        branch = "fix-obsolete-icons",
+        config = function()
+          require("symbols-outline").setup()
+          vim.keymap.set({ "n" }, "<Space>2", "<cmd>SymbolsOutline<cr>")
+        end,
+      },
     },
     config = config_lspconfig,
   },

@@ -2,13 +2,10 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope" },
-    dependencies = { "smartpde/telescope-recent-files" },
     config = function()
       local utils = require("utils")
       local builtin = require("telescope.builtin")
       local actions = require("telescope.actions")
-
-      require("telescope").load_extension("recent_files")
 
       require("telescope").setup({
         defaults = {
@@ -56,7 +53,7 @@ return {
       local my_live_grep = function(opts)
         opts = opts or {}
         opts.path_display = { "absolute" }
-        opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+        -- opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
         if vim.v.shell_error ~= 0 then
           -- if not git then active lsp client root
           -- will get the configured root directory of the first attached lsp. You will have problems if you are using multiple lsps
@@ -73,7 +70,7 @@ return {
       utils.bind_mappings({
         -- ['<Space>f'] = builtin.oldfiles,
         ["gd"] = builtin.lsp_definitions,
-        ["<Space>gf"] = require("telescope").extensions.recent_files.pick,
+        ["<Space>go"] = builtin.oldfiles,
         -- ['<Space>gf'] = builtin.find_files,
         ["<Space>gg"] = builtin.git_files,
         ["<Space>gh"] = builtin.help_tags,
@@ -106,6 +103,6 @@ return {
       end
 
       vim.keymap.set({ "c" }, "<C-f>", command_mode_extension)
-    end
-  }
+    end,
+  },
 }

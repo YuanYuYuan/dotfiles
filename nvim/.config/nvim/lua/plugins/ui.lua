@@ -11,9 +11,7 @@ for suffix, icon in pairs({
 end
 
 local config_lualine = function()
-  local navic = require("nvim-navic")
-
-  require("lualine").setup {
+  require("lualine").setup({
     options = {
       icons_enabled = true,
       theme = "onedark",
@@ -34,7 +32,7 @@ local config_lualine = function()
           sources = { "nvim_diagnostic" },
           symbols = symbols.signs,
         },
-        { "navic"},
+        { "navic" },
       },
       lualine_x = {
         "location",
@@ -59,7 +57,7 @@ local config_lualine = function()
       lualine_z = {},
     },
     tabline = {},
-  }
+  })
 end
 
 return {
@@ -69,18 +67,19 @@ return {
     event = "VimEnter",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
-      require("dashboard").setup {
+      require("dashboard").setup({
         theme = "hyper",
         config = {
           week_header = { enable = true },
           shortcut = {
-            { desc = "Plugins",     action = "Lazy",                     key = "l" },
-            { desc = "Find files",  action = "Telescope find_files",     key = "f" },
-            { desc = "Grep string", action = "Telescope live_grep_args", key = "g" },
-            { desc = "Quit",        action = "quitall",                  key = "q" },
+            { desc = "Lazy", action = "Lazy", key = "l" },
+            { desc = "Find files", action = "Telescope find_files", key = "f" },
+            { desc = "Grep string", action = "Telescope live_grep", key = "g" },
+            { desc = "Old files", action = "Telescope oldfiles", key = "o" },
+            { desc = "Quit", action = "quitall", key = "q" },
           },
         },
-      }
+      })
     end,
   },
 
@@ -97,11 +96,11 @@ return {
     "stevearc/dressing.nvim",
     lazy = false,
     config = function()
-      require("dressing").setup {
+      require("dressing").setup({
         input = {
           insert_only = false,
         },
-      }
+      })
     end,
   },
 
@@ -110,27 +109,29 @@ return {
     "akinsho/nvim-bufferline.lua",
     lazy = false,
     config = function()
-      require("bufferline").setup {
+      require("bufferline").setup({
         options = {
           diagnostics = "nvim_lsp",
         },
-      }
+      })
     end,
     keys = {
       { "<C-l>", "<cmd>BufferLineCycleNext<cr>" },
       { "<C-h>", "<cmd>BufferLineCyclePrev<cr>" },
-      { "L",     "<cmd>BufferLineMoveNext<cr>" },
-      { "H",     "<cmd>BufferLineMovePrev<cr>" },
+      { "L", "<cmd>BufferLineMoveNext<cr>" },
+      { "H", "<cmd>BufferLineMovePrev<cr>" },
     },
   },
 
   -- neo-tree
   {
-    "nvim-neo-tree/neo-tree.nvim",
+    -- "nvim-neo-tree/neo-tree.nvim",
+    "loichyan/neo-tree.nvim",
+    branch = "fix-obsolete-icons",
     dependencies = { "MunifTanjim/nui.nvim" },
     keys = {
-      { "<Space>1", "<cmd>Neotree<cr>" }
-    }
+      { "<Space>1", "<cmd>Neotree float<cr>" },
+    },
   },
 
   -- indent-blankline
@@ -139,14 +140,14 @@ return {
     lazy = false,
     config = function()
       vim.opt.list = true
-      vim.opt.listchars:append "space:⋅"
-      vim.opt.listchars:append "eol:↴"
-      require("indent_blankline").setup {
+      vim.opt.listchars:append("space:⋅")
+      vim.opt.listchars:append("eol:↴")
+      require("indent_blankline").setup({
         space_char_blankline = " ",
         show_current_context = true,
         show_current_context_start = true,
-      }
-    end
+      })
+    end,
   },
 
   -- fidget
@@ -154,7 +155,7 @@ return {
     "j-hui/fidget.nvim",
     lazy = false,
     config = function()
-      require("fidget").setup {
+      require("fidget").setup({
         text = {
           spinner = "dots",
         },
@@ -162,7 +163,7 @@ return {
         window = {
           blend = 0,
         },
-      }
-    end
-  }
+      })
+    end,
+  },
 }
