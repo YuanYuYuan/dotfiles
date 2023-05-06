@@ -15,4 +15,6 @@ curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.t
 # Relocate to the project root
 cd $(git rev-parse --show-toplevel)
 stow nvim
-# $HOME/.local/bin/nvim --headless +PackerInstall +PackerCompile +q
+
+# Install packages
+$HOME/.local/bin/nvim --headless "+Lazy! sync" +qa
