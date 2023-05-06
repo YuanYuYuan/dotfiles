@@ -1,3 +1,4 @@
+-- Define basic symobls
 local symbols = require("custom.symbols")
 for suffix, icon in pairs({
   Error = symbols.signs.error,
@@ -9,7 +10,60 @@ for suffix, icon in pairs({
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+local config_lualine = function()
+  local navic = require("nvim-navic")
+
+  require("lualine").setup {
+    options = {
+      icons_enabled = true,
+      theme = "onedark",
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
+      disabled_filetypes = {},
+      always_divide_middle = true,
+      globalstatus = true,
+    },
+    sections = {
+      lualine_a = { "mode" },
+      lualine_b = {
+        "filetype",
+      },
+      lualine_c = {
+        {
+          "diagnostics",
+          sources = { "nvim_diagnostic" },
+          symbols = symbols.signs,
+        },
+        { "navic"},
+      },
+      lualine_x = {
+        "location",
+        "progress",
+      },
+      lualine_y = {
+        {
+          "diff",
+          symbols = symbols.diff,
+        },
+      },
+      lualine_z = {
+        "branch",
+      },
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { "filename" },
+      lualine_x = { "location" },
+      lualine_y = {},
+      lualine_z = {},
+    },
+    tabline = {},
+  }
+end
+
 return {
+  -- dashboard
   {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
@@ -29,73 +83,16 @@ return {
       }
     end,
   },
+
+  -- lualine
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
     event = "VeryLazy",
-    config = function()
-      local symbols = require("custom.symbols")
-      local navic = require("nvim-navic")
-
-      require("lualine").setup({
-        options = {
-          icons_enabled = true,
-          theme = "onedark",
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
-          disabled_filetypes = {},
-          always_divide_middle = true,
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = { "mode" },
-          lualine_b = {
-            "filetype",
-          },
-          lualine_c = {
-            {
-              "diagnostics",
-              sources = { "nvim_diagnostic" },
-              symbols = symbols.signs,
-            },
-            {
-              navic.get_location,
-              cond = navic.is_available,
-            },
-            function()
-              return require("lsp-status").status()
-            end,
-          },
-          lualine_x = {
-            "location",
-            "progress",
-          },
-          lualine_y = {
-            {
-              "diff",
-              symbols = {
-                added = " ",
-                modified = "柳",
-                removed = " ",
-              },
-            },
-          },
-          lualine_z = {
-            "branch",
-          },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = { "filename" },
-          lualine_x = { "location" },
-          lualine_y = {},
-          lualine_z = {},
-        },
-        tabline = {},
-        extensions = { "nvim-tree" },
-      })
-    end,
+    config = config_lualine,
   },
+
+  -- dressing
   {
     "stevearc/dressing.nvim",
     lazy = false,
@@ -107,14 +104,17 @@ return {
       }
     end,
   },
+
+  -- bufferline
   {
     "akinsho/nvim-bufferline.lua",
+    lazy = false,
     config = function()
-      require("bufferline").setup({
+      require("bufferline").setup {
         options = {
           diagnostics = "nvim_lsp",
         },
-      })
+      }
     end,
     keys = {
       { "<C-l>", "<cmd>BufferLineCycleNext<cr>" },
@@ -122,5 +122,47 @@ return {
       { "L",     "<cmd>BufferLineMoveNext<cr>" },
       { "H",     "<cmd>BufferLineMovePrev<cr>" },
     },
+  },
+
+  -- neo-tree
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    keys = {
+      { "<Space>1", "<cmd>Neotree<cr>" }
+    }
+  },
+
+  -- indent-blankline
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    lazy = false,
+    config = function()
+      vim.opt.list = true
+      vim.opt.listchars:append "space:⋅"
+      vim.opt.listchars:append "eol:↴"
+      require("indent_blankline").setup {
+        space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+      }
+    end
+  },
+
+  -- fidget
+  {
+    "j-hui/fidget.nvim",
+    lazy = false,
+    config = function()
+      require("fidget").setup {
+        text = {
+          spinner = "dots",
+        },
+        -- Transparency
+        window = {
+          blend = 0,
+        },
+      }
+    end
   }
 }

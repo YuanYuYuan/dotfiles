@@ -4,13 +4,14 @@ local servers = {
   sqlls = {},
   gopls = {},
   pyright = {},
-  ccls = {
-    init_options = {
-      clang = {
-        extraArgs = { "-std=c++17" },
-      },
-    },
-  },
+  -- ccls = {
+  --   init_options = {
+  --     clang = {
+  --       extraArgs = { "-std=c++17" },
+  --     },
+  --   },
+  -- },
+  clangd = {},
   cmake = {},
   texlab = {},
   jsonls = {
@@ -55,77 +56,75 @@ local servers = {
   rust_analyzer = {},
 }
 
-local setup_lspconfig = function()
+local config_lspconfig = function()
   local lspconfig = require "lspconfig"
 
   require("lspconfig.ui.windows").default_options.border = "rounded"
-  lspconfig.util.default_config =
-      vim.tbl_extend("force", lspconfig.util.default_config, {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-      })
+  -- lspconfig.util.default_config =
+  --     vim.tbl_extend("force", lspconfig.util.default_config, {
+  --       capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  --     })
 
   local navic = require("nvim-navic")
+
   local inlayhints = require("lsp-inlayhints")
   inlayhints.setup()
 
   local on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+        print("navic is loaded")
+    end
     inlayhints.on_attach(client, bufnr)
     client.config.flags.debounce_text_changes = 500
   end
 
+  local capabilities = require("cmp_nvim_lsp").default_capabilities()
   for server, config in pairs(servers) do
     config.autostart = true
     config.on_attach = on_attach
+    config.capabilities = capabilities
     lspconfig[server].setup(config)
   end
 
-  -- require("mason-lspconfig").setup_handlers {
-  --   function(server_name) lspconfig[server_name].setup {} end,
-  -- }
-
-  local lsp_status = require("lsp-status")
-  lsp_status.config({
-    diagnostics = false,
-    status_symbol = "",
-    select_symbol = function(cursor_pos, symbol)
-      if symbol.valueRange then
-        local value_range = {
-          ["start"] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[1]) },
-          ["end"] = { character = 0, line = vim.fn.byte2line(symbol.valueRange[2]) },
-        }
-
-        return require("lsp-status/util").in_range(cursor_pos, value_range)
-      end
-    end,
-    current_function = true,
+  local rt = require("rust-tools")
+  rt.setup({
+    server = {
+      autostart = true,
+      on_attach = function(_, bufnr)
+        vim.keymap.set("n", "<Space>rk", rt.hover_actions.hover_actions, { buffer = bufnr })
+        vim.keymap.set("n", "<Space>rc", rt.code_action_group.code_action_group, { buffer = bufnr })
+        vim.keymap.set("n", "<Space>re", rt.expand_macro.expand_macro, { buffer = bufnr })
+      end,
+      capabilities = capabilities,
+      settings = {
+        ["rust-analyzer"] = {
+          check = {
+            -- command = "clippy",
+            allTargets = false,
+            -- overrideCommand = {
+            --     "cargo",
+            --     "clippy",
+            --     "--message-format=json-diagnostic-rendered-ansi",
+            --     "--fix",
+            --     "--allow-dirty"
+            -- }
+          },
+        },
+      },
+    },
   })
-  lsp_status.register_progress()
 end
 
 return {
   {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = true,
+    "neovim/nvim-lspconfig",
     dependencies = {
-      {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-          require("mason").setup()
-          require("mason-lspconfig").setup()
-        end,
-      },
-      {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-          {"ray-x/lsp_signature.nvim"},
-          {"nvim-lua/lsp-status.nvim"},
-          {"lvimuser/lsp-inlayhints.nvim"},
-          {"SmiteshP/nvim-navic"},
-        },
-        config = setup_lspconfig,
-      },
+      { "ray-x/lsp_signature.nvim" },
+      { "lvimuser/lsp-inlayhints.nvim" },
+      { "SmiteshP/nvim-navic" },
+      { "simrat39/rust-tools.nvim" },
     },
+    config = config_lspconfig,
   },
 }
