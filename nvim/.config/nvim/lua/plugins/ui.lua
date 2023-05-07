@@ -133,6 +133,11 @@ return {
     "loichyan/neo-tree.nvim",
     branch = "fix-obsolete-icons",
     dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("neo-tree").setup({
+        popup_border_style = "rounded",
+      })
+    end,
     keys = {
       { "<Space>1", "<cmd>NeoTreeFloatToggle<cr>" },
     },
