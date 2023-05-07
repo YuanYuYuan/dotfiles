@@ -11,7 +11,7 @@ return {
           "cmake",
           "comment",
           "cpp",
-          "haskell",
+          -- "haskell",
           "html",
           "javascript",
           "json",
