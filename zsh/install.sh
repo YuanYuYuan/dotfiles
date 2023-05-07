@@ -10,14 +10,13 @@ for cmd in $cmd_list; do
 done
 
 
-
 # command -v cargo &> /dev/null || {
 #     ./rust/install-rust.sh
 # }
 
 command -v starship &> /dev/null || {
     # cargo install --locked starship
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
+    curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y
 }
 
 command -v z &> /dev/null || {
