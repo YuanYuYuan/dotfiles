@@ -1,6 +1,10 @@
 return {
   {
     "EdenEast/nightfox.nvim",
+    -- Load it during startup
+    lazy = false,
+    -- Load this before all the other plugins
+    priority = 1000,
     config = function()
       require("nightfox").setup({
         options = {

@@ -13,4 +13,4 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 require("config")
-vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme nightfox")

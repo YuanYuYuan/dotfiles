@@ -57,6 +57,15 @@ local config_lualine = function()
       lualine_z = {},
     },
     tabline = {},
+    extensions = {
+      'quickfix',
+      'neo-tree',
+      'fugitive',
+      'quickfix',
+      'toggleterm',
+      'lazy',
+      'main',
+    },
   })
 end
 

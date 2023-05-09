@@ -14,18 +14,23 @@ return {
 
       require("telescope").setup({
         defaults = {
+          scroll_strategy = "limit",
+          layout_config = {
+            horizontal = { preview_width = 0.6 },
+          },
           path_display = { "smart" },
           -- wrap_results = true,
           mappings = {
             i = {
               ["<C-j>"] = actions.preview_scrolling_down,
               ["<C-k>"] = actions.preview_scrolling_up,
-              ["<Tab>"] = "move_selection_next",
-              ["<S-Tab>"] = "move_selection_previous",
+              ["<Tab>"] = actions.move_selection_next,
+              ["<S-Tab>"] = actions.move_selection_previous,
             },
             n = {
               ["J"] = actions.preview_scrolling_down,
               ["K"] = actions.preview_scrolling_up,
+              ["q"] = actions.close,
             },
           },
           vimgrep_arguments = {
