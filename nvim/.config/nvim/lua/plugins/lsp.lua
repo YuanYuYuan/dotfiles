@@ -123,15 +123,6 @@ return {
       { "lvimuser/lsp-inlayhints.nvim" },
       { "SmiteshP/nvim-navic" },
       { "simrat39/rust-tools.nvim" },
-      {
-        -- "simrat39/symbols-outline.nvim",
-        "loichyan/symbols-outline.nvim",
-        branch = "fix-obsolete-icons",
-        config = function()
-          require("symbols-outline").setup()
-          vim.keymap.set({ "n" }, "<Space>2", "<cmd>SymbolsOutline<cr>")
-        end,
-      },
     },
     config = config_lspconfig,
   },

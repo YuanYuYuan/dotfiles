@@ -58,13 +58,13 @@ local config_lualine = function()
     },
     tabline = {},
     extensions = {
-      'quickfix',
-      'neo-tree',
-      'fugitive',
-      'quickfix',
-      'toggleterm',
-      'lazy',
-      'man',
+      "quickfix",
+      "neo-tree",
+      "fugitive",
+      "quickfix",
+      "toggleterm",
+      "lazy",
+      "man",
     },
   })
 end
@@ -149,9 +149,9 @@ return {
           window = {
             mappings = {
               ["u"] = "navigate_up",
-            }
-          }
-        }
+            },
+          },
+        },
       })
     end,
     keys = {
@@ -189,6 +189,17 @@ return {
           blend = 0,
         },
       })
+    end,
+  },
+
+  -- symbols-outline
+  {
+    -- "simrat39/symbols-outline.nvim",
+    "loichyan/symbols-outline.nvim",
+    branch = "fix-obsolete-icons",
+    config = function()
+      require("symbols-outline").setup()
+      vim.keymap.set({ "n" }, "<Space>2", "<cmd>SymbolsOutline<cr>")
     end,
   },
 }
