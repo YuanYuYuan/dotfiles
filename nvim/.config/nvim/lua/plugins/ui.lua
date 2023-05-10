@@ -64,7 +64,7 @@ local config_lualine = function()
       'quickfix',
       'toggleterm',
       'lazy',
-      'main',
+      'man',
     },
   })
 end
