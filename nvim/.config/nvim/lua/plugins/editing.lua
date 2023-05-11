@@ -19,6 +19,8 @@ return {
           line = "<BS>",
         },
       })
+      local ft = require("Comment.ft")
+      ft.set("json5", "//%s")
     end,
   },
 
