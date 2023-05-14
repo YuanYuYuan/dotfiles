@@ -1,6 +1,10 @@
 return {
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
+  {
+    "ledger/vim-ledger",
+    ft = "ledger",
+  },
   -- {
   --   "folke/which-key.nvim",
   --   config = function()
