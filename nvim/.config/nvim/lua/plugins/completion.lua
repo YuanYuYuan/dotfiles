@@ -7,9 +7,11 @@ return {
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
       { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-cmdline" },
       { "onsails/lspkind.nvim" },
+      { 'saecki/crates.nvim' },
     },
     config = function()
       local cmp = require("cmp")
@@ -33,6 +35,8 @@ return {
               nvim_lua = "[Lua]",
               luasnip = "[Luasnip]",
               path = "[Path]",
+              calc = "[Calc]",
+              crates = "[Crates]",
             })[entry.source.name]
 
             return vim_item
@@ -62,6 +66,11 @@ return {
         },
         sources = {
           { name = "luasnip" },
+          { name = "nvim_lsp" },
+          { name = "nvim_lua" },
+          { name = "path" },
+          { name = "calc" },
+          { name = "crates"},
           {
             name = "buffer",
             option = {
@@ -70,10 +79,6 @@ return {
               end,
             },
           },
-          { name = "nvim_lsp" },
-          { name = "nvim_lua" },
-          { name = "path" },
-          { name = "calc" },
         },
       })
 
