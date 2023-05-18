@@ -57,6 +57,7 @@ return {
     },
   },
 
+  -- mini.align
   {
     "echasnovski/mini.align",
     version = "*",
