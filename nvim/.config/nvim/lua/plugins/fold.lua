@@ -49,6 +49,7 @@ return {
       -- Only depend on `nvim-treesitter/queries/filetype/folds.scm`,
       -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
       require('ufo').setup({
+        open_fold_hl_timeout = 0,
         provider_selector = function(_, _, _)
           return { 'treesitter', 'indent' }
         end,
