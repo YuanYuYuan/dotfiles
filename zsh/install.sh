@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cmd_list="zsh git stow curl"
+cmd_list="zsh git stow curl clang"
 for cmd in $cmd_list; do
     command -v $cmd &> /dev/null || {
         echo "$cmd not found! Exiting..."

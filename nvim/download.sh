@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for pkg in curl; do
+for pkg in curl clang; do
     command -v $pkg &> /dev/null || {
         echo "$pkg not installed!"
         exit
