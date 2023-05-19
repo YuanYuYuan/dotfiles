@@ -53,7 +53,9 @@ local servers = {
       },
     },
   },
-  rust_analyzer = {},
+  rust_analyzer = {
+    cmd = { "ra-multiplex" },
+  },
 }
 
 local config_lspconfig = function()
@@ -86,33 +88,33 @@ local config_lspconfig = function()
     lspconfig[server].setup(config)
   end
 
-  local rt = require("rust-tools")
-  rt.setup({
-    server = {
-      autostart = true,
-      on_attach = function(_, bufnr)
-        vim.keymap.set("n", "<Space>rk", rt.hover_actions.hover_actions, { buffer = bufnr })
-        vim.keymap.set("n", "<Space>rc", rt.code_action_group.code_action_group, { buffer = bufnr })
-        vim.keymap.set("n", "<Space>re", rt.expand_macro.expand_macro, { buffer = bufnr })
-      end,
-      capabilities = capabilities,
-      settings = {
-        ["rust-analyzer"] = {
-          check = {
-            -- command = "clippy",
-            allTargets = false,
-            -- overrideCommand = {
-            --     "cargo",
-            --     "clippy",
-            --     "--message-format=json-diagnostic-rendered-ansi",
-            --     "--fix",
-            --     "--allow-dirty"
-            -- }
-          },
-        },
-      },
-    },
-  })
+  -- local rt = require("rust-tools")
+  -- rt.setup({
+  --   server = {
+  --     autostart = true,
+  --     on_attach = function(_, bufnr)
+  --       vim.keymap.set("n", "<Space>rk", rt.hover_actions.hover_actions, { buffer = bufnr })
+  --       vim.keymap.set("n", "<Space>rc", rt.code_action_group.code_action_group, { buffer = bufnr })
+  --       vim.keymap.set("n", "<Space>re", rt.expand_macro.expand_macro, { buffer = bufnr })
+  --     end,
+  --     capabilities = capabilities,
+  --     settings = {
+  --       ["rust-analyzer"] = {
+  --         check = {
+  --           -- command = "clippy",
+  --           allTargets = false,
+  --           -- overrideCommand = {
+  --           --     "cargo",
+  --           --     "clippy",
+  --           --     "--message-format=json-diagnostic-rendered-ansi",
+  --           --     "--fix",
+  --           --     "--allow-dirty"
+  --           -- }
+  --         },
+  --       },
+  --     },
+  --   },
+  -- })
 end
 
 return {
