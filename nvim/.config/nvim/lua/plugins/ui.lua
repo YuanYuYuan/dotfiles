@@ -126,9 +126,8 @@ return {
         options = {
           diagnostics = "nvim_lsp",
           indicator = {
-            style = 'underline'
-          }
-
+            style = "underline",
+          },
         },
       })
     end,

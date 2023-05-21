@@ -11,7 +11,7 @@ return {
       { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-cmdline" },
       { "onsails/lspkind.nvim" },
-      { 'saecki/crates.nvim' },
+      { "saecki/crates.nvim" },
     },
     config = function()
       local cmp = require("cmp")
@@ -70,7 +70,7 @@ return {
           { name = "nvim_lua" },
           { name = "path" },
           { name = "calc" },
-          { name = "crates"},
+          { name = "crates" },
           {
             name = "buffer",
             option = {
