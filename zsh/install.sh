@@ -16,6 +16,7 @@ done
 
 command -v starship &> /dev/null || {
     # cargo install --locked starship
+    mkdir -p ~/.local/bin
     curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y
 }
 
