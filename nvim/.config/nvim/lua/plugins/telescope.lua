@@ -82,6 +82,8 @@ return {
       utils.bind_mappings({
         -- ['<Space>f'] = builtin.oldfiles,
         ["gd"] = builtin.lsp_definitions,
+        ["gi"] = builtin.lsp_implementations,
+        ["gr"] = builtin.lsp_references,
         ["<Space>go"] = builtin.oldfiles,
         -- ['<Space>gf'] = builtin.find_files,
         ["<Space>gg"] = builtin.git_files,
