@@ -151,7 +151,8 @@ return {
         filesystem = {
           window = {
             mappings = {
-              ["u"] = "navigate_up",
+              ["h"] = "navigate_up",
+              ["l"] = "open",
             },
           },
         },
