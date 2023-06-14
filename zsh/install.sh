@@ -9,7 +9,6 @@ for cmd in $cmd_list; do
     }
 done
 
-
 # command -v cargo &> /dev/null || {
 #     ./rust/install-rust.sh
 # }
