@@ -48,7 +48,11 @@ return {
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-c>"] = cmp.mapping.close(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+          -- https://github.com/hrsh7th/cmp-cmdline/issues/42
+          -- ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true })),
+
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -87,7 +91,7 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = "path" },
-        }, {
+      }, {
           {
             name = "cmdline",
             option = {

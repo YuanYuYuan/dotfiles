@@ -56,6 +56,7 @@ local servers = {
   rust_analyzer = {
     cmd = { "ra-multiplex" },
   },
+  kotlin_language_server = {},
 }
 
 local config_lspconfig = function()
