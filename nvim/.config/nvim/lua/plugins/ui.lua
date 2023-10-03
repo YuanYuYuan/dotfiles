@@ -76,7 +76,7 @@ return {
     event = "VimEnter",
     dependencies = {
       { "nvim-telescope/telescope.nvim" },
-      { "loichyan/neo-tree.nvim" },
+      { "nvim-neo-tree/neo-tree.nvim" },
     },
     config = function()
       require("dashboard").setup({
@@ -141,25 +141,61 @@ return {
 
   -- neo-tree
   {
-    -- "nvim-neo-tree/neo-tree.nvim",
-    "loichyan/neo-tree.nvim",
-    branch = "fix-obsolete-icons",
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     dependencies = { "MunifTanjim/nui.nvim" },
     config = function()
       require("neo-tree").setup({
+        -- global config
         popup_border_style = "rounded",
+        window = {
+          mappings = {
+            ["l"] = "open",
+            ["<Tab>"] = "next_source",
+            ["<S-Tab>"] = "prev_source",
+          },
+        },
+
+        -- filesystem source config
         filesystem = {
+          bind_to_cwd = false,
+          filtered_items = {
+            hide_dotfiles = false,
+          },
           window = {
             mappings = {
               ["h"] = "navigate_up",
-              ["l"] = "open",
             },
           },
         },
+
+        -- buffers source config
+        buffers = {
+          bind_to_cwd = false,
+          window = {
+            mappings = {
+              ["h"] = "navigate_up",
+            },
+          },
+        },
+
+        -- auto close on open file
+        event_handlers = {
+          {
+            event = "file_opened",
+            handler = function(file_path)
+              -- auto close
+              -- vimc.cmd("Neotree close")
+              -- OR
+              require("neo-tree.command").execute({ action = "close" })
+            end
+          },
+        }
+
       })
     end,
     keys = {
-      { "<Space>1", "<cmd>NeoTreeFloatToggle<cr>" },
+      { "<Space>1", "<cmd>Neotree last bottom toggle<cr>" },
     },
   },
 
@@ -167,13 +203,14 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     lazy = false,
+    main = "ibl",
     config = function()
       vim.opt.list = true
       -- vim.opt.listchars:append("space:⋅")
       -- vim.opt.listchars:append("eol:↴")
-      require("indent_blankline").setup({
-        space_char_blankline = " ",
-        show_current_context = true,
+      require("ibl").setup({
+        -- space_char_blankline = " ",
+        -- show_current_context = true,
         -- show_current_context_start = true,
       })
     end,
