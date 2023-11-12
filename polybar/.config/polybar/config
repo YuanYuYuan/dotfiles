@@ -222,6 +222,7 @@ label-empty-padding = 3
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
+use-actual-brightness = false
 format = <ramp> <label>
 label = %percentage:2%%
 ramp-0 = 󰃞
