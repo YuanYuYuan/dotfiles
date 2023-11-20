@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd("Filetype", {
     "json5",
     "html",
     "tex",
+    "markdown",
   },
   group = augroup("ShorterSpaceAuGroup"),
   callback = function()
