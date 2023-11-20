@@ -30,6 +30,8 @@ local option_collection = {
 
     -- conceal
     conceallevel = 2,
+
+    shada = "!,'1000,<50,s10,h"
   },
 
   tab_and_space = {
