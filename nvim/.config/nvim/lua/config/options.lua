@@ -39,6 +39,16 @@ local option_collection = {
     shiftwidth = 4, -- < and > will shift 4 spaces
   },
 
+  indent = {
+    list = true,
+    listchars = {
+      tab = "⇥ ",
+      leadmultispace = "┊ ",
+      trail = "␣",
+      nbsp = "⍽",
+    }
+  },
+
   split = {
     splitbelow = true,
     splitright = true,

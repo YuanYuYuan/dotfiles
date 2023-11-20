@@ -199,23 +199,6 @@ return {
     },
   },
 
-  -- indent-blankline
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    lazy = false,
-    main = "ibl",
-    config = function()
-      vim.opt.list = true
-      -- vim.opt.listchars:append("space:⋅")
-      -- vim.opt.listchars:append("eol:↴")
-      require("ibl").setup({
-        -- space_char_blankline = " ",
-        -- show_current_context = true,
-        -- show_current_context_start = true,
-      })
-    end,
-  },
-
   -- fidget
   {
     "j-hui/fidget.nvim",
