@@ -20,6 +20,7 @@ require("lazy").setup("plugins", {
 -- require("config")
 require("config.options")
 require("config.keymappings")
+require("config.indent")
 -- require("config.fold")
 if vim.fn.exists("g:neovide") > 0 then
   require("config.neovide")
