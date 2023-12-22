@@ -16,7 +16,7 @@
     alias tm='tmux attach-session || tmux'
     alias uv='urlview'
     alias v='nvim'
-    alias nv='neovide'
+    alias nv='$HOME/.config/nvim/scripts/open-in-neovide.sh'
     # alias cd='z'
 # }}}
 
