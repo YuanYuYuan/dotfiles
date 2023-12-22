@@ -23,6 +23,10 @@
         # SCCACHE_IDLE_TIMEOUT=0 sccache --start-server &> /dev/null
     # }}}
 
+    # { Ripgrep } {{{
+        export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+    # }}}
+
     # { Ruby } {{{
         command -v ruby &> /dev/null && {
             export GEM_HOME=$(ruby -e 'print Gem.user_dir')
