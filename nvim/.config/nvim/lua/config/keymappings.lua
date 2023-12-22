@@ -31,6 +31,40 @@ local switch_brackets = function()
   -- -- print(vim.fn.getreg('v'))
 end
 
+-- Ref: https://github.com/chrishrb/gx.nvim
+local open_in_neovide = function()
+  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+  local line = vim.api.nvim_get_current_line()
+
+  local left = 1
+  for i = 1, col-1 do
+    local j = col - i + 1
+    local c = string.sub(line, j, j)
+    if string.match(c, "%s") ~= nil then
+      left = j + 1
+      break
+    end
+  end
+
+  local right = string.len(line)
+  for i = col+1, string.len(line) do
+    local c = string.sub(line, i, i)
+    if string.match(c, "%s") ~= nil then
+      right = i - 1
+      break
+    end
+  end
+
+  local args = {vim.fn.stdpath("config") .. "/scripts/open-in-neovide.sh"}
+  for w in string.sub(line, left, right):gmatch("([^:]+)") do
+    table.insert(args, w)
+  end
+
+  vim.fn.system({unpack(args)})
+end
+
+
 vim.keymap.set({ "i", "n" }, "<F8>", "<Cmd>silent !alacritty --working-directory %:p:h&<CR>")
 
 -- TODO: rewrite it in lua
@@ -184,4 +218,9 @@ utils.bind_mapping_collection({
   git = {
     ["<Space>gb"] = { n = "<Cmd>Git blame<CR>" },
   },
+
+  open_in_neovide = {
+    ["gn"] = open_in_neovide,
+  },
+
 })
