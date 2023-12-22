@@ -1,5 +1,14 @@
 return {
-  { "tpope/vim-fugitive" },
+  {
+    "tpope/vim-fugitive" ,
+    config = function()
+      require("utils").bind_mappings({
+        ["<Space>gv"] = "<Cmd>Gvdiffsplit<CR>",
+        ["<Space>gb"] = "<Cmd>G Blame<CR>",
+      })
+    end
+
+  },
   {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
