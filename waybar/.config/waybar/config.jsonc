@@ -5,12 +5,11 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "sway/mode", "hyprland/scratchpad"],
+    "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "battery", "battery#bat2", "clock", "tray", "custom/notification"],
     // Modules configuration
     "hyprland/workspaces": {
-        "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
         "format": "{name}: {icon}",
@@ -23,7 +22,11 @@
             "urgent": "",
             "focused": "",
             "default": ""
-        }
+        },
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "on-click": "activate"
+
     },
     "hyprland/scratchpad": {
         "format": "{icon} {count}",
@@ -118,5 +121,26 @@
         "on-click-right": "swaync-client -d -sw",
         "escape": true
     },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "disk",
+            "cpu",
+            "memory"
+        ]
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 14,
+        "icon-theme": "Numix-Circle",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        // "ignore-list": [
+        //     "Alacritty"
+        // ],
+        "app_ids-mapping": {
+            "firefoxdeveloperedition": "firefox-developer-edition"
+        }
+    }
 }
-// vim:ft=config
