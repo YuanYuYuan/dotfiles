@@ -6,6 +6,8 @@ td() { termdown $1 && notify-send "Time's up!!!" && mpv ~/Music/apple_ring.mp3 -
 
 xrp() { realpath $1 | xclip -selection clipboard -in -rmlastnl }
 
+wrp() { realpath $1 | wl-copy --trim-newline }
+
 # xp() { xclip -selection clipboard -out -target image/png > ${1}.png }
 xp() { cp /tmp/screenshot.png ${1}.png }
 
