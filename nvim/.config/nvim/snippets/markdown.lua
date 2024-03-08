@@ -18,6 +18,7 @@ local auto_snippets = {
     ),
     line_begin_cond
   ),
+  snp("ilc", fmt("`{}`", { ino(1, "CODE") })),
   snp("img", fmt("![{}]({})", { ino(2, "NAME"), ino(1, "PATH") })),
   snp("lnk", fmt("[{}]({})", { ino(1, "NAME"), ino(2, "LINK") })),
   snp(
