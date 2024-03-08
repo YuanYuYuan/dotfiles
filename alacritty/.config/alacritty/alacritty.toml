@@ -1,0 +1,30 @@
+[cursor]
+blink_interval = 750
+thickness = 0.2
+
+[cursor.style]
+blinking = "On"
+shape = "Beam"
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "FiraCode Nerd Font"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+
+[font.normal]
+family = "FiraCode Nerd Font"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control"
+
+[window]
+opacity = 0.8
