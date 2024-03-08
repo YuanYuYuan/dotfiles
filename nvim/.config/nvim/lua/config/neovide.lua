@@ -5,8 +5,8 @@
 local font_size = 10
 local font_list = {
   "FiraCode Nerd Font",
-  "Font Awesome 5 Free",
-  "DejaVuSans",
+  "Font Awesome 6 Free",
+  "DejaVu Sans",
   "Noto Color Emoji",
 }
 
@@ -36,6 +36,6 @@ vim.keymap.set("n", "<C-=>", change_size(1))
 vim.keymap.set("n", "<C-->", change_size(-1))
 vim.keymap.set("c", "<C-v>", "<C-r>+")
 
--- transparency
-vim.opt["background"] = "dark"
-vim.g.neovide_transparency = 0.7
+-- -- transparency
+-- vim.opt["background"] = "dark"
+vim.g.neovide_transparency = 0.8
