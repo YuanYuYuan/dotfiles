@@ -20,6 +20,7 @@
     # { Rust } {{{
         [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
         export RUST_LOG=info
+        export CARGO_PROFILE_DEV_DEBUG=false
         # SCCACHE_IDLE_TIMEOUT=0 sccache --start-server &> /dev/null
     # }}}
 
