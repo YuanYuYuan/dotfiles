@@ -12,10 +12,12 @@ return {
           "comment",
           "cpp",
           -- "haskell",
+          "hyprlang",
           "html",
           "javascript",
           "json",
           "json5",
+          "just",
           "lua",
           "markdown",
           "markdown_inline",
@@ -30,6 +32,13 @@ return {
         },
         indent = { enable = true },
         autotag = { enable = true },
+      })
+
+      vim.filetype.add({
+        pattern = {
+          [".*/hypr/.*%.conf"] = "hyprlang",
+          [".*/.*justfile"] = "just",
+        },
       })
     end,
   },
