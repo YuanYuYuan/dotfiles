@@ -55,7 +55,6 @@ return {
         end,
         fold_virt_text_handler = handler,
       })
-      --
     end,
   },
 }
