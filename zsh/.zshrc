@@ -127,4 +127,7 @@ command -v pnpm &> /dev/null && {
     export PATH="$PNPM_HOME:$PATH"
 }
 
+# { starship } {{{
+    eval "$(starship init zsh)"
+# }}}
 # vim:foldmethod=marker
