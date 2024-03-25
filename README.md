@@ -2,7 +2,7 @@
 
 
 ```bash
-git clone https://github.com/yuanyuyan/dotfiles
+git clone https://github.com/yuanyuyuan/dotfiles
 cd dotfiles
 ./setup-for-non-root.sh
 export PATH="~/.local/bin:$PATH"
