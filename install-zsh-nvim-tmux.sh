@@ -4,7 +4,7 @@ cd $HOME
 
 [ "$EUID" == 0 ] && {
     apt update -y
-    apt install -y stow git zsh tmux curl gcc g++
+    apt install -y stow git zsh tmux curl gcc g++ clang
 }
 
 git clone https://github.com/YuanYuYuan/dotfiles
