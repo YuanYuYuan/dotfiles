@@ -35,7 +35,8 @@ def open_in_neovide [path: string] {
     }
     if ($path | str contains ":") {
         let data = $path | split column ":" | rename file_path line_number | into record
-        nvim --server $pipe --remote-send $":e ($data.file_path) | ($data.line_number) <CR>zz"
+        let file_path = realpath $data.file_path
+        nvim --server $pipe --remote-send $":e ($file_path) | ($data.line_number) <CR>zz"
     } else {
         nvim --server $pipe --remote $path
     }
