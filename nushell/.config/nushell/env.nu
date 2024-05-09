@@ -104,10 +104,15 @@ $env.PATH = ($env.PATH | uniq)
 
 
 load-env {
-    "RUST_LOG": "info",
+    "ANDROID_HOME": $"($env.HOME)/Android/Sdk"
     "CARGO_PROFILE_DEV_DEBUG": false,
-    "RIPGREP_CONFIG_PATH": "~/.config/ripgrep/config",
-    "ANDROID_HOME": "~/Android/Sdk"
+    "EDITOR": "/usr/bin/nvim",
+    "RIPGREP_CONFIG_PATH": $"($env.HOME)/.config/ripgrep/config",
+    "RUST_LOG": "info",
+    "STARDICT_DATA_DIR": $"($env.HOME)/.config/stardict",
+    "VISUAL": "nvim",
+    # valgrind issue
+    "DEBUGINFOD_URLS": "https://debuginfod.archlinux.org/",
 }
 
 # To load from a custom file you can use:

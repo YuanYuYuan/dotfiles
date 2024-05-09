@@ -15,7 +15,7 @@ def --env ranger_with_cd [] {
 
 def --env cd_mkdir [p: string] {
     if not ($p | path exists) {
-        mkdir $p
+        mkdir ($p | path expand)
     }
     cd $p
 }
@@ -42,6 +42,10 @@ def open_in_neovide [path: string] {
     }
 }
 
+def copy_real_path [file_path: string] {
+    realpath $file_path | wl-copy -n
+}
+
 alias cdm = cd_mkdir
 alias nv = open_in_neovide
 alias p = python
@@ -50,6 +54,9 @@ alias s = sdcv
 alias tm = tmux attach
 alias v = nvim
 alias z = zoxide
+alias g = git status .
+alias wrp = copy_real_path
+alias wp = wl-paste -n
 
 # alias nv = $'($HOME)/.config/nvim/scripts/open-in-neovide.sh'
 # alias rng = $'ranger --choosedir=($HOME)/.rangerdir; LASTDIR=`cat ($HOME)/.rangerdir`; cd "($LASTDIR)"'
