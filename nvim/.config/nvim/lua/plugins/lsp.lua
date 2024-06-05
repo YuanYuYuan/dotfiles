@@ -50,6 +50,7 @@ local servers = {
             [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
         },
+        hint = { enable = true },
       },
     },
   },
@@ -88,6 +89,12 @@ local servers = {
   kotlin_language_server = {},
 }
 
+if vim.lsp.inlay_hint then
+  vim.keymap.set("n", "<Space><Space>i", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, { desc = "Toggle inlay hints" })
+end
+
 local config_lspconfig = function()
   local lspconfig = require("lspconfig")
 
@@ -97,24 +104,13 @@ local config_lspconfig = function()
   --       capabilities = require("cmp_nvim_lsp").default_capabilities(),
   --     })
 
-  local navic = require("nvim-navic")
-
-  local inlayhints = require("lsp-inlayhints")
-  inlayhints.setup()
-
-  local on_attach = function(client, bufnr)
-    if client.server_capabilities.documentSymbolProvider then
-      navic.attach(client, bufnr)
-    end
-    inlayhints.on_attach(client, bufnr)
-    client.config.flags.debounce_text_changes = 500
-  end
-
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
   for server, config in pairs(servers) do
     config.autostart = true
-    config.on_attach = on_attach
     config.capabilities = capabilities
+    config.on_attach = function(_client, _bufnr)
+      vim.lsp.inlay_hint.enable()
+    end
     lspconfig[server].setup(config)
   end
 
@@ -152,8 +148,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "ray-x/lsp_signature.nvim" },
-      { "lvimuser/lsp-inlayhints.nvim" },
-      { "SmiteshP/nvim-navic" },
       { "simrat39/rust-tools.nvim" },
     },
     config = config_lspconfig,
