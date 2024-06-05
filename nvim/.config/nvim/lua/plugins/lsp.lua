@@ -54,7 +54,36 @@ local servers = {
     },
   },
   rust_analyzer = {
-    cmd = { "ra-multiplex" },
+    cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
+    init_options = {
+      lspMux = {
+        version = "1",
+        method = "connect",
+        server = "rust-analyzer",
+      },
+    },
+    settings = {
+      ["rust-analyzer"] = {
+        -- checkOnSave = false,
+        check = {
+          allTargets = false,
+          -- overrideCommand = {
+          --     "cargo",
+          --     "check",
+          -- }
+          -- overrideCommand = {
+          --     "cargo",
+          --     "clippy",
+          --     "--message-format=json",
+          --     "--",
+          --     "-D warnings",
+          -- }
+        },
+        cargo = {
+          features = "all",
+        },
+      },
+    },
   },
   kotlin_language_server = {},
 }
