@@ -2,6 +2,9 @@ return {
   -- pwntester/octo.nvim
   {
     "pwntester/octo.nvim",
+    enabled = function()
+      return vim.fn.executable('gh') == 1
+    end,
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
