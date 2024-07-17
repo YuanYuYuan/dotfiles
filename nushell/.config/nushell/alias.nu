@@ -7,17 +7,21 @@ module ls_mod {
 }
 use ls_mod *
 
-def --env ranger_with_cd [] {
-    let last_dir = $"($env.HOME)/.cache/rangerdir"
-    ranger --choosedir $last_dir
-    cd (cat $last_dir)
-}
-
-def --env cd_mkdir [p: string] {
+def --env cdm [p: string] {
     if not ($p | path exists) {
         mkdir ($p | path expand)
     }
     cd $p
+}
+
+def --env yy [...args] {
+    let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+    yazi ...$args --cwd-file $tmp
+    let cwd = (open $tmp)
+    if $cwd != "" and $cwd != $env.PWD {
+        cd $cwd
+    }
+    rm -fp $tmp
 }
 
 def open_in_neovide [path: string] {
@@ -42,21 +46,17 @@ def open_in_neovide [path: string] {
     }
 }
 
-def copy_real_path [file_path: string] {
+# copy the real path of the given file
+def wrp [file_path: string] {
     realpath $file_path | wl-copy -n
 }
 
-alias cdm = cd_mkdir
 alias nv = open_in_neovide
 alias p = python
-alias rng = ranger_with_cd
 alias s = sdcv
 alias tm = tmux attach
 alias v = nvim
 alias z = zoxide
 alias g = git status .
-alias wrp = copy_real_path
+alias o = xdg-open
 alias wp = wl-paste -n
-
-# alias nv = $'($HOME)/.config/nvim/scripts/open-in-neovide.sh'
-# alias rng = $'ranger --choosedir=($HOME)/.rangerdir; LASTDIR=`cat ($HOME)/.rangerdir`; cd "($LASTDIR)"'
