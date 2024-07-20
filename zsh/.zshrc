@@ -4,7 +4,7 @@
 
     # This would be called by zim
     # # completion
-    autoload -U compinit && compinit
+    # autoload -U compinit && compinit
 
     # enable completion after =
     setopt magicequalsubst
