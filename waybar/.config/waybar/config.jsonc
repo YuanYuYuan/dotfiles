@@ -6,8 +6,8 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces",
-        "wlr/taskbar"
+        "hyprland/workspaces"
+        // "wlr/taskbar"
     ],
     "modules-center": [
         // "hyprland/window",
