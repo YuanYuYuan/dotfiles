@@ -27,16 +27,17 @@ def --env yy [...args] {
 def open_in_neovide [path: string] {
     let pipe = $'($env.HOME)/.cache/nvim/server.pipe'
     if not ($pipe | path exists) {
-        neovide -- --listen $pipe
+        neovide --fork -- --listen $pipe
 
         # dashboard can take some time to start
         sleep 1sec
 
         while not ($pipe | path exists) {
             sleep 0.1sec
-            echo "Waiting for pipe established"
+            print "Waiting for pipe established"
         }
     }
+
     if ($path | str contains ":") {
         let data = $path | split column ":" | rename file_path line_number | into record
         let file_path = realpath $data.file_path
