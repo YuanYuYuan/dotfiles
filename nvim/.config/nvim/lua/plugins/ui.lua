@@ -11,6 +11,7 @@ for suffix, icon in pairs({
 end
 
 local config_lualine = function()
+  vim.opt.laststatus = 3
   require("lualine").setup({
     options = {
       icons_enabled = true,
@@ -24,7 +25,14 @@ local config_lualine = function()
     sections = {
       lualine_a = { "mode" },
       lualine_b = {
-        "filetype",
+        {
+          "filetype",
+          icon_only = true,
+        },
+        {
+          "filename",
+          path = 4,
+        },
       },
       lualine_c = {
         {
@@ -32,7 +40,7 @@ local config_lualine = function()
           sources = { "nvim_diagnostic" },
           symbols = symbols.signs,
         },
-        { "navic" },
+        "aerial",
       },
       lualine_x = {
         "location",
@@ -70,6 +78,14 @@ local config_lualine = function()
 end
 
 return {
+  -- nvim-pqf
+  {
+    "yorickpeterse/nvim-pqf",
+    config = function()
+      require("pqf").setup()
+    end,
+  },
+
   -- dashboard
   {
     "glepnir/dashboard-nvim",
@@ -100,7 +116,9 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
-    event = "VeryLazy",
+    lazy = false,
+    -- Comment out due to the gloabl status issue
+    -- event = "VeryLazy",
     config = config_lualine,
   },
 
@@ -188,10 +206,9 @@ return {
               -- vimc.cmd("Neotree close")
               -- OR
               require("neo-tree.command").execute({ action = "close" })
-            end
+            end,
           },
-        }
-
+        },
       })
     end,
     keys = {
@@ -202,29 +219,90 @@ return {
   -- fidget
   {
     "j-hui/fidget.nvim",
-    lazy = false,
-    tag = "legacy",
+    -- lazy = false,
     config = function()
       require("fidget").setup({
-        text = {
-          spinner = "dots",
-        },
-        -- Transparency
-        window = {
-          blend = 0,
+        notification = {
+          -- Transparency
+          window = {
+            winblend = 0,
+          },
         },
       })
     end,
   },
 
-  -- symbols-outline
+  -- stevearc/aerial.nvim, show tags of variables
   {
-    -- "simrat39/symbols-outline.nvim",
-    "loichyan/symbols-outline.nvim",
-    branch = "fix-obsolete-icons",
+    "stevearc/aerial.nvim",
     config = function()
-      require("symbols-outline").setup()
-      vim.keymap.set({ "n" }, "<Space>2", "<cmd>SymbolsOutline<cr>")
+      require("aerial").setup({
+        on_attach = function(bufnr)
+          vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+          vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+        end,
+      })
+      vim.keymap.set({ "n" }, "<Space>2", "<cmd>AerialToggle<CR>")
     end,
   },
+
+  -- indent-blankline.nvim
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+      require("ibl").setup({
+        exclude = {
+          filetypes = {
+            "lspinfo",
+            "packer",
+            "checkhealth",
+            "help",
+            "man",
+            "gitcommit",
+            "TelescopePrompt",
+            "TelescopeResults",
+            "dashboard",
+            "",
+          }
+        }
+      })
+    end,
+  },
+
+  -- RRethy/vim-illuminate: hightlight the other uses
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require('illuminate').configure()
+    end
+  },
+
+  -- folke/todo-comments.nvim
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("todo-comments").setup({
+        highlight = {
+          -- vimgrep regex, supporting the pattern TODO(name):
+          pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
+        },
+        search = {
+          -- ripgrep regex, supporting the pattern TODO(name):
+          pattern = [[\b(KEYWORDS)(\(\w*\))*:]],
+        }
+      })
+
+    end
+  },
+
+  -- rcarriga/nvim-notify
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup()
+      vim.notify = require("notify")
+    end
+  }
 }
