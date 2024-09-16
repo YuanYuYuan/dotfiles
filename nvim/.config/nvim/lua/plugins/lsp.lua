@@ -1,6 +1,6 @@
 local servers = {
   eslint = {},
-  tsserver = {},
+  ts_ls = {},
   sqlls = {},
   gopls = {},
   pyright = {},
@@ -56,15 +56,17 @@ local servers = {
   },
   rust_analyzer = {
     cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
-    init_options = {
-      lspMux = {
-        version = "1",
-        method = "connect",
-        server = "rust-analyzer",
-      },
-    },
     settings = {
       ["rust-analyzer"] = {
+
+        -- ra-multiplex
+        lspMux = {
+          version = "1",
+          method = "connect",
+          server = "rust-analyzer",
+        },
+
+        -- server_path = "ra-multiplex",
         -- checkOnSave = false,
         check = {
           allTargets = false,
@@ -105,6 +107,12 @@ local config_lspconfig = function()
   --     })
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+  -- nvim-ufo
+  capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+  }
   for server, config in pairs(servers) do
     config.autostart = true
     config.capabilities = capabilities
