@@ -17,14 +17,15 @@
     // Modules configuration
     "hyprland/workspaces": {
         "all-outputs": true,
-        "warp-on-scroll": false,
-        "format": "{name}: {icon}",
+        "active-only": false,
+        // "move-to-monitor": true,
+        "format": "{name}: {icon}  ",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": "󱙳",
+            "2": "",
+            "3": "",
+            "4": "󱗆",
+            "5": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -46,7 +47,7 @@
         "spacing": 6
     },
     "clock": {
-        // "timezone": "America/New_York",
+        // "timezone": "Asia/Taipei",
         "format": "{:%a %R}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%a %Y-%m-%d %R}"
