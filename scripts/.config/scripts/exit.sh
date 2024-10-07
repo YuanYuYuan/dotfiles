@@ -26,12 +26,12 @@ case "$1" in
         lock
         pactl set-sink-mute $output_sink 0
         ;;
-    reboot)
-        systemctl reboot
-        ;;
-    shutdown)
-        systemctl poweroff
-        ;;
+    # reboot)
+    #     systemctl reboot
+    #     ;;
+    # shutdown)
+    #     systemctl poweroff
+    #     ;;
     *)
         echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
 esac

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-amixer
-alsa-utils
-source $XMONAD_HOME/scripts/check_cmd.sh
-check_cmd
-check_cmd dunstify dunst
+# amixer
+# alsa-utils
+# source $XMONAD_HOME/scripts/check_cmd.sh
+# check_cmd
+# check_cmd dunstify dunst
 
 function get_volume {
     amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1

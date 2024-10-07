@@ -1,5 +1,5 @@
 [build]
-rustc-wrapper = "/usr/bin/sccache"
+rustc-wrapper = "sccache"
 
 [target.armv7-unknown-linux-musleabihf]
 linker = "/opt/muslcc/arm-linux-musleabihf-cross/bin/arm-linux-musleabihf-gcc"

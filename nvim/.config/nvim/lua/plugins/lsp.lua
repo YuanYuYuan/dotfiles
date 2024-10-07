@@ -1,6 +1,6 @@
 local servers = {
   eslint = {},
-  ts_ls = {},
+  -- ts_ls = {},
   sqlls = {},
   gopls = {},
   pyright = {},
