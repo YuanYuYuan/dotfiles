@@ -106,7 +106,7 @@ $env.PATH = ($env.PATH | uniq)
 load-env {
     "ANDROID_HOME": $"($env.HOME)/Android/Sdk"
     "CARGO_PROFILE_DEV_DEBUG": false,
-    "EDITOR": "/usr/bin/nvim",
+    "EDITOR": "/usr/bin/env nvim",
     "RIPGREP_CONFIG_PATH": $"($env.HOME)/.config/ripgrep/config",
     "RUST_LOG": "info",
     "STARDICT_DATA_DIR": $"($env.HOME)/.config/stardict",
