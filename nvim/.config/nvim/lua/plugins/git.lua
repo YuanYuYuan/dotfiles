@@ -28,12 +28,12 @@ return {
       require("diffview").setup({
         keymaps = {
           view = {
-            { "n", "<Space>ch", actions.conflict_choose("ours") },
-            { "n", "<Space>cl", actions.conflict_choose("theirs") },
-            { "n", "<Space>cn", actions.next_conflict },
-            { "n", "<Space>cp", actions.prev_conflict },
-            { "n", "<Space>cb", actions.toggle_files },
-            { "n", "<Space>cx", actions.cycle_layout },
+            { "n", "<Space>dh", actions.conflict_choose("ours") },
+            { "n", "<Space>dl", actions.conflict_choose("theirs") },
+            { "n", "<Space>dn", actions.next_conflict },
+            { "n", "<Space>dp", actions.prev_conflict },
+            { "n", "<Space>dx", actions.cycle_layout },
+            { "n", "<Space>df", actions.toggle_files },
           },
         },
       })

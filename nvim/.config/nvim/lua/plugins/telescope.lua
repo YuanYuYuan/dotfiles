@@ -65,7 +65,7 @@ return {
       local my_live_grep = function(opts)
         opts = opts or {}
         opts.path_display = { "absolute" }
-        -- opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+        opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
         if vim.v.shell_error ~= 0 then
           -- if not git then active lsp client root
           -- will get the configured root directory of the first attached lsp. You will have problems if you are using multiple lsps
