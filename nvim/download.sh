@@ -10,7 +10,7 @@ done
 # Download the latest release of nvim
 base_dir=$HOME/.local
 mkdir -p $base_dir
-curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | tar -xz --strip 1 -C $base_dir
+curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz | tar -xz --strip 1 -C $base_dir
 
 # Relocate to the project root
 cd $(git rev-parse --show-toplevel)
