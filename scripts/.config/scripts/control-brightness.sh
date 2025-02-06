@@ -11,7 +11,7 @@ function get_brightness {
 function send_notification {
     val=$(get_brightness)
     bar=$(seq -s "─" 0 $((val / 5)) | sed 's/[0-9]//g')
-    dunstify -t 600 -r 5555 -u normal " $val $bar"
+    dunstify -t 600 -r 5555 -u normal "󱩓 $val $bar"
 }
 
 case $1 in

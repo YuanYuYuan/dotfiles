@@ -7,7 +7,8 @@ wallpaper="~/.xmonad/pic/lockscreen.png"
 lock() {
     xset dpms force off
     xset dpms 10
-    i3lock -e -n -i $wallpaper
+    # i3lock -e -n -i $wallpaper
+    hyprlock
     xset dpms 360
 }
 

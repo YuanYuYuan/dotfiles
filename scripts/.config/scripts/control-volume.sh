@@ -37,19 +37,21 @@ function send_notification {
         text=" Muted"
     else
         val=$(get_volume)
-        text="墳 $val $(seq --separator="─" 0 "$((val / 5))" | sed 's/[0-9]//g')"
+        # text="󰕾 $val $(seq --separator="─" 0 "$((val / 5))" | sed 's/[0-9]//g')"
+        text="󰕾 $val"
     fi
-    dunstify -t 600 -r 2593 -u normal "$text"
+    # dunstify -t 600 -r 2593 -u normal "$text"
+    dunstify -t 600 -h string:x-canonical-private-synchronous:audio $text -h int:value:$val
 }
 
 case $1 in
     up)
         pactl set-sink-mute @DEFAULT_SINK@ false
-        pactl set-sink-volume @DEFAULT_SINK@ +5%
+        pactl set-sink-volume @DEFAULT_SINK@ +1%
         ;;
     down)
         pactl set-sink-mute @DEFAULT_SINK@ false
-        pactl set-sink-volume @DEFAULT_SINK@ -5%
+        pactl set-sink-volume @DEFAULT_SINK@ -1%
         ;;
     mute)
         pactl set-sink-mute @DEFAULT_SINK@ toggle
