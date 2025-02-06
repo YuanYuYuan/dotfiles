@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("Filetype", {
     "html",
     "tex",
     "markdown",
+    'nix',
   },
   group = augroup("ShorterSpaceAuGroup"),
   callback = function()
@@ -51,11 +52,11 @@ local cmd_table_collection = {
     .Table({
       c = function(file)
         local exe = file:gsub(".c", ".out")
-        return string.format("gcc %s -o %s && ./%s", file, exe, exe)
+        return string.format("gcc %s -o %s; ./%s", file, exe, exe)
       end,
       cpp = function(file)
         local exe = file:gsub(".cpp", ".out")
-        return string.format("g++ %s -o %s && ./%s", file, exe, exe)
+        return string.format("g++ %s -o %s; ./%s", file, exe, exe)
       end,
       python = function(file)
         return "python " .. file

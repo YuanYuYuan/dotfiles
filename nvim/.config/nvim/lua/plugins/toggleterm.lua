@@ -24,7 +24,8 @@ return {
       local speak_and_trans = function(text)
         local prev_win = vim.api.nvim_get_current_win()
         local prev_pos = vim.api.nvim_win_get_cursor(prev_win)
-        require("toggleterm").exec(string.format('trans -b -speak -s en-US -t zh-TW "%s"', text))
+        -- require("toggleterm").exec(string.format('trans -b -speak -s en-US -t zh-TW "%s"', text))
+        require("toggleterm").exec(string.format('trans -b -speak -s fr -t zh-TW "%s"', text))
         vim.api.nvim_win_set_cursor(prev_win, prev_pos)
         vim.api.nvim_set_current_win(prev_win)
       end

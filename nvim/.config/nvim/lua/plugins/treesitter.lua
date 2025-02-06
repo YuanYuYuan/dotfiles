@@ -1,9 +1,12 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
+    -- lazy = false,
     build = ":TSUpdate",
-    dependencies = { "nvim-treesitter/nvim-treesitter-context" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context" ,
+      "nushell/tree-sitter-nu",
+    },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
@@ -25,6 +28,7 @@ return {
           "rust",
           "toml",
           "yaml",
+          "nu",
         },
         highlight = {
           enable = true,

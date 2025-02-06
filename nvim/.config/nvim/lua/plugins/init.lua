@@ -6,6 +6,11 @@ return {
     ft = "ledger",
   },
   -- {
+  --   "nvzone/typr",
+  --   -- cmd = "TyprStats",
+  --   dependencies = "nvzone/volt",
+  -- }
+  -- {
   --   "folke/which-key.nvim",
   --   config = function()
   --     -- vim.o.timeout = true

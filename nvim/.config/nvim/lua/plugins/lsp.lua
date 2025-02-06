@@ -24,7 +24,7 @@ local servers = {
     },
   },
   lemminx = {
-    cmd = { "/usr/bin/lemminx" },
+    cmd = { "lemminx" },
   },
   html = {},
   docker_compose_language_service = {},
@@ -58,7 +58,6 @@ local servers = {
     cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
     settings = {
       ["rust-analyzer"] = {
-
         -- ra-multiplex
         lspMux = {
           version = "1",
@@ -66,22 +65,21 @@ local servers = {
           server = "rust-analyzer",
         },
 
-        -- server_path = "ra-multiplex",
-        -- checkOnSave = false,
-        check = {
-          allTargets = false,
-          -- overrideCommand = {
-          --     "cargo",
-          --     "check",
-          -- }
-          -- overrideCommand = {
-          --     "cargo",
-          --     "clippy",
-          --     "--message-format=json",
-          --     "--",
-          --     "-D warnings",
-          -- }
-        },
+        -- -- checkOnSave = false,
+        -- check = {
+        --   allTargets = false,
+        --   -- overrideCommand = {
+        --   --     "cargo",
+        --   --     "check",
+        --   -- }
+        --   -- overrideCommand = {
+        --   --     "cargo",
+        --   --     "clippy",
+        --   --     "--message-format=json",
+        --   --     "--",
+        --   --     "-D warnings",
+        --   -- }
+        -- },
         cargo = {
           features = "all",
         },
@@ -89,6 +87,8 @@ local servers = {
     },
   },
   kotlin_language_server = {},
+  nushell = {},
+  nil_ls = {},
 }
 
 if vim.lsp.inlay_hint then
