@@ -19,10 +19,11 @@ command -v starship &> /dev/null || {
     curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y
 }
 
-command -v z &> /dev/null || {
-    # cargo install --locked zoxide
-    curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh -s -- -y
-}
+# # FIXME: this failed in a docker
+# command -v z &> /dev/null || {
+#     # cargo install --locked zoxide
+#     curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh -s -- -y
+# }
 
 cd $(git rev-parse --show-toplevel)
 stow zsh
