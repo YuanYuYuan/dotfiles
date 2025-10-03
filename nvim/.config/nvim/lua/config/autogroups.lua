@@ -4,26 +4,27 @@ local augroup = function(group_name)
   return vim.api.nvim_create_augroup(group_name, { clear = true })
 end
 
-vim.api.nvim_create_autocmd("Filetype", {
-  pattern = {
-    "toml",
-    "haskell",
-    "lua",
-    "yaml",
-    "json",
-    "json5",
-    "html",
-    "tex",
-    "markdown",
-    'nix',
-  },
-  group = augroup("ShorterSpaceAuGroup"),
-  callback = function()
-    for _, opt in ipairs({ "tabstop", "softtabstop", "shiftwidth" }) do
-      vim.opt[opt] = 2
-    end
-  end,
-})
+-- NOTE: Use guess-indent.nvim instead
+-- vim.api.nvim_create_autocmd("Filetype", {
+--   pattern = {
+--     "toml",
+--     "haskell",
+--     "lua",
+--     "yaml",
+--     "json",
+--     "json5",
+--     "html",
+--     "tex",
+--     "markdown",
+--     'nix',
+--   },
+--   group = augroup("ShorterSpaceAuGroup"),
+--   callback = function()
+--     for _, opt in ipairs({ "tabstop", "softtabstop", "shiftwidth" }) do
+--       vim.opt[opt] = 2
+--     end
+--   end,
+-- })
 
 local toggle_term = function(cmd)
   local prev_win = vim.api.nvim_get_current_win()
