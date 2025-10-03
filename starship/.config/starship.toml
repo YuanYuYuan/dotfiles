@@ -2,6 +2,7 @@ add_newline = true
 
 format = """
 $container\
+$direnv\
 $username\
 $hostname\
 $shlvl\
@@ -31,7 +32,7 @@ $shell\
 $character"""
 
 [character]                            # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+success_symbol = " [➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 [username]
 format = "[$user]($style)"
@@ -43,6 +44,10 @@ format = " @ [$hostname]($style) "
 format = " [$symbol$branch]($style) "
 
 [python]
-symbol = " "
+symbol = " 󰌠 "
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "v${major}.${minor}"
+
+[direnv]
+disabled = false
+symbol = "  "
