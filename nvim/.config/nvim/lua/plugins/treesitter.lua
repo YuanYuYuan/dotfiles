@@ -5,7 +5,7 @@ return {
     build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context" ,
-      "nushell/tree-sitter-nu",
+      -- "nushell/tree-sitter-nu",
     },
     config = function()
       require("nvim-treesitter.configs").setup({

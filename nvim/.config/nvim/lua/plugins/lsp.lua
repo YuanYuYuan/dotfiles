@@ -14,15 +14,16 @@ local servers = {
   clangd = {},
   cmake = {},
   texlab = {},
-  jsonls = {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-        end,
-      },
-    },
-  },
+  -- FIXME: vscode-json-languageserver issue
+  -- jsonls = {
+  --   commands = {
+  --     Format = {
+  --       function()
+  --         vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+  --       end,
+  --     },
+  --   },
+  -- },
   lemminx = {
     cmd = { "lemminx" },
   },
@@ -54,41 +55,26 @@ local servers = {
       },
     },
   },
+  kotlin_language_server = {},
+  nushell = {},
+  nixd = {
+    formatter = {
+      command = { "ls" },
+    },
+  },
+  taplo = {},
   rust_analyzer = {
     cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
     settings = {
       ["rust-analyzer"] = {
-        -- ra-multiplex
         lspMux = {
           version = "1",
           method = "connect",
           server = "rust-analyzer",
         },
-
-        -- -- checkOnSave = false,
-        -- check = {
-        --   allTargets = false,
-        --   -- overrideCommand = {
-        --   --     "cargo",
-        --   --     "check",
-        --   -- }
-        --   -- overrideCommand = {
-        --   --     "cargo",
-        --   --     "clippy",
-        --   --     "--message-format=json",
-        --   --     "--",
-        --   --     "-D warnings",
-        --   -- }
-        -- },
-        cargo = {
-          features = "all",
-        },
       },
     },
-  },
-  kotlin_language_server = {},
-  nushell = {},
-  nil_ls = {},
+  }
 }
 
 if vim.lsp.inlay_hint then
@@ -96,6 +82,11 @@ if vim.lsp.inlay_hint then
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
   end, { desc = "Toggle inlay hints" })
 end
+
+vim.diagnostic.config({
+  virtual_text = true,
+  -- virtual_lines = { current_line = true },
+})
 
 local config_lspconfig = function()
   local lspconfig = require("lspconfig")
@@ -106,15 +97,18 @@ local config_lspconfig = function()
   --       capabilities = require("cmp_nvim_lsp").default_capabilities(),
   --     })
 
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
+  -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   -- nvim-ufo
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true
+    dynamicRegistration = false,
+    lineFoldingOnly = true
   }
   for server, config in pairs(servers) do
-    config.autostart = true
+    if config.autostart == nil then
+      config.autostart = true
+    end
     config.capabilities = capabilities
     config.on_attach = function(_client, _bufnr)
       vim.lsp.inlay_hint.enable()
