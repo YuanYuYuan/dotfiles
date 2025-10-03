@@ -65,4 +65,34 @@ return {
       require("mini.align").setup()
     end,
   },
+
+  -- leap.nvim
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+    end
+  },
+
+  -- For Markdown
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    config = function()
+      require('render-markdown').setup({
+        completions = { blink = { enabled = true } },
+        -- Render for all modes
+        render_modes = true,
+      })
+    end,
+  },
+  {
+    'brianhuster/live-preview.nvim',
+  },
+
+  {
+    'nmac427/guess-indent.nvim',
+    config = function()
+      require('guess-indent').setup()
+    end,
+  },
 }
