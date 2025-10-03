@@ -1,24 +1,25 @@
 return {
-  -- pwntester/octo.nvim
-  {
-    "pwntester/octo.nvim",
-    enabled = function()
-      return vim.fn.executable('gh') == 1
-    end,
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("octo").setup({
-        suppress_missing_scope = {
-          projects_v2 = true,
-        }
-      })
-      vim.treesitter.language.register("markdown", "octo")
-    end,
-  },
+  -- This plugin is not really useful and requires github permission every time
+  -- -- pwntester/octo.nvim
+  -- {
+  --   "pwntester/octo.nvim",
+  --   enabled = function()
+  --     return vim.fn.executable('gh') == 1
+  --   end,
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = function()
+  --     require("octo").setup({
+  --       suppress_missing_scope = {
+  --         projects_v2 = true,
+  --       }
+  --     })
+  --     vim.treesitter.language.register("markdown", "octo")
+  --   end,
+  -- },
 
   -- sindrets/diffview.nvim
   {
